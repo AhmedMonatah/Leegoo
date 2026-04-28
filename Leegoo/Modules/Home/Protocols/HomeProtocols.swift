@@ -1,13 +1,8 @@
 import Foundation
 
-protocol HomeViewProtocol: AnyObject {
-    func showLoading()
-    func hideLoading()
-    func renderSports(_ sports: [Sport])
-    func showError(_ message: String)
-}
 
 protocol HomePresenterProtocol: AnyObject {
-    func viewDidLoad()
-    func didSelectSport(_ sport: Sport)
+    func numberOfItems() -> Int
+    func item(at index: Int) -> Sport
+    func didSelectItem(at index: Int)
 }
