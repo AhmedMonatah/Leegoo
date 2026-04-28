@@ -38,8 +38,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         presenter.didSelectItem(at: indexPath.item)
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let padding: CGFloat = 12
@@ -51,17 +50,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let totalSpacing = (padding * 2) + ((itemsPerRow - 1) * spacing)
         let width = (collectionView.frame.width - totalSpacing) / itemsPerRow
                               
-        return CGSize(width: width, height: 230)
+        return CGSize(width: width, height: 250)
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 12
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 2
     }

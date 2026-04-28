@@ -4,10 +4,10 @@ class HomePresenter: HomePresenterProtocol {
     
         
     private let items: [Sport] = [
-        Sport(title: "Football", imageName: "football"),
-        Sport(title: "Basketball", imageName: "basketball"),
-        Sport(title: "Tennis", imageName: "tennis"),
-        Sport(title: "Cricket", imageName: "cricket")
+        Sport(title: "FOOTBALL", imageName: "football"),
+        Sport(title: "BASKETBALL", imageName: "basketball"),
+        Sport(title: "TENNIS", imageName: "tennis"),
+        Sport(title: "CRICKET", imageName: "cricket")
     ]
     
         
