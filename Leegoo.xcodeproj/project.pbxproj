@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6D2DDBD12FA07A9900FFE59D /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 6D2DDBD02FA07A9900FFE59D /* Shimmer */; };
+		6D2DDBD42FA07AFA00FFE59D /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6D2DDBD32FA07AFA00FFE59D /* SDWebImage */; };
+		6D2DDBD62FA07AFA00FFE59D /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6D2DDBD52FA07AFA00FFE59D /* SDWebImageMapKit */; };
+		6D2DDC382FA07FD500FFE59D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6D2DDC372FA07FD500FFE59D /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6D9C5B5A2FA026CA00ECB3D6 /* Leegoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leegoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +43,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D2DDBD12FA07A9900FFE59D /* Shimmer in Frameworks */,
+				6D2DDC382FA07FD500FFE59D /* Alamofire in Frameworks */,
+				6D2DDBD62FA07AFA00FFE59D /* SDWebImageMapKit in Frameworks */,
+				6D2DDBD42FA07AFA00FFE59D /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +89,10 @@
 			);
 			name = Leegoo;
 			packageProductDependencies = (
+				6D2DDBD02FA07A9900FFE59D /* Shimmer */,
+				6D2DDBD32FA07AFA00FFE59D /* SDWebImage */,
+				6D2DDBD52FA07AFA00FFE59D /* SDWebImageMapKit */,
+				6D2DDC372FA07FD500FFE59D /* Alamofire */,
 			);
 			productName = Leegoo;
 			productReference = 6D9C5B5A2FA026CA00ECB3D6 /* Leegoo.app */;
@@ -107,6 +122,11 @@
 			);
 			mainGroup = 6D9C5B512FA026CA00ECB3D6;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6D2DDBCF2FA07A9900FFE59D /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				6D2DDBD22FA07AFA00FFE59D /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				6D2DDC362FA07FD500FFE59D /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6D9C5B5B2FA026CA00ECB3D6 /* Products */;
 			projectDirPath = "";
@@ -333,6 +353,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6D2DDBCF2FA07A9900FFE59D /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
+		6D2DDBD22FA07AFA00FFE59D /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.7;
+			};
+		};
+		6D2DDC362FA07FD500FFE59D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6D2DDBD02FA07A9900FFE59D /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D2DDBCF2FA07A9900FFE59D /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
+		};
+		6D2DDBD32FA07AFA00FFE59D /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D2DDBD22FA07AFA00FFE59D /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		6D2DDBD52FA07AFA00FFE59D /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D2DDBD22FA07AFA00FFE59D /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+		6D2DDC372FA07FD500FFE59D /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D2DDC362FA07FD500FFE59D /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6D9C5B522FA026CA00ECB3D6 /* Project object */;
 }
