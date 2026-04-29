@@ -9,7 +9,7 @@ enum NetworkError: Error {
 }
 
 protocol NetworkServiceProtocol {
-    func fetchSports(completion: @escaping (Result<[Sport], Error>) -> Void)
+  //  func fetchSports(completion: @escaping (Result<[Sport], Error>) -> Void)
     func fetchLeagues(sportName: String, completion: @escaping (Result<[League], Error>) -> Void)
     func fetchEvents(leagueId: String, completion: @escaping (Result<[Event], Error>) -> Void)
     func fetchTeams(leagueName: String, completion: @escaping (Result<[Team], Error>) -> Void)
@@ -22,17 +22,17 @@ class NetworkService: NetworkServiceProtocol {
     
     private let baseURL = "https://www.thesportsdb.com/api/v1/json/3"
     
-    func fetchSports(completion: @escaping (Result<[Sport], Error>) -> Void) {
-        let urlString = "\(baseURL)/all_sports.php"
-        performRequest(urlString: urlString, responseType: SportResponse.self) { result in
-            switch result {
-            case .success(let response):
-                completion(.success(response.sports))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
+//    func fetchSports(completion: @escaping (Result<[Sport], Error>) -> Void) {
+//        let urlString = "\(baseURL)/all_sports.php"
+//        performRequest(urlString: urlString, responseType: SportResponse.self) { result in
+//            switch result {
+//            case .success(let response):
+//                completion(.success(response.sports))
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+//    }
     
     func fetchLeagues(sportName: String, completion: @escaping (Result<[League], Error>) -> Void) {
         let urlString = "\(baseURL)/search_all_leagues.php?s=\(sportName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"

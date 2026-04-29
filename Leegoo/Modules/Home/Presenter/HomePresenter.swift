@@ -2,31 +2,25 @@ import Foundation
 
 class HomePresenter: HomePresenterProtocol {
     
-    weak var view: HomeViewProtocol?
-    private let networkService: NetworkServiceProtocol
+        
+    private let items: [Sport] = [
+        Sport(title: "FOOTBALL", imageName: "football"),
+        Sport(title: "BASKETBALL", imageName: "basketball"),
+        Sport(title: "TENNIS", imageName: "tennis"),
+        Sport(title: "CRICKET", imageName: "cricket")
+    ]
     
-    init(view: HomeViewProtocol, networkService: NetworkServiceProtocol = NetworkService.shared) {
-        self.view = view
-        self.networkService = networkService
+        
+    func numberOfItems() -> Int {
+        items.count
     }
-    
-    func viewDidLoad() {
-        fetchSports()
+        
+    func item(at index: Int) -> Sport {
+        items[index]
     }
-    
-    private func fetchSports() {
-        view?.showLoading()
-        networkService.fetchSports { [weak self] result in
-            self?.view?.hideLoading()
-            switch result {
-            case .success(let sports):
-                self?.view?.renderSports(sports)
-            case .failure(let error):
-                self?.view?.showError(error.localizedDescription)
-            }
-        }
-    }
-    
-    func didSelectSport(_ sport: Sport) {
+        
+    func didSelectItem(at index: Int) {
+        let item = items[index]
+        print(item.title)
     }
 }
