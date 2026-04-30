@@ -212,10 +212,10 @@ class OnboardingViewController: UIViewController {
 
 extension OnboardingViewController: OnboardingViewProtocol {
     func navigateToHome() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        guard let nav = sb.instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController,
+        let sb = UIStoryboard(name: "Home_Storyboard", bundle: nil)
+        guard let nav = sb.instantiateInitialViewController() as? UINavigationController,
               let home = nav.viewControllers.first as? HomeViewController else { return }
-        home.presenter = HomePresenter()
+        home.presenter = HomePresenter(view: home)
         nav.modalTransitionStyle = .crossDissolve
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)

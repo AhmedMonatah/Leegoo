@@ -171,10 +171,10 @@ class SplashViewController: UIViewController {
             onboardingVC.presenter = onboardingPresenter
             destinationVC = UINavigationController(rootViewController: onboardingVC)
         } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let navVC = storyboard.instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController,
+            let storyboard = UIStoryboard(name: "Home_Storyboard", bundle: nil)
+            guard let navVC = storyboard.instantiateInitialViewController() as? UINavigationController,
                   let homeVC = navVC.viewControllers.first as? HomeViewController else { return }
-            let presenter = HomePresenter()
+            let presenter = HomePresenter(view: homeVC)
             homeVC.presenter = presenter
             destinationVC = navVC
         }

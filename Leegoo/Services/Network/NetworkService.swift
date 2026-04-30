@@ -22,7 +22,7 @@ class NetworkService: NetworkServiceProtocol {
     
     private let baseURL = "https://apiv2.allsportsapi.com"
     private let apiKey = "3874de8a6677aee6669fb0452cbee68d0ee1cc00aa48e678c49417c40d395dca"
-    
+
 //    func fetchSports(completion: @escaping (Result<[Sport], Error>) -> Void) {
 //        let urlString = "\(baseURL)/all_sports.php"
 //        performRequest(urlString: urlString, responseType: SportResponse.self) { result in
