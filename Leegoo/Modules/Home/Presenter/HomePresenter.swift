@@ -1,16 +1,26 @@
 import Foundation
 
+protocol HomeViewProtocol: AnyObject {
+    func navigateToLeagues(with sport: Sport)
+}
+
+
 class HomePresenter: HomePresenterProtocol {
     
         
+    weak var view: HomeViewProtocol?
+    
     private let items: [Sport] = [
-        Sport(title: "FOOTBALL", imageName: "football"),
-        Sport(title: "BASKETBALL", imageName: "basketball"),
-        Sport(title: "TENNIS", imageName: "tennis"),
-        Sport(title: "CRICKET", imageName: "cricket")
+        Sport(title: "FOOTBALL", imageName: "football", endpoint: "football"),
+        Sport(title: "BASKETBALL", imageName: "basketball", endpoint: "basketball"),
+        Sport(title: "TENNIS", imageName: "tennis", endpoint: "tennis"),
+        Sport(title: "CRICKET", imageName: "cricket", endpoint: "cricket")
     ]
     
-        
+    init(view: HomeViewProtocol) {
+        self.view = view
+    }
+    
     func numberOfItems() -> Int {
         items.count
     }
@@ -21,6 +31,6 @@ class HomePresenter: HomePresenterProtocol {
         
     func didSelectItem(at index: Int) {
         let item = items[index]
-        print(item.title)
+        view?.navigateToLeagues(with: item)
     }
 }

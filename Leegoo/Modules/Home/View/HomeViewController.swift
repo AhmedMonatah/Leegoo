@@ -1,15 +1,29 @@
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController ,HomeViewProtocol {
     
-    var presenter: HomePresenterProtocol = HomePresenter()
+    var presenter: HomePresenterProtocol!
     
     @IBOutlet weak var sportsCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = HomePresenter(view: self)
         sportsCollectionView.delegate = self
         sportsCollectionView.dataSource = self
+    }
+    
+    func navigateToLeagues(with sport: Sport) {
+        let storyboard = UIStoryboard(name: "Home_Storyboard", bundle: nil)
+           
+        guard let leaguesVC = storyboard.instantiateViewController(withIdentifier: "LeaguesVC") as? LeaguesViewController else {
+            return
+        }
+           
+        let presenter = LeaguesPresenter(view: leaguesVC, title: sport.title, selectedSport: sport)
+        leaguesVC.presenter = presenter
+    
+        navigationController?.pushViewController(leaguesVC, animated: true)
     }
        
     

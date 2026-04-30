@@ -20,7 +20,8 @@ class NetworkService: NetworkServiceProtocol {
     static let shared = NetworkService()
     private init() {}
     
-    private let baseURL = "https://www.thesportsdb.com/api/v1/json/3"
+    private let baseURL = "https://apiv2.allsportsapi.com"
+    private let apiKey = "3874de8a6677aee6669fb0452cbee68d0ee1cc00aa48e678c49417c40d395dca"
     
 //    func fetchSports(completion: @escaping (Result<[Sport], Error>) -> Void) {
 //        let urlString = "\(baseURL)/all_sports.php"
@@ -35,11 +36,12 @@ class NetworkService: NetworkServiceProtocol {
 //    }
     
     func fetchLeagues(sportName: String, completion: @escaping (Result<[League], Error>) -> Void) {
-        let urlString = "\(baseURL)/search_all_leagues.php?s=\(sportName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+        let urlString = "\(baseURL)/\(sportName)?met=Leagues&APIkey=\(apiKey)"
+        
         performRequest(urlString: urlString, responseType: LeagueResponse.self) { result in
             switch result {
             case .success(let response):
-                completion(.success(response.countries))
+                completion(.success(response.result ?? []))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -76,12 +78,15 @@ class NetworkService: NetworkServiceProtocol {
             return
         }
         
-        AF.request(urlString).responseDecodable(of: T.self) { response in
+        AF.request(urlString).validate().responseDecodable(of: T.self) { response in
             switch response.result {
             case .success(let data):
                 completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
+            case .failure:
+                if let data = response.data {
+                    print(String(data: data, encoding: .utf8) ?? "")
+                }
+                completion(.failure(NetworkError.decodingError))
             }
         }
     }
