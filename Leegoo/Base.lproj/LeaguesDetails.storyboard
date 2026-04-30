@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LD-vc-001">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Leagues Details View Controller-->
+        <scene sceneID="LD-sc-001">
+            <objects>
+                <viewController storyboardIdentifier="LeaguesDetailsViewController" id="LD-vc-001" customClass="LeaguesDetailsViewController" customModule="Leegoo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LD-vw-root">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-header">
+                                <rect key="frame" x="0.0" y="118" width="393" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LD-bt-back">
+                                        <rect key="frame" x="16" y="14" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="LD-ct-h1"/>
+                                            <constraint firstAttribute="height" constant="22" id="LD-ct-h2"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemBlueColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="chevron.left" catalog="system"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leegoo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-title">
+                                        <rect key="frame" x="162.66666666666666" y="13" width="68" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LD-bt-fav">
+                                        <rect key="frame" x="353" y="13" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="LD-ct-h3"/>
+                                            <constraint firstAttribute="width" constant="24" id="LD-ct-h4"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemBlueColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="heart" catalog="system"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="LD-bt-fav" firstAttribute="centerY" secondItem="LD-vw-header" secondAttribute="centerY" id="LD-ct-h10"/>
+                                    <constraint firstAttribute="height" constant="50" id="LD-ct-h11"/>
+                                    <constraint firstItem="LD-bt-back" firstAttribute="centerY" secondItem="LD-vw-header" secondAttribute="centerY" id="LD-ct-h5"/>
+                                    <constraint firstItem="LD-bt-back" firstAttribute="leading" secondItem="LD-vw-header" secondAttribute="leading" constant="16" id="LD-ct-h6"/>
+                                    <constraint firstItem="LD-lb-title" firstAttribute="centerX" secondItem="LD-vw-header" secondAttribute="centerX" id="LD-ct-h7"/>
+                                    <constraint firstItem="LD-lb-title" firstAttribute="centerY" secondItem="LD-vw-header" secondAttribute="centerY" id="LD-ct-h8"/>
+                                    <constraint firstAttribute="trailing" secondItem="LD-bt-fav" secondAttribute="trailing" constant="16" id="LD-ct-h9"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-sv-main">
+                                <rect key="frame" x="0.0" y="168" width="393" height="684"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-content">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1160"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="LD-st-sections">
+                                                <rect key="frame" x="0.0" y="16" width="393" height="1128"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="280"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-s1-title">
+                                                                <rect key="frame" x="15.999999999999993" y="0.0" width="127.33333333333331" height="19.333333333333332"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LD-bt-s1-all">
+                                                                <rect key="frame" x="311" y="-4.6666666666666572" width="66" height="29"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                <state key="normal" title="View All &gt;">
+                                                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-upcoming">
+                                                                <rect key="frame" x="31.666666666666657" y="31.333333333333357" width="330" height="248.66666666666663"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="LD-fl-upcoming">
+                                                                    <size key="itemSize" width="330" height="220"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells>
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LD-cell-upcoming" id="LD-uc-cell1" customClass="UpcomingEventCell" customModule="Leegoo" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="14.333333333333334" width="330" height="220"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="330" height="220"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                            <subviews>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-v-card">
+                                                                                    <rect key="frame" x="10" y="10" width="310" height="200"/>
+                                                                                    <subviews>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Man United vs Chelsea" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-match">
+                                                                                            <rect key="frame" x="20" y="16" width="274" height="21.666666666666671"/>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-iv1">
+                                                                                            <rect key="frame" x="60" y="55.333333333333329" width="60" height="56.999999999999986"/>
+                                                                                            <color key="tintColor" systemColor="systemGray4Color"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="height" constant="60" id="LD-uc-h1"/>
+                                                                                                <constraint firstAttribute="width" constant="60" id="LD-uc-w1"/>
+                                                                                            </constraints>
+                                                                                        </imageView>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-vs">
+                                                                                            <rect key="frame" x="140" y="71.666666666666671" width="30.333333333333343" height="26.333333333333329"/>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                                                                                            <color key="textColor" systemColor="systemBlueColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-iv2">
+                                                                                            <rect key="frame" x="210" y="55.333333333333329" width="50" height="56.999999999999986"/>
+                                                                                            <color key="tintColor" systemColor="systemGray4Color"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="height" constant="60" id="LD-uc-h2"/>
+                                                                                                <constraint firstAttribute="width" constant="50" id="LD-uc-w2"/>
+                                                                                            </constraints>
+                                                                                        </imageView>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Man United" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-t1">
+                                                                                            <rect key="frame" x="30" y="121.66666666666664" width="120" height="14.333333333333329"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="width" constant="120" id="LD-uc-w3"/>
+                                                                                            </constraints>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chelsea" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-t2">
+                                                                                            <rect key="frame" x="175" y="121.66666666666664" width="120" height="14.333333333333329"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="width" constant="120" id="LD-uc-w4"/>
+                                                                                            </constraints>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-st-info">
+                                                                                            <rect key="frame" x="77.666666666666671" y="174.33333333333334" width="154.66666666666663" height="15.666666666666657"/>
+                                                                                            <subviews>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 May 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-date">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="81.666666666666671" height="15.666666666666666"/>
+                                                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:00 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-time">
+                                                                                                    <rect key="frame" x="93.666666666666671" y="0.0" width="61.000000000000014" height="15.666666666666666"/>
+                                                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                            </subviews>
+                                                                                        </stackView>
+                                                                                    </subviews>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstItem="LD-uc-lb-match" firstAttribute="leading" secondItem="LD-uc-v-card" secondAttribute="leading" constant="20" id="LD-uc-ct1"/>
+                                                                                        <constraint firstItem="LD-uc-lb-t2" firstAttribute="top" secondItem="LD-uc-iv2" secondAttribute="bottom" constant="8" id="LD-uc-ct10"/>
+                                                                                        <constraint firstAttribute="bottom" secondItem="LD-uc-st-info" secondAttribute="bottom" constant="10" id="LD-uc-ct11"/>
+                                                                                        <constraint firstItem="LD-uc-iv1" firstAttribute="top" secondItem="LD-uc-lb-match" secondAttribute="bottom" constant="16" id="LD-uc-ct12"/>
+                                                                                        <constraint firstItem="LD-uc-lb-t2" firstAttribute="centerX" secondItem="LD-uc-iv2" secondAttribute="centerX" id="LD-uc-ct13"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="LD-uc-lb-match" secondAttribute="trailing" constant="16" id="LD-uc-ct14"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="LD-uc-iv2" secondAttribute="trailing" constant="50" id="LD-uc-ct15"/>
+                                                                                        <constraint firstItem="LD-uc-lb-vs" firstAttribute="top" secondItem="LD-uc-lb-match" secondAttribute="bottom" constant="34" id="LD-uc-ct2"/>
+                                                                                        <constraint firstItem="LD-uc-lb-t1" firstAttribute="centerX" secondItem="LD-uc-iv1" secondAttribute="centerX" id="LD-uc-ct3"/>
+                                                                                        <constraint firstItem="LD-uc-iv1" firstAttribute="leading" secondItem="LD-uc-v-card" secondAttribute="leading" constant="60" id="LD-uc-ct4"/>
+                                                                                        <constraint firstItem="LD-uc-st-info" firstAttribute="centerX" secondItem="LD-uc-v-card" secondAttribute="centerX" id="LD-uc-ct5"/>
+                                                                                        <constraint firstItem="LD-uc-iv2" firstAttribute="top" secondItem="LD-uc-lb-match" secondAttribute="bottom" constant="16" id="LD-uc-ct6"/>
+                                                                                        <constraint firstItem="LD-uc-lb-t1" firstAttribute="top" secondItem="LD-uc-iv1" secondAttribute="bottom" constant="8" id="LD-uc-ct7"/>
+                                                                                        <constraint firstItem="LD-uc-lb-match" firstAttribute="top" secondItem="LD-uc-v-card" secondAttribute="top" constant="16" id="LD-uc-ct8"/>
+                                                                                        <constraint firstItem="LD-uc-lb-vs" firstAttribute="centerX" secondItem="LD-uc-v-card" secondAttribute="centerX" id="LD-uc-ct9"/>
+                                                                                    </constraints>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                            <integer key="value" value="16"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
+                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.shadowColor">
+                                                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                                                                                            <real key="value" value="0.10000000000000001"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                                                                            <size key="value" width="0.0" height="6"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                                                                                            <integer key="value" value="10"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </view>
+                                                                            </subviews>
+                                                                        </view>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="LD-uc-v-card" secondAttribute="bottom" constant="10" id="LD-uc-c-ct1"/>
+                                                                            <constraint firstItem="LD-uc-v-card" firstAttribute="leading" secondItem="LD-uc-cell1" secondAttribute="leading" constant="10" id="LD-uc-c-ct2"/>
+                                                                            <constraint firstItem="LD-uc-v-card" firstAttribute="top" secondItem="LD-uc-cell1" secondAttribute="top" constant="10" id="LD-uc-c-ct3"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="LD-uc-v-card" secondAttribute="trailing" constant="10" id="LD-uc-c-ct4"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="awayTeamImageView" destination="LD-uc-iv2" id="uc-c-1"/>
+                                                                            <outlet property="awayTeamLabel" destination="LD-uc-lb-t2" id="uc-c-2"/>
+                                                                            <outlet property="dateLabel" destination="LD-uc-lb-date" id="uc-c-3"/>
+                                                                            <outlet property="homeTeamImageView" destination="LD-uc-iv1" id="uc-c-4"/>
+                                                                            <outlet property="homeTeamLabel" destination="LD-uc-lb-t1" id="uc-c-5"/>
+                                                                            <outlet property="matchLabel" destination="LD-uc-lb-match" id="uc-c-6"/>
+                                                                            <outlet property="timeLabel" destination="LD-uc-lb-time" id="uc-c-7"/>
+                                                                        </connections>
+                                                                    </collectionViewCell>
+                                                                </cells>
+                                                            </collectionView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="LD-bt-s1-all" secondAttribute="trailing" constant="16" id="LD-ct-s1-1"/>
+                                                            <constraint firstAttribute="height" constant="280" id="LD-ct-s1-2"/>
+                                                            <constraint firstItem="LD-cv-upcoming" firstAttribute="top" secondItem="LD-lb-s1-title" secondAttribute="bottom" constant="12" id="LD-ct-s1-3"/>
+                                                            <constraint firstItem="LD-lb-s1-title" firstAttribute="top" secondItem="LD-vw-sec1" secondAttribute="top" id="LD-ct-s1-4"/>
+                                                            <constraint firstItem="LD-lb-s1-title" firstAttribute="leading" secondItem="LD-vw-sec1" secondAttribute="leading" constant="16" id="LD-ct-s1-5"/>
+                                                            <constraint firstItem="LD-cv-upcoming" firstAttribute="width" constant="330" id="LD-ct-s1-6"/>
+                                                            <constraint firstAttribute="bottom" secondItem="LD-cv-upcoming" secondAttribute="bottom" id="LD-ct-s1-7"/>
+                                                            <constraint firstItem="LD-cv-upcoming" firstAttribute="centerX" secondItem="LD-vw-sec1" secondAttribute="centerX" id="LD-ct-s1-8"/>
+                                                            <constraint firstItem="LD-bt-s1-all" firstAttribute="centerY" secondItem="LD-lb-s1-title" secondAttribute="centerY" id="LD-ct-s1-9"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec2">
+                                                        <rect key="frame" x="0.0" y="304" width="393" height="600"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latest Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-s2-title">
+                                                                <rect key="frame" x="16" y="0.0" width="92.666666666666671" height="18"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LD-bt-s2-all">
+                                                                <rect key="frame" x="311" y="-5.3333333333333144" width="66" height="29"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                <state key="normal" title="View All &gt;">
+                                                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-latest">
+                                                                <rect key="frame" x="0.0" y="30" width="393" height="570"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="0.0" id="LD-fl-latest">
+                                                                    <size key="itemSize" width="361" height="90"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells>
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LD-cell-latest" id="LD-lc-cell1" customClass="LatestEventCell" customModule="Leegoo" customModuleProvider="target">
+                                                                        <rect key="frame" x="16" y="0.0" width="361" height="90"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="361" height="90"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                            <subviews>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lc-v-card">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="90"/>
+                                                                                    <subviews>
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lc-iv1">
+                                                                                            <rect key="frame" x="15" y="13.666666666666664" width="40" height="37"/>
+                                                                                            <color key="tintColor" systemColor="systemGray4Color"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="height" constant="40" id="LD-lc-h1"/>
+                                                                                                <constraint firstAttribute="width" constant="40" id="LD-lc-w1"/>
+                                                                                            </constraints>
+                                                                                        </imageView>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lc-lb-t1">
+                                                                                            <rect key="frame" x="65" y="24.999999999999996" width="34.666666666666657" height="14.333333333333332"/>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 - 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lc-lb-score">
+                                                                                            <rect key="frame" x="150.66666666666666" y="21.333333333333329" width="60" height="21.666666666666671"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="width" constant="60" id="LD-lc-w2"/>
+                                                                                            </constraints>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                                                                            <color key="textColor" systemColor="systemBlueColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lc-lb-t2">
+                                                                                            <rect key="frame" x="249.66666666666666" y="24.999999999999996" width="31.333333333333343" height="14.333333333333332"/>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lc-iv2">
+                                                                                            <rect key="frame" x="289" y="13.666666666666664" width="40" height="37"/>
+                                                                                            <color key="tintColor" systemColor="systemGray4Color"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="height" constant="40" id="LD-lc-h2"/>
+                                                                                                <constraint firstAttribute="width" constant="40" id="LD-lc-w3"/>
+                                                                                            </constraints>
+                                                                                        </imageView>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lc-lb-info">
+                                                                                            <rect key="frame" x="150.66666666666666" y="55" width="60" height="14.333333333333329"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lc-iv-arrow">
+                                                                                            <rect key="frame" x="334" y="38" width="12" height="14.333333333333329"/>
+                                                                                            <color key="tintColor" systemColor="systemGray3Color"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="height" constant="18" id="LD-lc-h3"/>
+                                                                                                <constraint firstAttribute="width" constant="12" id="LD-lc-w4"/>
+                                                                                            </constraints>
+                                                                                        </imageView>
+                                                                                    </subviews>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstItem="LD-lc-iv2" firstAttribute="leading" secondItem="LD-lc-lb-t2" secondAttribute="trailing" constant="8" id="CU5-UW-ogN"/>
+                                                                                        <constraint firstItem="LD-lc-iv1" firstAttribute="top" secondItem="LD-lc-v-card" secondAttribute="top" constant="12" id="LD-lc-v-ct1"/>
+                                                                                        <constraint firstItem="LD-lc-iv1" firstAttribute="leading" secondItem="LD-lc-v-card" secondAttribute="leading" constant="15" id="LD-lc-v-ct10"/>
+                                                                                        <constraint firstItem="LD-lc-lb-info" firstAttribute="top" secondItem="LD-lc-lb-score" secondAttribute="bottom" constant="12" id="LD-lc-v-ct11"/>
+                                                                                        <constraint firstItem="LD-lc-lb-t1" firstAttribute="centerY" secondItem="LD-lc-iv1" secondAttribute="centerY" id="LD-lc-v-ct12"/>
+                                                                                        <constraint firstItem="LD-lc-lb-score" firstAttribute="centerX" secondItem="LD-lc-v-card" secondAttribute="centerX" id="LD-lc-v-ct14"/>
+                                                                                        <constraint firstItem="LD-lc-lb-score" firstAttribute="centerY" secondItem="LD-lc-iv1" secondAttribute="centerY" id="LD-lc-v-ct2"/>
+                                                                                        <constraint firstItem="LD-lc-lb-t1" firstAttribute="leading" secondItem="LD-lc-iv1" secondAttribute="trailing" constant="10" id="LD-lc-v-ct3"/>
+                                                                                        <constraint firstItem="LD-lc-lb-t2" firstAttribute="centerY" secondItem="LD-lc-iv1" secondAttribute="centerY" id="LD-lc-v-ct4"/>
+                                                                                        <constraint firstItem="LD-lc-lb-info" firstAttribute="centerX" secondItem="LD-lc-v-card" secondAttribute="centerX" id="LD-lc-v-ct5"/>
+                                                                                        <constraint firstItem="LD-lc-iv-arrow" firstAttribute="centerY" secondItem="LD-lc-v-card" secondAttribute="centerY" id="LD-lc-v-ct7"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="LD-lc-iv-arrow" secondAttribute="trailing" constant="15" id="LD-lc-v-ct8"/>
+                                                                                        <constraint firstItem="LD-lc-iv2" firstAttribute="centerY" secondItem="LD-lc-iv1" secondAttribute="centerY" id="LD-lc-v-ct9"/>
+                                                                                        <constraint firstItem="LD-lc-iv-arrow" firstAttribute="leading" secondItem="LD-lc-iv2" secondAttribute="trailing" constant="5" id="QkX-Dh-bcR"/>
+                                                                                    </constraints>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                            <integer key="value" value="12"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </view>
+                                                                            </subviews>
+                                                                        </view>
+                                                                        <constraints>
+                                                                            <constraint firstItem="LD-lc-v-card" firstAttribute="top" secondItem="LD-lc-cell1" secondAttribute="top" id="LD-lc-ct-w1"/>
+                                                                            <constraint firstItem="LD-lc-v-card" firstAttribute="leading" secondItem="LD-lc-cell1" secondAttribute="leading" id="LD-lc-ct-w2"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="LD-lc-v-card" secondAttribute="trailing" id="LD-lc-ct-w3"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="LD-lc-v-card" secondAttribute="bottom" id="LD-lc-ct-w4"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="awayTeamImageView" destination="LD-lc-iv2" id="lc-c-1"/>
+                                                                            <outlet property="awayTeamLabel" destination="LD-lc-lb-t2" id="lc-c-2"/>
+                                                                            <outlet property="homeTeamImageView" destination="LD-lc-iv1" id="lc-c-3"/>
+                                                                            <outlet property="homeTeamLabel" destination="LD-lc-lb-t1" id="lc-c-4"/>
+                                                                            <outlet property="infoLabel" destination="LD-lc-lb-info" id="lc-c-5"/>
+                                                                            <outlet property="scoreLabel" destination="LD-lc-lb-score" id="lc-c-6"/>
+                                                                        </connections>
+                                                                    </collectionViewCell>
+                                                                </cells>
+                                                            </collectionView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="LD-lb-s2-title" firstAttribute="leading" secondItem="LD-vw-sec2" secondAttribute="leading" constant="16" id="LD-ct-s2-1"/>
+                                                            <constraint firstItem="LD-lb-s2-title" firstAttribute="top" secondItem="LD-vw-sec2" secondAttribute="top" id="LD-ct-s2-2"/>
+                                                            <constraint firstAttribute="trailing" secondItem="LD-bt-s2-all" secondAttribute="trailing" constant="16" id="LD-ct-s2-3"/>
+                                                            <constraint firstItem="LD-bt-s2-all" firstAttribute="centerY" secondItem="LD-lb-s2-title" secondAttribute="centerY" id="LD-ct-s2-4"/>
+                                                            <constraint firstItem="LD-cv-latest" firstAttribute="top" secondItem="LD-lb-s2-title" secondAttribute="bottom" constant="12" id="LD-ct-s2-5"/>
+                                                            <constraint firstItem="LD-cv-latest" firstAttribute="leading" secondItem="LD-vw-sec2" secondAttribute="leading" id="LD-ct-s2-6"/>
+                                                            <constraint firstAttribute="trailing" secondItem="LD-cv-latest" secondAttribute="trailing" id="LD-ct-s2-7"/>
+                                                            <constraint firstAttribute="bottom" secondItem="LD-cv-latest" secondAttribute="bottom" id="LD-ct-s2-8"/>
+                                                            <constraint firstAttribute="height" constant="600" id="LD-ct-s2-9"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec3">
+                                                        <rect key="frame" x="0.0" y="928" width="393" height="200"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-s3-title">
+                                                                <rect key="frame" x="16.000000000000004" y="0.0" width="59.333333333333343" height="23"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LD-bt-s3-all">
+                                                                <rect key="frame" x="311" y="-3" width="66" height="29"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                <state key="normal" title="View All &gt;">
+                                                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                                                </state>
+                                                            </button>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-teams">
+                                                                <rect key="frame" x="0.0" y="35" width="393" height="165"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="LD-fl-teams">
+                                                                    <size key="itemSize" width="100" height="140"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells>
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LD-cell-team" id="LD-tc-cell1" customClass="TeamCell" customModule="Leegoo" customModuleProvider="target">
+                                                                        <rect key="frame" x="16" y="12.666666666666666" width="100" height="140"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="140"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                            <subviews>
+                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-tc-iv">
+                                                                                    <rect key="frame" x="10" y="10.666666666666664" width="80" height="78.666666666666686"/>
+                                                                                    <color key="tintColor" systemColor="systemGray5Color"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="80" id="LD-tc-h1"/>
+                                                                                        <constraint firstAttribute="width" constant="80" id="LD-tc-w1"/>
+                                                                                    </constraints>
+                                                                                </imageView>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="LD-tc-lb-name">
+                                                                                    <rect key="frame" x="4" y="98" width="92" height="17"/>
+                                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </view>
+                                                                        <constraints>
+                                                                            <constraint firstItem="LD-tc-lb-name" firstAttribute="top" secondItem="LD-tc-iv" secondAttribute="bottom" constant="8" id="LD-tc-ct1"/>
+                                                                            <constraint firstItem="LD-tc-iv" firstAttribute="centerX" secondItem="LD-tc-cell1" secondAttribute="centerX" id="LD-tc-ct2"/>
+                                                                            <constraint firstItem="LD-tc-iv" firstAttribute="top" secondItem="LD-tc-cell1" secondAttribute="top" constant="10" id="LD-tc-ct3"/>
+                                                                            <constraint firstItem="LD-tc-lb-name" firstAttribute="leading" secondItem="LD-tc-cell1" secondAttribute="leading" constant="4" id="LD-tc-ct4"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="LD-tc-lb-name" secondAttribute="trailing" constant="4" id="LD-tc-ct5"/>
+                                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LD-tc-lb-name" secondAttribute="bottom" constant="4" id="LD-tc-ct6"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="teamImageView" destination="LD-tc-iv" id="tc-c-1"/>
+                                                                            <outlet property="teamNameLabel" destination="LD-tc-lb-name" id="tc-c-2"/>
+                                                                        </connections>
+                                                                    </collectionViewCell>
+                                                                </cells>
+                                                            </collectionView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="LD-lb-s3-title" firstAttribute="leading" secondItem="LD-vw-sec3" secondAttribute="leading" constant="16" id="LD-ct-s3-1"/>
+                                                            <constraint firstItem="LD-lb-s3-title" firstAttribute="top" secondItem="LD-vw-sec3" secondAttribute="top" id="LD-ct-s3-2"/>
+                                                            <constraint firstAttribute="trailing" secondItem="LD-bt-s3-all" secondAttribute="trailing" constant="16" id="LD-ct-s3-3"/>
+                                                            <constraint firstItem="LD-bt-s3-all" firstAttribute="centerY" secondItem="LD-lb-s3-title" secondAttribute="centerY" id="LD-ct-s3-4"/>
+                                                            <constraint firstItem="LD-cv-teams" firstAttribute="top" secondItem="LD-lb-s3-title" secondAttribute="bottom" constant="12" id="LD-ct-s3-5"/>
+                                                            <constraint firstItem="LD-cv-teams" firstAttribute="leading" secondItem="LD-vw-sec3" secondAttribute="leading" id="LD-ct-s3-6"/>
+                                                            <constraint firstAttribute="trailing" secondItem="LD-cv-teams" secondAttribute="trailing" id="LD-ct-s3-7"/>
+                                                            <constraint firstAttribute="bottom" secondItem="LD-cv-teams" secondAttribute="bottom" id="LD-ct-s3-8"/>
+                                                            <constraint firstAttribute="height" constant="200" id="LD-ct-s3-9"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="LD-st-sections" firstAttribute="top" secondItem="LD-vw-content" secondAttribute="top" constant="16" id="LD-ct-c1"/>
+                                            <constraint firstAttribute="trailing" secondItem="LD-st-sections" secondAttribute="trailing" id="LD-ct-c2"/>
+                                            <constraint firstItem="LD-st-sections" firstAttribute="leading" secondItem="LD-vw-content" secondAttribute="leading" id="LD-ct-c3"/>
+                                            <constraint firstAttribute="bottom" secondItem="LD-st-sections" secondAttribute="bottom" constant="16" id="LD-ct-c4"/>
+                                            <constraint firstAttribute="height" priority="250" constant="1200" id="LD-ct-c5"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="LD-vw-content" firstAttribute="leading" secondItem="LD-sv-main" secondAttribute="leading" id="LD-ct-sv1"/>
+                                    <constraint firstAttribute="bottom" secondItem="LD-vw-content" secondAttribute="bottom" id="LD-ct-sv2"/>
+                                    <constraint firstItem="LD-vw-content" firstAttribute="top" secondItem="LD-sv-main" secondAttribute="top" id="LD-ct-sv3"/>
+                                    <constraint firstAttribute="trailing" secondItem="LD-vw-content" secondAttribute="trailing" id="LD-ct-sv4"/>
+                                    <constraint firstItem="LD-vw-content" firstAttribute="width" secondItem="LD-sv-main" secondAttribute="width" id="LD-ct-sv5"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LD-sa-root"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LD-vw-header" firstAttribute="top" secondItem="LD-sa-root" secondAttribute="top" id="LD-ct-r1"/>
+                            <constraint firstItem="LD-sv-main" firstAttribute="leading" secondItem="LD-sa-root" secondAttribute="leading" id="LD-ct-r2"/>
+                            <constraint firstItem="LD-vw-header" firstAttribute="leading" secondItem="LD-sa-root" secondAttribute="leading" id="LD-ct-r3"/>
+                            <constraint firstItem="LD-sv-main" firstAttribute="top" secondItem="LD-vw-header" secondAttribute="bottom" id="LD-ct-r4"/>
+                            <constraint firstItem="LD-vw-header" firstAttribute="trailing" secondItem="LD-sa-root" secondAttribute="trailing" id="LD-ct-r5"/>
+                            <constraint firstAttribute="bottom" secondItem="LD-sv-main" secondAttribute="bottom" id="LD-ct-r6"/>
+                            <constraint firstItem="LD-sv-main" firstAttribute="trailing" secondItem="LD-sa-root" secondAttribute="trailing" id="LD-ct-r7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="LD-bt-back" id="conn-6"/>
+                        <outlet property="latestCollectionView" destination="LD-cv-latest" id="conn-1"/>
+                        <outlet property="latestSectionHeightConstraint" destination="LD-ct-s2-9" id="conn-2"/>
+                        <outlet property="teamsCollectionView" destination="LD-cv-teams" id="conn-3"/>
+                        <outlet property="titleLabel" destination="LD-lb-title" id="conn-4"/>
+                        <outlet property="upcomingCollectionView" destination="LD-cv-upcoming" id="conn-5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LD-fr-001" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139.69465648854961" y="4.9295774647887329"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="person.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

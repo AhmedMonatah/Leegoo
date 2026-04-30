@@ -215,7 +215,7 @@ extension OnboardingViewController: OnboardingViewProtocol {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         guard let nav = sb.instantiateViewController(withIdentifier: "HomeNavigationController") as? UINavigationController,
               let home = nav.viewControllers.first as? HomeViewController else { return }
-        home.presenter = HomePresenter(view: home)
+        home.presenter = HomePresenter()
         nav.modalTransitionStyle = .crossDissolve
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
