@@ -6,6 +6,7 @@ class LeaguesPresenter: LeaguesPresenterProtocol {
     weak var view: LeaguesViewProtocol?
     
     private var leagues: [League] = []
+    private var filteredLeagues: [League] = []
     private let sportTitle: String
     private let selectedSport: Sport
     private let networkService: NetworkServiceProtocol
@@ -19,7 +20,7 @@ class LeaguesPresenter: LeaguesPresenterProtocol {
     }
     
     var numberOfLeagues: Int {
-        leagues.count
+        filteredLeagues.count
     }
     
     func viewDidLoad() {
@@ -28,7 +29,16 @@ class LeaguesPresenter: LeaguesPresenterProtocol {
     }
     
     func league(at index: Int) -> League {
-        leagues[index]
+        filteredLeagues[index]
+    }
+    
+    func searchLeagues(with text: String) {
+        if text.isEmpty {
+            filteredLeagues = leagues
+        } else {
+            filteredLeagues = leagues.filter { ($0.leagueName ?? "").lowercased().contains(text.lowercased()) }
+        }
+        view?.reloadData()
     }
     
     private func fetchLeagues() {
@@ -42,6 +52,7 @@ class LeaguesPresenter: LeaguesPresenterProtocol {
             switch result {
             case .success(let leagues):
                 self.leagues = leagues
+                self.filteredLeagues = leagues
                 self.view?.reloadData()
             case .failure(let error):
                 self.view?.showError(error.localizedDescription)
