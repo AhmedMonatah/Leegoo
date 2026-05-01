@@ -99,8 +99,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <searchBar contentMode="redraw" placeholder="Search Leagues" translatesAutoresizingMaskIntoConstraints="NO" id="leagues-search-bar">
+                                <rect key="frame" x="0.0" y="151" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ASZ-iv-lrM">
-                                <rect key="frame" x="0.0" y="161" width="393" height="623"/>
+                                <rect key="frame" x="0.0" y="215" width="393" height="569"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="leaguesCell" rowHeight="75" id="l3y-qP-XJj" customClass="LeaguesCell" customModule="Leegoo" customModuleProvider="target">
@@ -163,12 +167,16 @@
                             <constraint firstItem="PRE-WV-TUS" firstAttribute="top" secondItem="mxQ-hm-ta9" secondAttribute="top" constant="20" id="5hI-EM-9Pf"/>
                             <constraint firstItem="PRE-WV-TUS" firstAttribute="bottom" secondItem="ASZ-iv-lrM" secondAttribute="bottom" id="Uav-Ab-tYE"/>
                             <constraint firstItem="Fb3-rY-Ybq" firstAttribute="centerX" secondItem="PRE-WV-TUS" secondAttribute="centerX" id="Y4m-9F-0An"/>
+                            <constraint firstItem="leagues-search-bar" firstAttribute="top" secondItem="mxQ-hm-ta9" secondAttribute="bottom" constant="10" id="lsb-top"/>
+                            <constraint firstItem="leagues-search-bar" firstAttribute="leading" secondItem="PRE-WV-TUS" secondAttribute="leading" id="lsb-lead"/>
+                            <constraint firstItem="leagues-search-bar" firstAttribute="trailing" secondItem="PRE-WV-TUS" secondAttribute="trailing" id="lsb-trail"/>
                             <constraint firstItem="mxQ-hm-ta9" firstAttribute="centerX" secondItem="PRE-WV-TUS" secondAttribute="centerX" id="l6e-YB-HXO"/>
-                            <constraint firstItem="ASZ-iv-lrM" firstAttribute="top" secondItem="mxQ-hm-ta9" secondAttribute="bottom" constant="20" id="wgV-fF-jRB"/>
+                            <constraint firstItem="ASZ-iv-lrM" firstAttribute="top" secondItem="leagues-search-bar" secondAttribute="bottom" constant="8" id="wgV-fF-jRB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="Fb3-rY-Ybq" id="j3r-WG-btV"/>
+                        <outlet property="searchBar" destination="leagues-search-bar" id="o-search"/>
                         <outlet property="tableView" destination="ASZ-iv-lrM" id="auA-QY-mfP"/>
                     </connections>
                 </viewController>

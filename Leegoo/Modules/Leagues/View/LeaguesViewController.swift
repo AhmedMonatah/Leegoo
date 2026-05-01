@@ -19,6 +19,7 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var presenter: LeaguesPresenterProtocol!
     
     
@@ -27,6 +28,7 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
         
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
                 
         presenter.viewDidLoad()
     }
@@ -79,4 +81,15 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
 
     
     
+}
+
+
+extension LeaguesViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchLeagues(with: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
 }
