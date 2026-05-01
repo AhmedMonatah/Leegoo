@@ -1,0 +1,180 @@
+{"app_name":"TypeToSiriWidgetExtension","timestamp":"2026-05-01 12:35:42.00 -0700","app_version":"1.0","slice_uuid":"5e6ae922-2571-3e63-aa55-2e98e147d806","build_version":"1","platform":7,"bundleID":"com.apple.siri.TypeToSiriWidget","share_with_app_devs":0,"is_first_party":1,"bug_type":"309","os_version":"macOS 26.1 (25B78)","roots_installed":0,"name":"TypeToSiriWidgetExtension","incident_id":"F355E3E6-4B9E-4E13-BB91-225D736397A5"}
+{
+  "uptime" : 2700,
+  "procRole" : "Unspecified",
+  "version" : 2,
+  "userID" : 501,
+  "deployVersion" : 210,
+  "modelCode" : "MacBookPro16,2",
+  "coalitionID" : 1282,
+  "osVersion" : {
+    "train" : "macOS 26.1",
+    "build" : "25B78",
+    "releaseType" : "User"
+  },
+  "captureTime" : "2026-05-01 12:35:23.6616 -0700",
+  "codeSigningMonitor" : 0,
+  "incident" : "F355E3E6-4B9E-4E13-BB91-225D736397A5",
+  "pid" : 4910,
+  "cpuType" : "X86-64",
+  "roots_installed" : 0,
+  "bug_type" : "309",
+  "procLaunch" : "2026-05-01 12:35:21.1451 -0700",
+  "procStartAbsTime" : 2761990031006,
+  "procExitAbsTime" : 2764497133991,
+  "procName" : "TypeToSiriWidgetExtension",
+  "procPath" : "\/Volumes\/VOLUME\/*\/Siri.app\/PlugIns\/TypeToSiriWidgetExtension.appex\/TypeToSiriWidgetExtension",
+  "bundleInfo" : {"CFBundleShortVersionString":"1.0","CFBundleVersion":"1","CFBundleIdentifier":"com.apple.siri.TypeToSiriWidget"},
+  "parentProc" : "launchd_sim",
+  "parentPid" : 3912,
+  "coalitionName" : "com.apple.CoreSimulator.SimDevice.463E94A4-6900-46F4-A8D1-36F5E2FED605",
+  "crashReporterKey" : "21D72907-55BE-40FA-8512-573B25BA92B3",
+  "appleIntelligenceStatus" : {"state":"unavailable","reasons":["deviceNotCapable"]},
+  "developerMode" : 1,
+  "responsiblePid" : 743,
+  "responsibleProc" : "SimulatorTrampoline",
+  "codeSigningID" : "com.apple.siri.TypeToSiriWidget",
+  "codeSigningTeamID" : "",
+  "codeSigningFlags" : 570442241,
+  "codeSigningValidationCategory" : 1,
+  "codeSigningTrustLevel" : 4294967295,
+  "codeSigningAuxiliaryInfo" : 0,
+  "bootSessionUUID" : "F4ADEE5A-8A54-4D57-B604-852869907BD5",
+  "sip" : "enabled",
+  "exception" : {"codes":"0x0000000000000001, 0x0000000000000000","rawCodes":[1,0],"type":"EXC_BAD_INSTRUCTION","signal":"SIGILL"},
+  "termination" : {"flags":0,"code":4,"namespace":"SIGNAL","indicator":"Illegal instruction: 4","byProc":"exc handler","byPid":4910},
+  "extMods" : {"caller":{"thread_create":0,"thread_set_state":0,"task_for_pid":0},"system":{"thread_create":0,"thread_set_state":60,"task_for_pid":4},"targeted":{"thread_create":0,"thread_set_state":0,"task_for_pid":0},"warnings":0},
+  "faultingThread" : 0,
+  "threads" : [{"triggered":true,"id":105476,"instructionState":{"instructionStream":{"bytes":[255,72,137,199,232,95,178,5,0,72,137,195,72,137,199,190,17,0,0,0,232,157,178,5,0,132,192,116,8,72,137,223,232,9,161,5,0,72,137,223,235,48,232,14,77,255,255,72,137,199,232,49,178,5,0,73,137,198,72,137,199,190,17,0,0,0,232,111,178,5,0,132,192,116,12,72,139,125,160,76,137,246,232,186,163,5,0,76,137,247,255,21,12,1,8,42,15,11,85,72,137,229,93,195,85,72,137,229,65,87,65,86,65,84,83,73,137,254,72,137,215,255,21,245,0,8,42,72,137,195,76,139,61,59,27,9,42,76,137,247,76,137,254,255,21,143,0,8,42,72,137,199,232,203,177,5,0,73,137,196,72,137,199,255,21,195,0,8,42,77,133,228,116,57,76,139,37,111,0,8,42,76,137,247,76,137,254,65,255,212,72,137],"offset":96}},"threadState":{"r13":{"value":140703155731824,"symbolLocation":0,"symbol":"objc_release"},"rax":{"value":2147483647},"rflags":{"value":66118},"cpu":{"value":1},"r14":{"value":0},"rsi":{"value":140703692514466,"objc-selector":"release"},"r8":{"value":0},"cr2":{"value":0},"rdx":{"value":259},"r10":{"value":140704251784264,"symbolLocation":0,"symbol":"OBJC_CLASS_$_OS_os_log"},"r9":{"value":4549771264},"r15":{"value":0},"rbx":{"value":105553140435328},"trap":{"value":6},"err":{"value":0},"r11":{"value":140703156719724,"symbolLocation":0,"symbol":"-[OS_object release]"},"rip":{"value":140712136056996,"matchesCrashFrame":1},"rbp":{"value":140701835238512},"rsp":{"value":140701835238400},"r12":{"value":0},"rcx":{"value":9223477589973191296},"flavor":"x86_THREAD_STATE","rdi":{"value":105553140435328}},"queue":"com.apple.main-thread","frames":[{"imageOffset":217252,"symbol":"-[_EXConnectionHandlerExtension willFinishLaunching]","symbolLocation":1201,"imageIndex":5},{"imageOffset":13126,"symbol":"-[_EXRunningExtension willFinishLaunching]","symbolLocation":266,"imageIndex":5},{"imageOffset":11668,"symbol":"-[_EXRunningExtension resume]","symbolLocation":50,"imageIndex":5},{"imageOffset":11417,"symbol":"-[_EXRunningExtension startWithArguments:count:]","symbolLocation":533,"imageIndex":5},{"imageOffset":106987,"symbol":"EXExtensionMain","symbolLocation":237,"imageIndex":5},{"imageOffset":8543782,"symbol":"NSExtensionMain","symbolLocation":168,"imageIndex":6},{"imageOffset":4514894814,"imageIndex":7},{"imageOffset":26497,"symbol":"start","symbolLocation":3457,"imageIndex":0}]},{"id":105577,"frames":[],"threadState":{"r13":{"value":0},"rax":{"value":33554800},"rflags":{"value":512},"cpu":{"value":0},"r14":{"value":1},"rsi":{"value":6403},"r8":{"value":409604},"cr2":{"value":0},"rdx":{"value":123145475395584},"r10":{"value":0},"r9":{"value":18446744073709551615},"r15":{"value":123145475918712},"rbx":{"value":123145475919872},"trap":{"value":133},"err":{"value":33554800},"r11":{"value":582},"rip":{"value":4513605684},"rbp":{"value":0},"rsp":{"value":123145475919872},"r12":{"value":7159812},"rcx":{"value":0},"flavor":"x86_THREAD_STATE","rdi":{"value":123145475919872}}},{"id":105578,"frames":[],"threadState":{"r13":{"value":0},"rax":{"value":33554800},"rflags":{"value":512},"cpu":{"value":0},"r14":{"value":1},"rsi":{"value":5635},"r8":{"value":409604},"cr2":{"value":0},"rdx":{"value":123145475932160},"r10":{"value":0},"r9":{"value":18446744073709551615},"r15":{"value":123145476455288},"rbx":{"value":123145476456448},"trap":{"value":133},"err":{"value":33554800},"r11":{"value":582},"rip":{"value":4513605684},"rbp":{"value":0},"rsp":{"value":123145476456448},"r12":{"value":5193732},"rcx":{"value":0},"flavor":"x86_THREAD_STATE","rdi":{"value":123145476456448}}}],
+  "usedImages" : [
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 4517511168,
+    "size" : 647168,
+    "uuid" : "2378f215-945e-342f-aecb-fee14f38b7b0",
+    "path" : "\/usr\/lib\/dyld",
+    "name" : "dyld"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 4513546240,
+    "CFBundleShortVersionString" : "1.0",
+    "CFBundleIdentifier" : "com.apple.siri.TypeToSiriWidget",
+    "size" : 8192,
+    "uuid" : "5e6ae922-2571-3e63-aa55-2e98e147d806",
+    "path" : "\/Volumes\/VOLUME\/*\/Siri.app\/PlugIns\/TypeToSiriWidgetExtension.appex\/TypeToSiriWidgetExtension",
+    "name" : "TypeToSiriWidgetExtension",
+    "CFBundleVersion" : "1"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 4514000896,
+    "size" : 40960,
+    "uuid" : "390c7871-2561-3212-9e6d-015ac086fced",
+    "path" : "\/usr\/lib\/system\/libsystem_platform.dylib",
+    "name" : "libsystem_platform.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 4514103296,
+    "size" : 253952,
+    "uuid" : "ce814508-262b-322e-8a46-4536cd339217",
+    "path" : "\/usr\/lib\/system\/libsystem_kernel.dylib",
+    "name" : "libsystem_kernel.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 4513599488,
+    "size" : 53248,
+    "uuid" : "0bbbf390-18b3-3d55-b170-13d66408e098",
+    "path" : "\/usr\/lib\/system\/libsystem_pthread.dylib",
+    "name" : "libsystem_pthread.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 140712135839744,
+    "CFBundleShortVersionString" : "97",
+    "CFBundleIdentifier" : "com.apple.ExtensionFoundation",
+    "size" : 747260,
+    "uuid" : "d755f66f-e95b-3bae-b15b-7a812d7bed11",
+    "path" : "\/Volumes\/VOLUME\/*\/ExtensionFoundation.framework\/ExtensionFoundation",
+    "name" : "ExtensionFoundation",
+    "CFBundleVersion" : "97"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 140703163215872,
+    "CFBundleShortVersionString" : "6.9",
+    "CFBundleIdentifier" : "com.apple.Foundation",
+    "size" : 13124118,
+    "uuid" : "e8e3daf5-9e17-337e-9c7d-40b44f8fa628",
+    "path" : "\/Volumes\/VOLUME\/*\/Foundation.framework\/Foundation",
+    "name" : "Foundation",
+    "CFBundleVersion" : "3603"
+  },
+  {
+    "size" : 0,
+    "source" : "A",
+    "base" : 0,
+    "uuid" : "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 140703156711424,
+    "size" : 277794,
+    "uuid" : "c931e5b2-b3d5-38cf-8132-4dd6e5fff3a6",
+    "path" : "\/Volumes\/VOLUME\/*\/libdispatch.dylib",
+    "name" : "libdispatch.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 140703155572736,
+    "size" : 239801,
+    "uuid" : "48d29814-f48e-39c6-82aa-ad09c92c5e7a",
+    "path" : "\/Volumes\/VOLUME\/*\/libobjc.A.dylib",
+    "name" : "libobjc.A.dylib"
+  }
+],
+  "sharedCache" : {
+  "base" : 140703128616960,
+  "size" : 21474836480,
+  "uuid" : "2431fcc3-9e4b-3ef9-97d3-b97316783ea3"
+},
+  "vmSummary" : "ReadOnly portion of Libraries: Total=873.4M resident=0K(0%) swapped_out_or_unallocated=873.4M(100%)\nWritable regions: Total=584.6M written=0K(0%) resident=0K(0%) swapped_out=0K(0%) unallocated=584.6M(100%)\n\n                                VIRTUAL   REGION \nREGION TYPE                        SIZE    COUNT (non-coalesced) \n===========                     =======  ======= \nActivity Tracing                   256K        1 \nKernel Alloc Once                    8K        1 \nMALLOC                           575.1M       23 \nMALLOC guard page                   16K        4 \nSTACK GUARD                       56.0M        3 \nStack                             9232K        3 \nVM_ALLOCATE                        128K        1 \nVM_ALLOCATE (reserved)               4K        1         reserved VM address space (unallocated)\n__DATA                            19.5M      514 \n__DATA_CONST                      61.9M      533 \n__DATA_DIRTY                        47K       15 \n__FONT_DATA                        2352        1 \n__LINKEDIT                       202.1M        8 \n__OBJC_RO                         61.3M        1 \n__OBJC_RW                         2728K        1 \n__TEXT                           671.3M      544 \n__TPRO_CONST                         4K        1 \ndyld private memory               28.3G       20 \nmapped file                       7876K        8 \nshared memory                        8K        2 \n===========                     =======  ======= \nTOTAL                             29.9G     1685 \nTOTAL, minus reserved VM space    29.9G     1685 \n",
+  "legacyInfo" : {
+  "threadTriggered" : {
+    "queue" : "com.apple.main-thread"
+  }
+},
+  "logWritingSignature" : "2e3efa9c1483690849d3ac512f36b64eac387347",
+  "trialInfo" : {
+  "rollouts" : [
+    {
+      "rolloutId" : "64c025b28b7f0e739e4fbe58",
+      "factorPackIds" : [
+
+      ],
+      "deploymentId" : 240000044
+    },
+    {
+      "rolloutId" : "68095e8ecb2a9d1eaa8463c9",
+      "factorPackIds" : [
+        "68bf4eac9c31c5367e5529ca"
+      ],
+      "deploymentId" : 240000008
+    }
+  ],
+  "experiments" : [
+
+  ]
+}
+}
