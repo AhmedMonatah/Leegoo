@@ -110,32 +110,40 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1aP-oA-E16">
-                                                    <rect key="frame" x="20" y="12" width="50" height="50"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1aP-oA-E16">
+                                                    <rect key="frame" x="10" y="12" width="50" height="51"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="M9e-fe-0fV"/>
+                                                        <constraint firstAttribute="height" constant="50" id="xBY-W6-34c"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZL-Yi-NNF">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZL-Yi-NNF">
                                                     <rect key="frame" x="97" y="22" width="198" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMy-0d-auH">
-                                                    <rect key="frame" x="322" y="20" width="51" height="35"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
-                                                        <color key="baseForegroundColor" systemColor="systemRedColor"/>
-                                                    </buttonConfiguration>
-                                                    <connections>
-                                                        <action selector="favButtonTapped:" destination="l3y-qP-XJj" eventType="touchUpInside" id="ZTP-sq-9kI"/>
-                                                    </connections>
-                                                </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jdk-Qp-wgf">
+                                                    <rect key="frame" x="343" y="30.666666666666671" width="35" height="14.333333333333329"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="ODh-UW-Zzg"/>
+                                                        <constraint firstAttribute="width" constant="35" id="Ren-0o-Ddq"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1aP-oA-E16" firstAttribute="leading" secondItem="hXU-Dw-Dql" secondAttribute="leading" constant="10" id="1Wh-IX-xWL"/>
+                                                <constraint firstItem="oZL-Yi-NNF" firstAttribute="centerY" secondItem="hXU-Dw-Dql" secondAttribute="centerY" id="3DC-Lk-bse"/>
+                                                <constraint firstAttribute="trailing" secondItem="jdk-Qp-wgf" secondAttribute="trailing" constant="15" id="EIK-Oy-f3y"/>
+                                                <constraint firstAttribute="bottom" secondItem="1aP-oA-E16" secondAttribute="bottom" constant="12" id="LOv-Qc-cAp"/>
+                                                <constraint firstItem="1aP-oA-E16" firstAttribute="top" secondItem="hXU-Dw-Dql" secondAttribute="top" constant="12" id="Yiz-B8-jzh"/>
+                                                <constraint firstItem="jdk-Qp-wgf" firstAttribute="leading" secondItem="oZL-Yi-NNF" secondAttribute="trailing" constant="15" id="aA9-Wu-7o4"/>
+                                                <constraint firstItem="1aP-oA-E16" firstAttribute="centerY" secondItem="hXU-Dw-Dql" secondAttribute="centerY" id="qSa-LR-Hyr"/>
+                                                <constraint firstItem="jdk-Qp-wgf" firstAttribute="centerY" secondItem="hXU-Dw-Dql" secondAttribute="centerY" id="tce-7e-rwP"/>
+                                                <constraint firstItem="oZL-Yi-NNF" firstAttribute="leading" secondItem="1aP-oA-E16" secondAttribute="trailing" constant="15" id="tvc-Hn-ATh"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="favButton" destination="gMy-0d-auH" id="Xv2-Qs-5nr"/>
                                             <outlet property="leagueLogo" destination="1aP-oA-E16" id="FQp-S6-362"/>
                                             <outlet property="leagueName" destination="oZL-Yi-NNF" id="P0c-x4-YSu"/>
                                         </connections>
@@ -188,12 +196,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="arrow.right" catalog="system" width="128" height="95"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

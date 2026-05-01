@@ -11,7 +11,6 @@ import SDWebImage
 class LeaguesCell: UITableViewCell {
 
     @IBOutlet weak var leagueLogo: UIImageView!
-    @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var leagueName: UILabel!
         
     override func awakeFromNib() {
@@ -35,6 +34,4 @@ class LeaguesCell: UITableViewCell {
         }
     }
 
-    @IBAction func favButtonTapped(_ sender: Any) {
-    }
 }
