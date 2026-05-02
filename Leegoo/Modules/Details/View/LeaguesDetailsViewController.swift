@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class LeaguesDetailsViewController: UIViewController {
 
@@ -15,17 +16,20 @@ class LeaguesDetailsViewController: UIViewController {
         super.viewDidLoad()
         print("DEBUG: LeaguesDetailsViewController (\(Unmanaged.passUnretained(self).toOpaque())) viewDidLoad")
         
-        if presenter == nil {
-            print("DEBUG: Presenter is NIL in viewDidLoad, using fallback")
+        upcomingCollectionView.delegate = self
+        upcomingCollectionView.dataSource = self
 
-            presenter = LeaguesDetailsPresenter(
-                view: self,
-                leagueId: "4328",
-                leagueName: "Leegoo"
-            )
-        } else {
-            print("DEBUG: Presenter is set in viewDidLoad")
+        latestCollectionView.delegate = self
+        latestCollectionView.dataSource = self
+
+        teamsCollectionView.delegate = self
+        teamsCollectionView.dataSource = self
+
+        guard presenter != nil else {
+            print("ERROR: presenter is nil")
+            return
         }
+        
         
         presenter?.viewDidLoad()
     }
@@ -91,6 +95,7 @@ extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollection
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingCell", for: indexPath) as! UpcomingEventCell
             if let event = presenter?.upcomingEvent(at: indexPath.item) {
                 cell.configure(with: event)
+            
             }
             return cell
         } else if collectionView == latestCollectionView {

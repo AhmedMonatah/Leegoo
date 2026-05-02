@@ -1,22 +1,18 @@
 import Foundation
 
 struct TeamResponse: Codable {
-    let teams: [Team]?
+    let success: Int?
+    let result: [Team]?
 }
 
 struct Team: Codable {
-    let idTeam: String?
-    let strTeam: String?
-    let strTeamBadge: String?
-    let strTeamLogo: String?
-    let strDescriptionEN: String?
-    let strStadium: String?
-    let strCountry: String?
-    let intFormedYear: String?
-    let strWebsite: String?
-    let strFacebook: String?
-    let strTwitter: String?
-    let strInstagram: String?
-    
-    static let dummy = Team(idTeam: "0", strTeam: "Team", strTeamBadge: nil, strTeamLogo: nil, strDescriptionEN: nil, strStadium: nil, strCountry: nil, intFormedYear: nil, strWebsite: nil, strFacebook: nil, strTwitter: nil, strInstagram: nil)
+    let teamKey: Int?
+    let teamName: String?
+    let teamLogo: String?
+
+    enum CodingKeys: String, CodingKey {
+        case teamKey = "team_key"
+        case teamName = "team_name"
+        case teamLogo = "team_logo"
+    }
 }

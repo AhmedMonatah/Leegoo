@@ -8,7 +8,7 @@ class LeaguesPresenter: LeaguesPresenterProtocol {
     private var leagues: [League] = []
     private var filteredLeagues: [League] = []
     private let sportTitle: String
-    private let selectedSport: Sport
+    let selectedSport: Sport
     private let networkService: NetworkServiceProtocol
     
     init(view: LeaguesViewProtocol,title: String ,selectedSport: Sport,

@@ -13,6 +13,7 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     weak var view: LeaguesDetailsViewProtocol?
     
     private let networkService: NetworkServiceProtocol
+    private let sportName: String
     private let leagueId: String
     private let leagueName: String
     
@@ -21,11 +22,12 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     private var teams: [Team] = []
     
     init(view: LeaguesDetailsViewProtocol,
-         leagueId: String,
-         leagueName: String,
-         networkService: NetworkServiceProtocol = NetworkService.shared) {
-        
+        sportName: String,
+        leagueId: String,
+        leagueName: String,
+        networkService: NetworkServiceProtocol = NetworkService.shared) {
         self.view = view
+        self.sportName = sportName
         self.leagueId = leagueId
         self.leagueName = leagueName
         self.networkService = networkService
@@ -56,36 +58,46 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
         view?.showLoading()
         
         fetchEvents()
-        fetchTeams()
+        if sportName.lowercased() == "tennis" {
+            teams = []
+            view?.showTeams()
+        } else {
+            fetchTeams()
+        }
     }
     
     private func fetchEvents() {
-        networkService.fetchEvents(leagueId: leagueId) { [weak self] result in
+        networkService.fetchEvents(sportName: sportName, leagueId: leagueId) { [weak self] result in
             guard let self = self else { return }
-            
+
             DispatchQueue.main.async {
                 self.view?.hideLoading()
-                
+
                 switch result {
                 case .success(let events):
-                    self.upcomingEvents = Array(events.prefix(5))
-                    self.latestEvents = Array(events.suffix(from: min(events.count, 5)))
-                    
-                    if self.upcomingEvents.isEmpty && self.latestEvents.isEmpty {
-                        // Fallback to dummy if empty success (optional, but good for testing)
-                        self.upcomingEvents = Array(repeating: .dummy, count: 3)
-                        self.latestEvents = Array(repeating: .dummy, count: 5)
+                    print("DEBUG: fetched events count = \(events.count)")
+
+                    if events.isEmpty {
+                        self.upcomingEvents = []
+                        self.latestEvents = []
+                        self.view?.showUpcomingEvents()
+                        self.view?.showLatestEvents()
+                        return
                     }
-                    
+
+                    self.upcomingEvents = Array(events.prefix(5))
+                    self.latestEvents = Array(events.suffix(5))
+
+                    print("DEBUG: upcoming count = \(self.upcomingEvents.count)")
+                    print("DEBUG: latest count = \(self.latestEvents.count)")
+
                     self.view?.showUpcomingEvents()
                     self.view?.showLatestEvents()
-                    
+
                 case .failure(let error):
                     print("Error fetching events: \(error)")
-                    // Fallback to dummy data
-                    self.upcomingEvents = Array(repeating: .dummy, count: 3)
-                    self.latestEvents = Array(repeating: .dummy, count: 5)
-                    
+                    self.upcomingEvents = []
+                    self.latestEvents = []
                     self.view?.showUpcomingEvents()
                     self.view?.showLatestEvents()
                     self.view?.showError(error.localizedDescription)
@@ -93,27 +105,27 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
             }
         }
     }
+
     
     private func fetchTeams() {
-        networkService.fetchTeams(leagueName: leagueName) { [weak self] result in
+        networkService.fetchTeams(sportName: sportName, leagueId: leagueId) { [weak self] result in
             guard let self = self else { return }
-            
+
             DispatchQueue.main.async {
                 switch result {
                 case .success(let teams):
+                    print("DEBUG: fetched teams count = \(teams.count)")
                     self.teams = teams
-                    if self.teams.isEmpty {
-                         self.teams = Array(repeating: .dummy, count: 10)
-                    }
                     self.view?.showTeams()
-                    
+
                 case .failure(let error):
                     print("Error fetching teams: \(error)")
-                    self.teams = Array(repeating: .dummy, count: 10)
+                    self.teams = []
                     self.view?.showTeams()
                     self.view?.showError(error.localizedDescription)
                 }
             }
         }
     }
+
 }

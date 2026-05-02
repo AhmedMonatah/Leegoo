@@ -67,6 +67,7 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
         
         vc.presenter = LeaguesDetailsPresenter(
             view: vc,
+            sportName: presenter.selectedSport.endpoint,
             leagueId: "\(league.leagueKey ?? 0)",
             leagueName: league.leagueName ?? ""
         )

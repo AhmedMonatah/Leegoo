@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class UpcomingEventCell: UICollectionViewCell {
     
@@ -16,12 +17,24 @@ class UpcomingEventCell: UICollectionViewCell {
     }
     
     func configure(with event: Event) {
-        matchLabel.text = event.strEvent ?? "Match Event"
-        homeTeamLabel.text = event.strHomeTeam?.components(separatedBy: " ").first ?? "Home"
-        awayTeamLabel.text = event.strAwayTeam?.components(separatedBy: " ").first ?? "Away"
-        dateLabel.text = event.dateEvent != nil ? formatDate(event.dateEvent) : "24 May 2024"
-        timeLabel.text = event.strTime != nil ? formatTime(event.strTime) : "00:00"
+        matchLabel.text = "\(event.eventHomeTeam ?? "Home") vs \(event.eventAwayTeam ?? "Away")"
+        homeTeamLabel.text = event.eventHomeTeam?.components(separatedBy: " ").first ?? "Home"
+        awayTeamLabel.text = event.eventAwayTeam?.components(separatedBy: " ").first ?? "Away"
+        dateLabel.text = event.eventDate != nil ? formatDate(event.eventDate) : "--"
+        timeLabel.text = event.eventTime != nil ? formatTime(event.eventTime) : "--"
+        
+        homeTeamImageView.sd_setImage(
+            with: URL(string: event.homeTeamLogo ?? ""),
+            placeholderImage: UIImage(systemName: "photo"),
+        )
+
+        awayTeamImageView.sd_setImage(
+            with: URL(string: event.awayTeamLogo ?? ""),
+            placeholderImage: UIImage(systemName: "photo"),
+        )
+        
     }
+
     
     private func formatDate(_ dateString: String?) -> String {
         guard let dateString = dateString else { return "--" }

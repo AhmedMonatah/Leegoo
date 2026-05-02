@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class TeamCell: UICollectionViewCell {
     
@@ -11,7 +12,10 @@ class TeamCell: UICollectionViewCell {
     }
     
     func configure(with team: Team) {
-        teamNameLabel.text = team.strTeam?.components(separatedBy: " ").first ?? "Team"
-        teamImageView.image = UIImage(systemName: "person.crop.circle")
+        teamNameLabel.text = team.teamName?.components(separatedBy: " ").first ?? "Team"
+        teamImageView.sd_setImage(
+            with: URL(string: team.teamLogo ?? ""),
+            placeholderImage: UIImage(systemName: "photo")
+        )
     }
 }

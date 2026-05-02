@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class LatestEventCell: UICollectionViewCell {
     
@@ -15,17 +16,25 @@ class LatestEventCell: UICollectionViewCell {
     }
     
     func configure(with event: Event) {
-        homeTeamLabel.text = event.strHomeTeam?.components(separatedBy: " ").first ?? "Home"
-        awayTeamLabel.text = event.strAwayTeam?.components(separatedBy: " ").first ?? "Away"
-        scoreLabel.text = "\(event.intHomeScore ?? "0") - \(event.intAwayScore ?? "0")"
-        homeTeamImageView.image = UIImage(systemName: "photo.circle")
-        awayTeamImageView.image = UIImage(systemName: "photo.circle")
+        homeTeamLabel.text = event.eventHomeTeam?.components(separatedBy: " ").first ?? "Home"
+        awayTeamLabel.text = event.eventAwayTeam?.components(separatedBy: " ").first ?? "Away"
+        scoreLabel.text = event.eventFinalResult?.isEmpty == false ? event.eventFinalResult : "0 - 0"
+        homeTeamImageView.sd_setImage(
+            with: URL(string: event.homeTeamLogo ?? ""),
+            placeholderImage: UIImage(systemName: "photo"),
+        )
+
+        awayTeamImageView.sd_setImage(
+            with: URL(string: event.awayTeamLogo ?? ""),
+            placeholderImage: UIImage(systemName: "photo"),
+        )
         setupInfoLabel(event: event)
     }
+
     
     private func setupInfoLabel(event: Event) {
-        let dateText = formatDate(event.dateEvent)
-        let timeText = formatTime(event.strTime)
+        let dateText = formatDate(event.eventDate)
+        let timeText = formatTime(event.eventTime)
         let info = NSMutableAttributedString()
         let attrs: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.secondaryLabel,
