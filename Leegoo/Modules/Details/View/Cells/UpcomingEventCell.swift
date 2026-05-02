@@ -3,7 +3,6 @@ import SDWebImage
 
 class UpcomingEventCell: UICollectionViewCell {
     
-    @IBOutlet weak var matchLabel: UILabel!
     @IBOutlet weak var homeTeamImageView: UIImageView!
     @IBOutlet weak var awayTeamImageView: UIImageView!
     @IBOutlet weak var homeTeamLabel: UILabel!
@@ -17,9 +16,8 @@ class UpcomingEventCell: UICollectionViewCell {
     }
     
     func configure(with event: Event) {
-        matchLabel.text = "\(event.eventHomeTeam ?? "Home") vs \(event.eventAwayTeam ?? "Away")"
-        homeTeamLabel.text = event.eventHomeTeam?.components(separatedBy: " ").first ?? "Home"
-        awayTeamLabel.text = event.eventAwayTeam?.components(separatedBy: " ").first ?? "Away"
+        homeTeamLabel.text = event.eventHomeTeam ?? "Home"
+        awayTeamLabel.text = event.eventAwayTeam ?? "Away"
         dateLabel.text = event.eventDate != nil ? formatDate(event.eventDate) : "--"
         timeLabel.text = event.eventTime != nil ? formatTime(event.eventTime) : "--"
         

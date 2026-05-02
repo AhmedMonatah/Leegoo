@@ -16,8 +16,8 @@ class LatestEventCell: UICollectionViewCell {
     }
     
     func configure(with event: Event) {
-        homeTeamLabel.text = event.eventHomeTeam?.components(separatedBy: " ").first ?? "Home"
-        awayTeamLabel.text = event.eventAwayTeam?.components(separatedBy: " ").first ?? "Away"
+        homeTeamLabel.text = event.eventHomeTeam ?? "Home"
+        awayTeamLabel.text = event.eventAwayTeam  ?? "Away"
         scoreLabel.text = event.eventFinalResult?.isEmpty == false ? event.eventFinalResult : "0 - 0"
         homeTeamImageView.sd_setImage(
             with: URL(string: event.homeTeamLogo ?? ""),

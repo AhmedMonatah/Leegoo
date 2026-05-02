@@ -7,7 +7,6 @@ class LeaguesDetailsViewController: UIViewController {
     @IBOutlet weak var latestCollectionView: UICollectionView!
     @IBOutlet weak var teamsCollectionView: UICollectionView!
     
-    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     
     var presenter: LeaguesDetailsPresenterProtocol?

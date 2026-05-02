@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,14 +26,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LD-bt-fav">
-                                        <rect key="frame" x="353" y="13" width="24" height="24"/>
+                                        <rect key="frame" x="341" y="7" width="36" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="LD-ct-h3"/>
-                                            <constraint firstAttribute="width" constant="24" id="LD-ct-h4"/>
+                                            <constraint firstAttribute="height" constant="36" id="LD-ct-h3"/>
+                                            <constraint firstAttribute="width" constant="36" id="LD-ct-h4"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="tintColor" systemColor="systemBlueColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="heart" catalog="system"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -89,47 +93,46 @@
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-v-card">
                                                                                     <rect key="frame" x="0.0" y="10" width="330" height="200"/>
                                                                                     <subviews>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Man United vs Chelsea" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-match">
-                                                                                            <rect key="frame" x="5" y="15.999999999999998" width="320" height="20.333333333333329"/>
-                                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                                                            <nil key="highlightedColor"/>
-                                                                                        </label>
                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-iv1">
-                                                                                            <rect key="frame" x="60" y="54" width="60" height="57"/>
+                                                                                            <rect key="frame" x="40" y="21.666666666666664" width="80" height="77"/>
                                                                                             <color key="tintColor" systemColor="systemGray4Color"/>
                                                                                             <constraints>
-                                                                                                <constraint firstAttribute="height" constant="60" id="LD-uc-h1"/>
-                                                                                                <constraint firstAttribute="width" constant="60" id="LD-uc-w1"/>
+                                                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="40M-My-ne4"/>
+                                                                                                <constraint firstAttribute="height" constant="80" id="LD-uc-h1"/>
+                                                                                                <constraint firstAttribute="width" constant="80" id="LD-uc-w1"/>
+                                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="d8D-yU-kFD"/>
                                                                                             </constraints>
                                                                                         </imageView>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-vs">
-                                                                                            <rect key="frame" x="150" y="70.333333333333329" width="30.333333333333343" height="26.333333333333329"/>
+                                                                                            <rect key="frame" x="150" y="47" width="30.333333333333343" height="26.333333333333329"/>
                                                                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
                                                                                             <color key="textColor" systemColor="systemBlueColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-iv2">
-                                                                                            <rect key="frame" x="230" y="54" width="50" height="57"/>
+                                                                                            <rect key="frame" x="210" y="21.666666666666664" width="80" height="77"/>
                                                                                             <color key="tintColor" systemColor="systemGray4Color"/>
                                                                                             <constraints>
-                                                                                                <constraint firstAttribute="height" constant="60" id="LD-uc-h2"/>
-                                                                                                <constraint firstAttribute="width" constant="50" id="LD-uc-w2"/>
+                                                                                                <constraint firstAttribute="height" constant="80" id="LD-uc-h2"/>
+                                                                                                <constraint firstAttribute="width" constant="80" id="LD-uc-w2"/>
+                                                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="S5p-cr-9vm"/>
+                                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="uZI-ht-xNR"/>
                                                                                             </constraints>
                                                                                         </imageView>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Man United" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-t1">
-                                                                                            <rect key="frame" x="30" y="120.33333333333334" width="120" height="14.333333333333343"/>
+                                                                                            <rect key="frame" x="20" y="115" width="120" height="17"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="120" id="LD-uc-w3"/>
                                                                                             </constraints>
-                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chelsea" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-t2">
-                                                                                            <rect key="frame" x="195" y="120.33333333333334" width="120" height="14.333333333333343"/>
+                                                                                            <rect key="frame" x="190" y="115" width="120" height="17"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="120" id="LD-uc-w4"/>
                                                                                             </constraints>
-                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-st-info">
@@ -152,21 +155,18 @@
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                     <constraints>
-                                                                                        <constraint firstItem="LD-uc-lb-match" firstAttribute="leading" secondItem="LD-uc-v-card" secondAttribute="leading" constant="5" id="LD-uc-ct1"/>
-                                                                                        <constraint firstItem="LD-uc-lb-t2" firstAttribute="top" secondItem="LD-uc-iv2" secondAttribute="bottom" constant="8" id="LD-uc-ct10"/>
+                                                                                        <constraint firstItem="LD-uc-lb-vs" firstAttribute="centerY" secondItem="LD-uc-iv1" secondAttribute="centerY" id="4sJ-OG-HsN"/>
+                                                                                        <constraint firstItem="LD-uc-iv2" firstAttribute="top" secondItem="LD-uc-v-card" secondAttribute="top" constant="20" id="Hr5-Pe-CsE"/>
+                                                                                        <constraint firstItem="LD-uc-lb-t2" firstAttribute="top" secondItem="LD-uc-iv2" secondAttribute="bottom" constant="15" id="LD-uc-ct10"/>
                                                                                         <constraint firstAttribute="bottom" secondItem="LD-uc-st-info" secondAttribute="bottom" constant="10" id="LD-uc-ct11"/>
-                                                                                        <constraint firstItem="LD-uc-iv1" firstAttribute="top" secondItem="LD-uc-lb-match" secondAttribute="bottom" constant="16" id="LD-uc-ct12"/>
                                                                                         <constraint firstItem="LD-uc-lb-t2" firstAttribute="centerX" secondItem="LD-uc-iv2" secondAttribute="centerX" id="LD-uc-ct13"/>
-                                                                                        <constraint firstAttribute="trailing" secondItem="LD-uc-lb-match" secondAttribute="trailing" constant="5" id="LD-uc-ct14"/>
-                                                                                        <constraint firstAttribute="trailing" secondItem="LD-uc-iv2" secondAttribute="trailing" constant="50" id="LD-uc-ct15"/>
-                                                                                        <constraint firstItem="LD-uc-lb-vs" firstAttribute="top" secondItem="LD-uc-lb-match" secondAttribute="bottom" constant="34" id="LD-uc-ct2"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="LD-uc-iv2" secondAttribute="trailing" constant="40" id="LD-uc-ct15"/>
                                                                                         <constraint firstItem="LD-uc-lb-t1" firstAttribute="centerX" secondItem="LD-uc-iv1" secondAttribute="centerX" id="LD-uc-ct3"/>
-                                                                                        <constraint firstItem="LD-uc-iv1" firstAttribute="leading" secondItem="LD-uc-v-card" secondAttribute="leading" constant="60" id="LD-uc-ct4"/>
+                                                                                        <constraint firstItem="LD-uc-iv1" firstAttribute="leading" secondItem="LD-uc-v-card" secondAttribute="leading" constant="40" id="LD-uc-ct4"/>
                                                                                         <constraint firstItem="LD-uc-st-info" firstAttribute="centerX" secondItem="LD-uc-v-card" secondAttribute="centerX" id="LD-uc-ct5"/>
-                                                                                        <constraint firstItem="LD-uc-iv2" firstAttribute="top" secondItem="LD-uc-lb-match" secondAttribute="bottom" constant="16" id="LD-uc-ct6"/>
-                                                                                        <constraint firstItem="LD-uc-lb-t1" firstAttribute="top" secondItem="LD-uc-iv1" secondAttribute="bottom" constant="8" id="LD-uc-ct7"/>
-                                                                                        <constraint firstItem="LD-uc-lb-match" firstAttribute="top" secondItem="LD-uc-v-card" secondAttribute="top" constant="16" id="LD-uc-ct8"/>
+                                                                                        <constraint firstItem="LD-uc-lb-t1" firstAttribute="top" secondItem="LD-uc-iv1" secondAttribute="bottom" constant="15" id="LD-uc-ct7"/>
                                                                                         <constraint firstItem="LD-uc-lb-vs" firstAttribute="centerX" secondItem="LD-uc-v-card" secondAttribute="centerX" id="LD-uc-ct9"/>
+                                                                                        <constraint firstItem="LD-uc-iv1" firstAttribute="top" secondItem="LD-uc-v-card" secondAttribute="top" constant="20" id="cGW-kq-bGj"/>
                                                                                     </constraints>
                                                                                     <userDefinedRuntimeAttributes>
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -201,7 +201,6 @@
                                                                             <outlet property="dateLabel" destination="LD-uc-lb-date" id="uc-c-3"/>
                                                                             <outlet property="homeTeamImageView" destination="LD-uc-iv1" id="uc-c-4"/>
                                                                             <outlet property="homeTeamLabel" destination="LD-uc-lb-t1" id="uc-c-5"/>
-                                                                            <outlet property="matchLabel" destination="LD-uc-lb-match" id="uc-c-6"/>
                                                                             <outlet property="timeLabel" destination="LD-uc-lb-time" id="uc-c-7"/>
                                                                         </connections>
                                                                     </collectionViewCell>

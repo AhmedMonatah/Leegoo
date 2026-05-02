@@ -12,7 +12,7 @@ class TeamCell: UICollectionViewCell {
     }
     
     func configure(with team: Team) {
-        teamNameLabel.text = team.teamName?.components(separatedBy: " ").first ?? "Team"
+        teamNameLabel.text = team.teamName ?? "Team"
         teamImageView.sd_setImage(
             with: URL(string: team.teamLogo ?? ""),
             placeholderImage: UIImage(systemName: "photo")

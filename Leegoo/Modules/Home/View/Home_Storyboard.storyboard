@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sports" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyt-E1-Gu1">
-                                <rect key="frame" x="137.66666666666666" y="182" width="117.66666666666666" height="43"/>
+                                <rect key="frame" x="137.66666666666666" y="162" width="117.66666666666666" height="43"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HA2-Pi-BqT">
-                                <rect key="frame" x="16" y="273" width="361" height="511"/>
+                                <rect key="frame" x="16" y="237" width="361" height="547"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bfL-uV-WPp">
                                     <size key="itemSize" width="194" height="286"/>
@@ -70,10 +70,10 @@
                         <constraints>
                             <constraint firstItem="HA2-Pi-BqT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="8OY-PN-iX5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="HA2-Pi-BqT" secondAttribute="bottom" id="gqo-e0-sxA"/>
-                            <constraint firstItem="HA2-Pi-BqT" firstAttribute="top" secondItem="nyt-E1-Gu1" secondAttribute="bottom" constant="48" id="mjV-xT-5Mm"/>
+                            <constraint firstItem="HA2-Pi-BqT" firstAttribute="top" secondItem="nyt-E1-Gu1" secondAttribute="bottom" constant="32" id="mjV-xT-5Mm"/>
                             <constraint firstItem="nyt-E1-Gu1" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="nch-tR-5jA"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="HA2-Pi-BqT" secondAttribute="trailing" constant="16" id="nxg-Y3-eC3"/>
-                            <constraint firstItem="nyt-E1-Gu1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="xNA-MP-wjg"/>
+                            <constraint firstItem="nyt-E1-Gu1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="xNA-MP-wjg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CKa-vU-iBc"/>
@@ -83,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054.1984732824426" y="1.4084507042253522"/>
+            <point key="canvasLocation" x="1052.6717557251909" y="1.4084507042253522"/>
         </scene>
         <!--Leagues View Controller-->
         <scene sceneID="wb5-uR-HML">
@@ -167,10 +167,10 @@
                             <constraint firstItem="PRE-WV-TUS" firstAttribute="top" secondItem="mxQ-hm-ta9" secondAttribute="top" constant="20" id="5hI-EM-9Pf"/>
                             <constraint firstItem="PRE-WV-TUS" firstAttribute="bottom" secondItem="ASZ-iv-lrM" secondAttribute="bottom" id="Uav-Ab-tYE"/>
                             <constraint firstItem="Fb3-rY-Ybq" firstAttribute="centerX" secondItem="PRE-WV-TUS" secondAttribute="centerX" id="Y4m-9F-0An"/>
-                            <constraint firstItem="leagues-search-bar" firstAttribute="top" secondItem="mxQ-hm-ta9" secondAttribute="bottom" constant="10" id="lsb-top"/>
-                            <constraint firstItem="leagues-search-bar" firstAttribute="leading" secondItem="PRE-WV-TUS" secondAttribute="leading" id="lsb-lead"/>
-                            <constraint firstItem="leagues-search-bar" firstAttribute="trailing" secondItem="PRE-WV-TUS" secondAttribute="trailing" id="lsb-trail"/>
                             <constraint firstItem="mxQ-hm-ta9" firstAttribute="centerX" secondItem="PRE-WV-TUS" secondAttribute="centerX" id="l6e-YB-HXO"/>
+                            <constraint firstItem="leagues-search-bar" firstAttribute="leading" secondItem="PRE-WV-TUS" secondAttribute="leading" id="lsb-lead"/>
+                            <constraint firstItem="leagues-search-bar" firstAttribute="top" secondItem="mxQ-hm-ta9" secondAttribute="bottom" constant="10" id="lsb-top"/>
+                            <constraint firstItem="leagues-search-bar" firstAttribute="trailing" secondItem="PRE-WV-TUS" secondAttribute="trailing" id="lsb-trail"/>
                             <constraint firstItem="ASZ-iv-lrM" firstAttribute="top" secondItem="leagues-search-bar" secondAttribute="bottom" constant="8" id="wgV-fF-jRB"/>
                         </constraints>
                     </view>
