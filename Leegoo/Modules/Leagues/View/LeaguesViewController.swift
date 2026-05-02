@@ -57,21 +57,22 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
     }
     
     func navigateToDetails(league: League) {
-        // todo later when Details finished 
+        print("DEBUG: LeaguesViewController navigateToDetails called for \(league.leagueName ?? "Unknown")")
+        let storyboard = UIStoryboard(name: "LeaguesDetails", bundle: nil)
         
-//        let storyboard = UIStoryboard(name: "LeaguesDetails", bundle: nil)
-//        
-//        guard let vc = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController else {
-//            return
-//        }
-//        
-//        vc.presenter = LeaguesDetailsPresenter(
-//            view: vc,
-//            leagueId: "\(league.leagueKey ?? 0)",
-//            leagueName: league.leagueName ?? ""
-//        )
-//        
-//        navigationController?.pushViewController(vc, animated: true)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController else {
+            print("DEBUG: FAILED to instantiate LeaguesDetailsViewController")
+            return
+        }
+        
+        vc.presenter = LeaguesDetailsPresenter(
+            view: vc,
+            leagueId: "\(league.leagueKey ?? 0)",
+            leagueName: league.leagueName ?? ""
+        )
+        print("DEBUG: Presenter assigned to vc (\(Unmanaged.passUnretained(vc).toOpaque()))")
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 
