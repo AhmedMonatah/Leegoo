@@ -19,19 +19,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-header">
                                 <rect key="frame" x="0.0" y="118" width="393" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LD-bt-back">
-                                        <rect key="frame" x="16" y="14" width="22" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="22" id="LD-ct-h1"/>
-                                            <constraint firstAttribute="height" constant="22" id="LD-ct-h2"/>
-                                        </constraints>
-                                        <color key="tintColor" systemColor="systemBlueColor"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="chevron.left" catalog="system"/>
-                                        <connections>
-                                            <action selector="backButtonTapped:" destination="LD-vc-001" eventType="touchUpInside" id="LD-conn-back-act"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leegoo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-title">
                                         <rect key="frame" x="162.66666666666666" y="13" width="68" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
@@ -52,8 +39,6 @@
                                 <constraints>
                                     <constraint firstItem="LD-bt-fav" firstAttribute="centerY" secondItem="LD-vw-header" secondAttribute="centerY" id="LD-ct-h10"/>
                                     <constraint firstAttribute="height" constant="50" id="LD-ct-h11"/>
-                                    <constraint firstItem="LD-bt-back" firstAttribute="centerY" secondItem="LD-vw-header" secondAttribute="centerY" id="LD-ct-h5"/>
-                                    <constraint firstItem="LD-bt-back" firstAttribute="leading" secondItem="LD-vw-header" secondAttribute="leading" constant="16" id="LD-ct-h6"/>
                                     <constraint firstItem="LD-lb-title" firstAttribute="centerX" secondItem="LD-vw-header" secondAttribute="centerX" id="LD-ct-h7"/>
                                     <constraint firstItem="LD-lb-title" firstAttribute="centerY" secondItem="LD-vw-header" secondAttribute="centerY" id="LD-ct-h8"/>
                                     <constraint firstAttribute="trailing" secondItem="LD-bt-fav" secondAttribute="trailing" constant="16" id="LD-ct-h9"/>
@@ -63,10 +48,10 @@
                                 <rect key="frame" x="0.0" y="168" width="393" height="684"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-content">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1160"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1200"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="LD-st-sections">
-                                                <rect key="frame" x="0.0" y="16" width="393" height="1128"/>
+                                                <rect key="frame" x="0.0" y="16" width="393" height="1168"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec1">
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="280"/>
@@ -84,11 +69,7 @@
                                                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                                                 </state>
                                                             </button>
-                                                                <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-upcoming">
-                                                                <connections>
-                                                                    <outlet property="dataSource" destination="LD-vc-001" id="LD-conn-upc-ds"/>
-                                                                    <outlet property="delegate" destination="LD-vc-001" id="LD-conn-upc-del"/>
-                                                                </connections>
+                                                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-upcoming">
                                                                 <rect key="frame" x="31.666666666666657" y="31.333333333333357" width="330" height="248.66666666666663"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="LD-fl-upcoming">
@@ -106,15 +87,15 @@
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-v-card">
-                                                                                    <rect key="frame" x="10" y="10" width="310" height="200"/>
+                                                                                    <rect key="frame" x="0.0" y="10" width="330" height="200"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Man United vs Chelsea" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-match">
-                                                                                            <rect key="frame" x="20" y="16" width="274" height="21.666666666666671"/>
-                                                                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                                                                            <rect key="frame" x="5" y="15.999999999999998" width="320" height="20.333333333333329"/>
+                                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-iv1">
-                                                                                            <rect key="frame" x="60" y="55.333333333333329" width="60" height="56.999999999999986"/>
+                                                                                            <rect key="frame" x="60" y="54" width="60" height="57"/>
                                                                                             <color key="tintColor" systemColor="systemGray4Color"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="height" constant="60" id="LD-uc-h1"/>
@@ -122,13 +103,13 @@
                                                                                             </constraints>
                                                                                         </imageView>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-vs">
-                                                                                            <rect key="frame" x="140" y="71.666666666666671" width="30.333333333333343" height="26.333333333333329"/>
+                                                                                            <rect key="frame" x="150" y="70.333333333333329" width="30.333333333333343" height="26.333333333333329"/>
                                                                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
                                                                                             <color key="textColor" systemColor="systemBlueColor"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-iv2">
-                                                                                            <rect key="frame" x="210" y="55.333333333333329" width="50" height="56.999999999999986"/>
+                                                                                            <rect key="frame" x="230" y="54" width="50" height="57"/>
                                                                                             <color key="tintColor" systemColor="systemGray4Color"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="height" constant="60" id="LD-uc-h2"/>
@@ -136,7 +117,7 @@
                                                                                             </constraints>
                                                                                         </imageView>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Man United" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-t1">
-                                                                                            <rect key="frame" x="30" y="121.66666666666664" width="120" height="14.333333333333329"/>
+                                                                                            <rect key="frame" x="30" y="120.33333333333334" width="120" height="14.333333333333343"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="120" id="LD-uc-w3"/>
                                                                                             </constraints>
@@ -144,7 +125,7 @@
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chelsea" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-t2">
-                                                                                            <rect key="frame" x="175" y="121.66666666666664" width="120" height="14.333333333333329"/>
+                                                                                            <rect key="frame" x="195" y="120.33333333333334" width="120" height="14.333333333333343"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="120" id="LD-uc-w4"/>
                                                                                             </constraints>
@@ -152,7 +133,7 @@
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-st-info">
-                                                                                            <rect key="frame" x="77.666666666666671" y="174.33333333333334" width="154.66666666666663" height="15.666666666666657"/>
+                                                                                            <rect key="frame" x="87.666666666666671" y="174.33333333333334" width="154.66666666666663" height="15.666666666666657"/>
                                                                                             <subviews>
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 May 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-uc-lb-date">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="81.666666666666671" height="15.666666666666666"/>
@@ -171,12 +152,12 @@
                                                                                     </subviews>
                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                     <constraints>
-                                                                                        <constraint firstItem="LD-uc-lb-match" firstAttribute="leading" secondItem="LD-uc-v-card" secondAttribute="leading" constant="20" id="LD-uc-ct1"/>
+                                                                                        <constraint firstItem="LD-uc-lb-match" firstAttribute="leading" secondItem="LD-uc-v-card" secondAttribute="leading" constant="5" id="LD-uc-ct1"/>
                                                                                         <constraint firstItem="LD-uc-lb-t2" firstAttribute="top" secondItem="LD-uc-iv2" secondAttribute="bottom" constant="8" id="LD-uc-ct10"/>
                                                                                         <constraint firstAttribute="bottom" secondItem="LD-uc-st-info" secondAttribute="bottom" constant="10" id="LD-uc-ct11"/>
                                                                                         <constraint firstItem="LD-uc-iv1" firstAttribute="top" secondItem="LD-uc-lb-match" secondAttribute="bottom" constant="16" id="LD-uc-ct12"/>
                                                                                         <constraint firstItem="LD-uc-lb-t2" firstAttribute="centerX" secondItem="LD-uc-iv2" secondAttribute="centerX" id="LD-uc-ct13"/>
-                                                                                        <constraint firstAttribute="trailing" secondItem="LD-uc-lb-match" secondAttribute="trailing" constant="16" id="LD-uc-ct14"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="LD-uc-lb-match" secondAttribute="trailing" constant="5" id="LD-uc-ct14"/>
                                                                                         <constraint firstAttribute="trailing" secondItem="LD-uc-iv2" secondAttribute="trailing" constant="50" id="LD-uc-ct15"/>
                                                                                         <constraint firstItem="LD-uc-lb-vs" firstAttribute="top" secondItem="LD-uc-lb-match" secondAttribute="bottom" constant="34" id="LD-uc-ct2"/>
                                                                                         <constraint firstItem="LD-uc-lb-t1" firstAttribute="centerX" secondItem="LD-uc-iv1" secondAttribute="centerX" id="LD-uc-ct3"/>
@@ -210,9 +191,9 @@
                                                                         </view>
                                                                         <constraints>
                                                                             <constraint firstAttribute="bottom" secondItem="LD-uc-v-card" secondAttribute="bottom" constant="10" id="LD-uc-c-ct1"/>
-                                                                            <constraint firstItem="LD-uc-v-card" firstAttribute="leading" secondItem="LD-uc-cell1" secondAttribute="leading" constant="10" id="LD-uc-c-ct2"/>
+                                                                            <constraint firstItem="LD-uc-v-card" firstAttribute="leading" secondItem="LD-uc-cell1" secondAttribute="leading" id="LD-uc-c-ct2"/>
                                                                             <constraint firstItem="LD-uc-v-card" firstAttribute="top" secondItem="LD-uc-cell1" secondAttribute="top" constant="10" id="LD-uc-c-ct3"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="LD-uc-v-card" secondAttribute="trailing" constant="10" id="LD-uc-c-ct4"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="LD-uc-v-card" secondAttribute="trailing" id="LD-uc-c-ct4"/>
                                                                         </constraints>
                                                                         <connections>
                                                                             <outlet property="awayTeamImageView" destination="LD-uc-iv2" id="uc-c-1"/>
@@ -225,6 +206,10 @@
                                                                         </connections>
                                                                     </collectionViewCell>
                                                                 </cells>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="LD-vc-001" id="LD-conn-upc-ds"/>
+                                                                    <outlet property="delegate" destination="LD-vc-001" id="LD-conn-upc-del"/>
+                                                                </connections>
                                                             </collectionView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -241,7 +226,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec2">
-                                                        <rect key="frame" x="0.0" y="304" width="393" height="600"/>
+                                                        <rect key="frame" x="0.0" y="304" width="393" height="640"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latest Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-s2-title">
                                                                 <rect key="frame" x="16" y="0.0" width="92.666666666666671" height="18"/>
@@ -257,11 +242,7 @@
                                                                 </state>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-latest" customClass="SelfSizingCollectionView" customModule="Leegoo" customModuleProvider="target">
-                                                                <connections>
-                                                                    <outlet property="dataSource" destination="LD-vc-001" id="LD-conn-lat-ds"/>
-                                                                    <outlet property="delegate" destination="LD-vc-001" id="LD-conn-lat-del"/>
-                                                                </connections>
-                                                                <rect key="frame" x="0.0" y="30" width="393" height="570"/>
+                                                                <rect key="frame" x="0.0" y="30" width="393" height="610"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="0.0" id="LD-fl-latest">
                                                                     <size key="itemSize" width="361" height="90"/>
@@ -372,6 +353,10 @@
                                                                         </connections>
                                                                     </collectionViewCell>
                                                                 </cells>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="LD-vc-001" id="LD-conn-lat-ds"/>
+                                                                    <outlet property="delegate" destination="LD-vc-001" id="LD-conn-lat-del"/>
+                                                                </connections>
                                                             </collectionView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -387,7 +372,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec3">
-                                                        <rect key="frame" x="0.0" y="928" width="393" height="200"/>
+                                                        <rect key="frame" x="0.0" y="968" width="393" height="200"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-s3-title">
                                                                 <rect key="frame" x="16.000000000000004" y="0.0" width="59.333333333333343" height="23"/>
@@ -403,10 +388,6 @@
                                                                 </state>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-teams">
-                                                                <connections>
-                                                                    <outlet property="dataSource" destination="LD-vc-001" id="LD-conn-tea-ds"/>
-                                                                    <outlet property="delegate" destination="LD-vc-001" id="LD-conn-tea-del"/>
-                                                                </connections>
                                                                 <rect key="frame" x="0.0" y="35" width="393" height="165"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="LD-fl-teams">
@@ -452,6 +433,10 @@
                                                                         </connections>
                                                                     </collectionViewCell>
                                                                 </cells>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="LD-vc-001" id="LD-conn-tea-ds"/>
+                                                                    <outlet property="delegate" destination="LD-vc-001" id="LD-conn-tea-del"/>
+                                                                </connections>
                                                             </collectionView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -502,7 +487,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backButton" destination="LD-bt-back" id="conn-6"/>
                         <outlet property="latestCollectionView" destination="LD-cv-latest" id="conn-1"/>
                         <outlet property="teamsCollectionView" destination="LD-cv-teams" id="conn-3"/>
                         <outlet property="titleLabel" destination="LD-lb-title" id="conn-4"/>
@@ -515,28 +499,27 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

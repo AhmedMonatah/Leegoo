@@ -34,11 +34,6 @@ class LeaguesDetailsViewController: UIViewController {
         presenter?.viewDidLoad()
     }
     
-    @IBAction private func backButtonTapped(_ sender: Any) {
-        print("DEBUG: Back button tapped")
-        navigationController?.popViewController(animated: true)
-    }
-
 }
 
 extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
