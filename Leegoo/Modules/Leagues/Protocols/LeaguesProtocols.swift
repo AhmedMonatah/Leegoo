@@ -5,5 +5,7 @@ protocol LeaguesPresenterProtocol: AnyObject {
     func viewDidLoad()
     func league(at index: Int) -> League
     func searchLeagues(with text: String)
+    func didSelectLeague(at index: Int) 
+
 }
 

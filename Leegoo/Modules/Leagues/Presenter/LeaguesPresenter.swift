@@ -59,4 +59,10 @@ class LeaguesPresenter: LeaguesPresenterProtocol {
             }
         }
     }
+    
+    func didSelectLeague(at index: Int) {
+        let league = filteredLeagues[index]
+        view?.navigateToDetails(league: league)
+    }
+    
 }

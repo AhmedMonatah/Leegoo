@@ -13,6 +13,7 @@ protocol LeaguesViewProtocol: AnyObject {
     func hideLoading()
     func showError(_ message: String)
     func setTitle(_ title: String)
+    func navigateToDetails(league: League)
 }
 
 class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
@@ -54,6 +55,25 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
     func setTitle(_ title: String) {
         self.title = title
     }
+    
+    func navigateToDetails(league: League) {
+        // todo later when Details finished 
+        
+//        let storyboard = UIStoryboard(name: "LeaguesDetails", bundle: nil)
+//        
+//        guard let vc = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController else {
+//            return
+//        }
+//        
+//        vc.presenter = LeaguesDetailsPresenter(
+//            view: vc,
+//            leagueId: "\(league.leagueKey ?? 0)",
+//            leagueName: league.leagueName ?? ""
+//        )
+//        
+//        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 
 }
 
@@ -79,6 +99,9 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
         return 75
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.didSelectLeague(at: indexPath.row)
+    }
     
     
 }
