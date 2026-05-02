@@ -20,8 +20,6 @@ class LatestEventCell: UICollectionViewCell {
         scoreLabel.text = "\(event.intHomeScore ?? "0") - \(event.intAwayScore ?? "0")"
         homeTeamImageView.image = UIImage(systemName: "photo.circle")
         awayTeamImageView.image = UIImage(systemName: "photo.circle")
-        [homeTeamLabel, awayTeamLabel, scoreLabel, infoLabel].forEach { $0?.backgroundColor = .clear }
-        
         setupInfoLabel(event: event)
     }
     

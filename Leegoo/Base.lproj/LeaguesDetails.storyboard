@@ -28,6 +28,9 @@
                                         <color key="tintColor" systemColor="systemBlueColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="chevron.left" catalog="system"/>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="LD-vc-001" eventType="touchUpInside" id="LD-conn-back-act"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leegoo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-title">
                                         <rect key="frame" x="162.66666666666666" y="13" width="68" height="24"/>
@@ -81,7 +84,11 @@
                                                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                                                 </state>
                                                             </button>
-                                                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-upcoming">
+                                                                <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-upcoming">
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="LD-vc-001" id="LD-conn-upc-ds"/>
+                                                                    <outlet property="delegate" destination="LD-vc-001" id="LD-conn-upc-del"/>
+                                                                </connections>
                                                                 <rect key="frame" x="31.666666666666657" y="31.333333333333357" width="330" height="248.66666666666663"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="LD-fl-upcoming">
@@ -91,7 +98,7 @@
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LD-cell-upcoming" id="LD-uc-cell1" customClass="UpcomingEventCell" customModule="Leegoo" customModuleProvider="target">
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UpcomingCell" id="LD-uc-cell1" customClass="UpcomingEventCell" customModule="Leegoo" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="14.333333333333334" width="330" height="220"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -249,7 +256,11 @@
                                                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                                                 </state>
                                                             </button>
-                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-latest">
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-latest" customClass="SelfSizingCollectionView" customModule="Leegoo" customModuleProvider="target">
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="LD-vc-001" id="LD-conn-lat-ds"/>
+                                                                    <outlet property="delegate" destination="LD-vc-001" id="LD-conn-lat-del"/>
+                                                                </connections>
                                                                 <rect key="frame" x="0.0" y="30" width="393" height="570"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="0.0" id="LD-fl-latest">
@@ -259,7 +270,7 @@
                                                                     <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LD-cell-latest" id="LD-lc-cell1" customClass="LatestEventCell" customModule="Leegoo" customModuleProvider="target">
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LatestCell" id="LD-lc-cell1" customClass="LatestEventCell" customModule="Leegoo" customModuleProvider="target">
                                                                         <rect key="frame" x="16" y="0.0" width="361" height="90"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -373,7 +384,6 @@
                                                             <constraint firstItem="LD-cv-latest" firstAttribute="leading" secondItem="LD-vw-sec2" secondAttribute="leading" id="LD-ct-s2-6"/>
                                                             <constraint firstAttribute="trailing" secondItem="LD-cv-latest" secondAttribute="trailing" id="LD-ct-s2-7"/>
                                                             <constraint firstAttribute="bottom" secondItem="LD-cv-latest" secondAttribute="bottom" id="LD-ct-s2-8"/>
-                                                            <constraint firstAttribute="height" constant="600" id="LD-ct-s2-9"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec3">
@@ -393,6 +403,10 @@
                                                                 </state>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-teams">
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="LD-vc-001" id="LD-conn-tea-ds"/>
+                                                                    <outlet property="delegate" destination="LD-vc-001" id="LD-conn-tea-del"/>
+                                                                </connections>
                                                                 <rect key="frame" x="0.0" y="35" width="393" height="165"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="LD-fl-teams">
@@ -402,7 +416,7 @@
                                                                     <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LD-cell-team" id="LD-tc-cell1" customClass="TeamCell" customModule="Leegoo" customModuleProvider="target">
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TeamCell" id="LD-tc-cell1" customClass="TeamCell" customModule="Leegoo" customModuleProvider="target">
                                                                         <rect key="frame" x="16" y="12.666666666666666" width="100" height="140"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -490,7 +504,6 @@
                     <connections>
                         <outlet property="backButton" destination="LD-bt-back" id="conn-6"/>
                         <outlet property="latestCollectionView" destination="LD-cv-latest" id="conn-1"/>
-                        <outlet property="latestSectionHeightConstraint" destination="LD-ct-s2-9" id="conn-2"/>
                         <outlet property="teamsCollectionView" destination="LD-cv-teams" id="conn-3"/>
                         <outlet property="titleLabel" destination="LD-lb-title" id="conn-4"/>
                         <outlet property="upcomingCollectionView" destination="LD-cv-upcoming" id="conn-5"/>

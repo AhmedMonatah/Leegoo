@@ -2,144 +2,108 @@ import UIKit
 
 class LeaguesDetailsViewController: UIViewController {
 
- 
     @IBOutlet weak var upcomingCollectionView: UICollectionView!
     @IBOutlet weak var latestCollectionView: UICollectionView!
     @IBOutlet weak var teamsCollectionView: UICollectionView!
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var latestSectionHeightConstraint: NSLayoutConstraint!
     
- 
-    var leagueId: String? = "4328"
-    var leagueName: String? = "English Premier League"
-    var isUpcomingLayoutSet = false
-    private var upcomingEvents: [Event] = []
-    private var latestEvents: [Event] = []
-    private var teams: [Team] = []
-    
-    private let networkService = NetworkService.shared
-
+    var presenter: LeaguesDetailsPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionViews()
-        setupButtons()
-        fetchData()
-        updateTitle()
-    }
-    
-    private func setupButtons() {
-        backButton?.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-    }
-    
-    @objc private func backButtonTapped() {
-        if navigationController != nil {
-            navigationController?.popViewController(animated: true)
-        } else {
-            dismiss(animated: true)
-        }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    private func setupCollectionViews() {
-        [upcomingCollectionView, latestCollectionView, teamsCollectionView].forEach {
-            $0?.delegate = self
-            $0?.dataSource = self
-        }
-    }
-    
-    private func updateTitle() {
-        titleLabel.text = "Leegoo"
-    }
-
-    private func fetchData() {
-        guard let leagueId = leagueId, let leagueName = leagueName else { return }
+        print("DEBUG: LeaguesDetailsViewController (\(Unmanaged.passUnretained(self).toOpaque())) viewDidLoad")
         
-        networkService.fetchEvents(leagueId: leagueId) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let events):
-                    // Split events into upcoming and latest (mocking split for now)
-                    self?.upcomingEvents = Array(events.prefix(5))
-                    self?.latestEvents = Array(events.suffix(from: min(events.count, 5)))
-                    self?.upcomingCollectionView.reloadData()
-                    self?.latestCollectionView.reloadData()
-                    self?.updateLatestSectionHeight()
-                case .failure(let error):
-                    print("Error fetching events: \(error)")
-                 
-                    let dummy = Event(idEvent: "0", strEvent: "Any Match", dateEvent: "2024-05-24", strTime: "16:00:00", intHomeScore: "0", intAwayScore: "0", idHomeTeam: "0", idAwayTeam: "0", strHomeTeam: "Home", strAwayTeam: "Away", strThumb: nil)
-                    self?.upcomingEvents = Array(repeating: dummy, count: 3)
-                    self?.latestEvents = Array(repeating: dummy, count: 5)
-                    self?.upcomingCollectionView.reloadData()
-                    self?.latestCollectionView.reloadData()
-                    self?.updateLatestSectionHeight()
-                }
-            }
+        if presenter == nil {
+            print("DEBUG: Presenter is NIL in viewDidLoad, using fallback")
+
+            presenter = LeaguesDetailsPresenter(
+                view: self,
+                leagueId: "4328",
+                leagueName: "Leegoo"
+            )
+        } else {
+            print("DEBUG: Presenter is set in viewDidLoad")
         }
         
-
-        networkService.fetchTeams(leagueName: leagueName) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let teams):
-                    self?.teams = teams
-                    self?.teamsCollectionView.reloadData()
-                case .failure(let error):
-                    print("Error fetching teams: \(error)")
-                    // Provide dummy data fallback
-                    let dummyTeam = Team(idTeam: "0", strTeam: "Team", strTeamBadge: nil, strTeamLogo: nil, strDescriptionEN: nil, strStadium: nil, strCountry: nil, intFormedYear: nil, strWebsite: nil, strFacebook: nil, strTwitter: nil, strInstagram: nil)
-                    self?.teams = Array(repeating: dummyTeam, count: 10)
-                    self?.teamsCollectionView.reloadData()
-                }
-            }
-        }
+        presenter?.viewDidLoad()
     }
     
-    private func updateLatestSectionHeight() {
-        let count = CGFloat(latestEvents.count)
-        if count == 0 {
-            latestSectionHeightConstraint.constant = 50
-        } else {
-            let itemHeight: CGFloat = 90
-            let lineSpacing: CGFloat = 12
-            let topOffset: CGFloat = 30 // Title height + spacing to collection view
-            let contentHeight = (count * itemHeight) + ((count - 1) * lineSpacing)
-            latestSectionHeightConstraint.constant = topOffset + contentHeight
-        }
-        view.layoutIfNeeded()
+    @IBAction private func backButtonTapped(_ sender: Any) {
+        print("DEBUG: Back button tapped")
+        navigationController?.popViewController(animated: true)
     }
 
+}
+
+extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
+    func showLoading() {
+        // Implement if needed
+    }
+    
+    func hideLoading() {
+        // Implement if needed
+    }
+    
+    func showError(_ message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    func showUpcomingEvents() {
+        upcomingCollectionView.reloadData()
+    }
+    
+    func showLatestEvents() {
+        latestCollectionView.reloadData()
+    }
+    
+    func showTeams() {
+        teamsCollectionView.reloadData()
+    }
+    
+    func setTitle(_ title: String) {
+        titleLabel.text = title
+    }
 }
 
 extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let count: Int
         if collectionView == upcomingCollectionView {
-            return upcomingEvents.count
+            count = presenter?.upcomingCount ?? 0
+            print("DEBUG: Upcoming count = \(count)")
         } else if collectionView == latestCollectionView {
-            return latestEvents.count
+            count = presenter?.latestCount ?? 0
+            print("DEBUG: Latest count = \(count)")
         } else {
-            return teams.count
+            count = presenter?.teamsCount ?? 0
+            print("DEBUG: Teams count = \(count)")
         }
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == upcomingCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LD-cell-upcoming", for: indexPath) as! UpcomingEventCell
-            cell.configure(with: upcomingEvents[indexPath.item])
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingCell", for: indexPath) as! UpcomingEventCell
+            if let event = presenter?.upcomingEvent(at: indexPath.item) {
+                cell.configure(with: event)
+            }
             return cell
         } else if collectionView == latestCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LD-cell-latest", for: indexPath) as! LatestEventCell
-            cell.configure(with: latestEvents[indexPath.item])
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestCell", for: indexPath) as! LatestEventCell
+            if let event = presenter?.latestEvent(at: indexPath.item) {
+                cell.configure(with: event)
+            }
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LD-cell-team", for: indexPath) as! TeamCell
-            cell.configure(with: teams[indexPath.item])
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! TeamCell
+            if let team = presenter?.team(at: indexPath.item) {
+                cell.configure(with: team)
+            }
             return cell
         }
     }

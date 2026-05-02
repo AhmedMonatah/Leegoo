@@ -17,4 +17,6 @@ struct Team: Codable {
     let strFacebook: String?
     let strTwitter: String?
     let strInstagram: String?
+    
+    static let dummy = Team(idTeam: "0", strTeam: "Team", strTeamBadge: nil, strTeamLogo: nil, strDescriptionEN: nil, strStadium: nil, strCountry: nil, intFormedYear: nil, strWebsite: nil, strFacebook: nil, strTwitter: nil, strInstagram: nil)
 }
