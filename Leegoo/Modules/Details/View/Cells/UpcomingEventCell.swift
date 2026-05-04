@@ -12,14 +12,24 @@ class UpcomingEventCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        contentView.backgroundColor = .systemBackground
+        contentView.layer.cornerRadius = 12
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.systemGray5.cgColor
         
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 4)
+        layer.shadowRadius = 6
+        layer.shadowOpacity = 0.08
+        layer.masksToBounds = false
     }
     
     func configure(with event: Event) {
         homeTeamLabel.text = event.eventHomeTeam ?? "Home"
         awayTeamLabel.text = event.eventAwayTeam ?? "Away"
-        dateLabel.text = event.eventDate != nil ? formatDate(event.eventDate) : "--"
-        timeLabel.text = event.eventTime != nil ? formatTime(event.eventTime) : "--"
+        dateLabel.text = ""
+        timeLabel.text = ""
+        setupInfoLabel(event: event)
         
         homeTeamImageView.sd_setImage(
             with: URL(string: event.homeTeamLogo ?? ""),
@@ -31,6 +41,38 @@ class UpcomingEventCell: UICollectionViewCell {
             placeholderImage: UIImage(systemName: "photo"),
         )
         
+    }
+
+    private func setupInfoLabel(event: Event) {
+        let dateText = formatDate(event.eventDate)
+        let timeText = formatTime(event.eventTime)
+        let info = NSMutableAttributedString()
+        let attrs: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.secondaryLabel,
+            .font: UIFont.systemFont(ofSize: 11, weight: .semibold)
+        ]
+        
+        // Calendar
+        if let calImg = UIImage(systemName: "calendar")?.withTintColor(.secondaryLabel, renderingMode: .alwaysOriginal) {
+            let a = NSTextAttachment(); a.image = calImg
+            a.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
+            info.append(NSAttributedString(attachment: a))
+            info.append(NSAttributedString(string: " \(dateText)  ", attributes: attrs))
+        }
+        
+        // Separator
+        info.append(NSAttributedString(string: "|   ", attributes: attrs))
+        
+        // Clock
+        if let clkImg = UIImage(systemName: "clock")?.withTintColor(.secondaryLabel, renderingMode: .alwaysOriginal) {
+            let a = NSTextAttachment(); a.image = clkImg
+            a.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
+            info.append(NSAttributedString(attachment: a))
+            info.append(NSAttributedString(string: " \(timeText)", attributes: attrs))
+        }
+        
+        dateLabel.attributedText = info
+        timeLabel.isHidden = true
     }
 
     

@@ -21,6 +21,7 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    private var isLoading = false
     var presenter: LeaguesPresenterProtocol!
     
     
@@ -39,11 +40,13 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
     }
         
     func showLoading() {
-        activityIndicator.startAnimating()
+        isLoading = true
+        tableView.reloadData()
     }
         
     func hideLoading() {
-        activityIndicator.stopAnimating()
+        isLoading = false
+        tableView.reloadData()
     }
         
     func showError(_ message: String) {
@@ -57,11 +60,9 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
     }
     
     func navigateToDetails(league: League) {
-        print("DEBUG: LeaguesViewController navigateToDetails called for \(league.leagueName ?? "Unknown")")
         let storyboard = UIStoryboard(name: "LeaguesDetails", bundle: nil)
         
         guard let vc = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController else {
-            print("DEBUG: FAILED to instantiate LeaguesDetailsViewController")
             return
         }
         
@@ -71,7 +72,6 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
             leagueId: "\(league.leagueKey ?? 0)",
             leagueName: league.leagueName ?? ""
         )
-        print("DEBUG: Presenter assigned to vc (\(Unmanaged.passUnretained(vc).toOpaque()))")
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -83,7 +83,7 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
 extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.numberOfLeagues
+        return isLoading ? 10 : presenter.numberOfLeagues
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -91,6 +91,14 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
+        if isLoading {
+            cell.leagueName.text = "                   "
+            cell.leagueLogo.image = nil
+            cell.contentView.showSkeleton()
+            return cell
+        }
+        
+        cell.contentView.hideSkeleton()
         let league = presenter.league(at: indexPath.row)
         cell.configure(with: league)
         
@@ -102,6 +110,7 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard !isLoading else { return }
         presenter.didSelectLeague(at: indexPath.row)
     }
     

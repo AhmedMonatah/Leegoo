@@ -9,14 +9,14 @@ class SelfSizingCollectionView: UICollectionView {
     }
     
     override var intrinsicContentSize: CGSize {
-        let height = max(contentSize.height, 50) // Minimum height of 50
-        return CGSize(width: contentSize.width, height: height)
+        self.layoutIfNeeded()
+        let height = contentSize.height > 0 ? contentSize.height : 250
+        return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if bounds.size != contentSize {
-            invalidateIntrinsicContentSize()
-        }
+    override func reloadData() {
+        super.reloadData()
+        self.invalidateIntrinsicContentSize()
+        self.layoutIfNeeded()
     }
 }

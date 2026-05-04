@@ -9,11 +9,13 @@ class LeaguesDetailsViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     
+    private var isLoading = false
     var presenter: LeaguesDetailsPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("DEBUG: LeaguesDetailsViewController (\(Unmanaged.passUnretained(self).toOpaque())) viewDidLoad")
+        
+        setupUpcomingCollectionView()
         
         upcomingCollectionView.delegate = self
         upcomingCollectionView.dataSource = self
@@ -24,24 +26,39 @@ class LeaguesDetailsViewController: UIViewController {
         teamsCollectionView.delegate = self
         teamsCollectionView.dataSource = self
 
-        guard presenter != nil else {
-            print("ERROR: presenter is nil")
-            return
-        }
-        
-        
         presenter?.viewDidLoad()
+    }
+    
+    private func setupUpcomingCollectionView() {
+        upcomingCollectionView.decelerationRate = .fast
+        upcomingCollectionView.isPagingEnabled = false
+        
+        if let layout = upcomingCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumLineSpacing = 20
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
+            layout.itemSize = CGSize(width: view.frame.width - 64, height: 220)
+        }
     }
     
 }
 
 extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
     func showLoading() {
-        // Implement if needed
+        isLoading = true
+        upcomingCollectionView.reloadData()
+        latestCollectionView.reloadData()
+        teamsCollectionView.reloadData()
     }
     
     func hideLoading() {
-        // Implement if needed
+        isLoading = false
+        upcomingCollectionView.reloadData()
+        latestCollectionView.reloadData()
+        teamsCollectionView.reloadData()
+        
+        updateEmptyState(for: upcomingCollectionView, count: presenter?.upcomingCount ?? 0)
+        updateEmptyState(for: latestCollectionView, count: presenter?.latestCount ?? 0)
+        updateEmptyState(for: teamsCollectionView, count: presenter?.teamsCount ?? 0)
     }
     
     func showError(_ message: String) {
@@ -52,34 +69,68 @@ extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
     
     func showUpcomingEvents() {
         upcomingCollectionView.reloadData()
+        updateEmptyState(for: upcomingCollectionView, count: presenter?.upcomingCount ?? 0)
     }
     
     func showLatestEvents() {
         latestCollectionView.reloadData()
+        updateEmptyState(for: latestCollectionView, count: presenter?.latestCount ?? 0)
     }
     
     func showTeams() {
         teamsCollectionView.reloadData()
+        updateEmptyState(for: teamsCollectionView, count: presenter?.teamsCount ?? 0)
+    }
+    
+    private func updateEmptyState(for collectionView: UICollectionView, count: Int) {
+        if isLoading {
+            collectionView.backgroundView = nil
+            return
+        }
+        if count == 0 {
+            let noDataView = NoDataView(frame: collectionView.bounds)
+            collectionView.backgroundView = noDataView
+        } else {
+            collectionView.backgroundView = nil
+        }
     }
     
     func setTitle(_ title: String) {
         titleLabel.text = title
     }
+    
+    func navigateToTeamDetails(teamId: Int) {
+        let storyboard = UIStoryboard(name: "Teams", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "SquadViewController") as? SquadViewController else { return }
+        
+        vc.presenter = TeamDetailsPresenter(
+            view: vc,
+            sportName: presenter?.sport ?? "football",
+            teamId: teamId
+        )
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
-extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard !isLoading else { return }
+        if collectionView == teamsCollectionView {
+            presenter?.didSelectTeam(at: indexPath.item)
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isLoading { return 5 }
         let count: Int
         if collectionView == upcomingCollectionView {
-            count = presenter?.upcomingCount ?? 0
-            print("DEBUG: Upcoming count = \(count)")
+                        count = presenter?.upcomingCount ?? 0
         } else if collectionView == latestCollectionView {
-            count = presenter?.latestCount ?? 0
-            print("DEBUG: Latest count = \(count)")
+                        count = presenter?.latestCount ?? 0
         } else {
-            count = presenter?.teamsCount ?? 0
-            print("DEBUG: Teams count = \(count)")
+                        count = presenter?.teamsCount ?? 0
         }
         return count
     }
@@ -87,24 +138,52 @@ extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == upcomingCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingCell", for: indexPath) as! UpcomingEventCell
-            if let event = presenter?.upcomingEvent(at: indexPath.item) {
-                cell.configure(with: event)
-            
+            if isLoading {
+                cell.contentView.showSkeleton()
+            } else {
+                cell.contentView.hideSkeleton()
+                if let event = presenter?.upcomingEvent(at: indexPath.item) {
+                    cell.configure(with: event)
+                }
             }
             return cell
         } else if collectionView == latestCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestCell", for: indexPath) as! LatestEventCell
-            if let event = presenter?.latestEvent(at: indexPath.item) {
-                cell.configure(with: event)
+            if isLoading {
+                cell.contentView.showSkeleton()
+            } else {
+                cell.contentView.hideSkeleton()
+                if let event = presenter?.latestEvent(at: indexPath.item) {
+                    cell.configure(with: event)
+                }
             }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! TeamCell
-            if let team = presenter?.team(at: indexPath.item) {
-                cell.configure(with: team)
+            if isLoading {
+                cell.contentView.showSkeleton()
+            } else {
+                cell.contentView.hideSkeleton()
+                if let team = presenter?.team(at: indexPath.item) {
+                    cell.configure(with: team)
+                }
             }
             return cell
         }
     }
 
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        guard scrollView == upcomingCollectionView else { return }
+        
+        let layout = upcomingCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+        
+        var offset = targetContentOffset.pointee
+        let index = offset.x / cellWidthIncludingSpacing
+        let roundedIndex = round(index)
+        
+        offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing, y: 0)
+        
+        targetContentOffset.pointee = offset
+    }
 }

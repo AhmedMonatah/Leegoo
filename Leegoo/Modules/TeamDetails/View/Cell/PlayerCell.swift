@@ -8,6 +8,7 @@
 
 
 import UIKit
+import SDWebImage
 
 final class PlayerCell: UITableViewCell {
 
@@ -16,7 +17,7 @@ final class PlayerCell: UITableViewCell {
   
 
     @IBOutlet weak var avatarView: UIView!
-    @IBOutlet weak var initialsLabel: UILabel!
+    @IBOutlet weak var playerImageView: UIImageView!
     @IBOutlet weak var numberBadge: UIView!
     @IBOutlet weak var numberLabel: UILabel!
 
@@ -42,40 +43,45 @@ final class PlayerCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // Circular styling
+        playerImageView.layer.cornerRadius = playerImageView.frame.height / 2
+        playerImageView.clipsToBounds = true
+        avatarView.layer.cornerRadius = avatarView.frame.height / 2
+        avatarView.clipsToBounds = true
+        avatarView.backgroundColor = .white
+    }
 
     // MARK: - Configure
 
     func configure(with player: Player) {
-        // Initials placeholder
-        let parts = player.name.split(separator: " ")
-        let initials = parts.prefix(2).compactMap { $0.first }.map { String($0) }.joined()
-        initialsLabel.text = initials
-        avatarView.backgroundColor = player.placeholderColor
+        // Player Image
+        playerImageView.sd_setImage(
+            with: URL(string: player.imageURL),
+            placeholderImage: UIImage(named: "PlayerPlacholder")
+        )
+        avatarView.backgroundColor = .white
 
         // Number
-        numberLabel.text = "\(player.number)"
+        numberLabel.text = player.number
 
         // Name / age
         nameLabel.text = player.name
         ageLabel.text  = "Age \(player.age)"
 
         // Badges
-        captainBadge.isHidden = !player.isCaptain
-        injuredBadge.isHidden = !player.isInjured
+        captainBadge.isHidden = true
+        injuredBadge.isHidden = true
 
         // Stats
-        statTitleLabel.text = player.statLabel
-
-        if let mp = player.matchesPlayed {
-            mpValueLabel.text   = "\(mp)"
-            statValueLabel.text = player.statValue.map { "\($0)" } ?? "-"
-            ratingValueLabel.text = player.rating.map { String(format: "%.2f", $0) } ?? "-"
-            ratingValueLabel.textColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
-        } else {
-            mpValueLabel.text     = "-"
-            statValueLabel.text   = "-"
-            ratingValueLabel.text = "-"
-            ratingValueLabel.textColor = .systemGray
-        }
+        statTitleLabel.text = "Goals"
+        mpValueLabel.text   = player.matches
+        statValueLabel.text = player.goals
+        
+        ratingTitleLabel.text = "Cards (Y/R)"
+        ratingValueLabel.text = "\(player.yellowCards)/\(player.redCards)"
+        ratingValueLabel.textColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
     }
 }

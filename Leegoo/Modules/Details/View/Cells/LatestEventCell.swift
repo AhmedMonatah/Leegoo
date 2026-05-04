@@ -12,13 +12,23 @@ class LatestEventCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-      
     }
     
     func configure(with event: Event) {
         homeTeamLabel.text = event.eventHomeTeam ?? "Home"
         awayTeamLabel.text = event.eventAwayTeam  ?? "Away"
-        scoreLabel.text = event.eventFinalResult?.isEmpty == false ? event.eventFinalResult : "0 - 0"
+        var result = (event.eventFinalResult ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        if result.isEmpty || result == "-" || result == " - " {
+            result = "VS"
+        } else {
+            result = result.replacingOccurrences(of: "...", with: "N/A")
+            if result.hasSuffix("-") {
+                result += "N/A"
+            } else if result.hasPrefix("-") {
+                result = "N/A" + result
+            }
+        }
+        scoreLabel.text = result
         homeTeamImageView.sd_setImage(
             with: URL(string: event.homeTeamLogo ?? ""),
             placeholderImage: UIImage(systemName: "photo"),
@@ -38,24 +48,28 @@ class LatestEventCell: UICollectionViewCell {
         let info = NSMutableAttributedString()
         let attrs: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.secondaryLabel,
-            .font: UIFont.systemFont(ofSize: 11, weight: .regular)
+            .font: UIFont.systemFont(ofSize: 11, weight: .semibold)
         ]
         
+        // Calendar
         if let calImg = UIImage(systemName: "calendar")?.withTintColor(.secondaryLabel, renderingMode: .alwaysOriginal) {
             let a = NSTextAttachment(); a.image = calImg
             a.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
             info.append(NSAttributedString(attachment: a))
-            info.append(NSAttributedString(string: " "))
+            info.append(NSAttributedString(string: " \(dateText)  ", attributes: attrs))
         }
-        info.append(NSAttributedString(string: dateText + "   ", attributes: attrs))
         
+        // Separator
+        info.append(NSAttributedString(string: "|   ", attributes: attrs))
+        
+        // Clock
         if let clkImg = UIImage(systemName: "clock")?.withTintColor(.secondaryLabel, renderingMode: .alwaysOriginal) {
             let a = NSTextAttachment(); a.image = clkImg
             a.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
             info.append(NSAttributedString(attachment: a))
-            info.append(NSAttributedString(string: " "))
+            info.append(NSAttributedString(string: " \(timeText)", attributes: attrs))
         }
-        info.append(NSAttributedString(string: timeText, attributes: attrs))
+        
         infoLabel.attributedText = info
     }
     

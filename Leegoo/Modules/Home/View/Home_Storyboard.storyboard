@@ -139,10 +139,8 @@
                                                 <constraint firstItem="1aP-oA-E16" firstAttribute="leading" secondItem="hXU-Dw-Dql" secondAttribute="leading" constant="10" id="1Wh-IX-xWL"/>
                                                 <constraint firstItem="oZL-Yi-NNF" firstAttribute="centerY" secondItem="hXU-Dw-Dql" secondAttribute="centerY" id="3DC-Lk-bse"/>
                                                 <constraint firstAttribute="trailing" secondItem="jdk-Qp-wgf" secondAttribute="trailing" constant="15" id="EIK-Oy-f3y"/>
-                                                <constraint firstAttribute="bottom" secondItem="1aP-oA-E16" secondAttribute="bottom" constant="12" id="LOv-Qc-cAp"/>
                                                 <constraint firstItem="1aP-oA-E16" firstAttribute="top" secondItem="hXU-Dw-Dql" secondAttribute="top" constant="12" id="Yiz-B8-jzh"/>
                                                 <constraint firstItem="jdk-Qp-wgf" firstAttribute="leading" secondItem="oZL-Yi-NNF" secondAttribute="trailing" constant="15" id="aA9-Wu-7o4"/>
-                                                <constraint firstItem="1aP-oA-E16" firstAttribute="centerY" secondItem="hXU-Dw-Dql" secondAttribute="centerY" id="qSa-LR-Hyr"/>
                                                 <constraint firstItem="jdk-Qp-wgf" firstAttribute="centerY" secondItem="hXU-Dw-Dql" secondAttribute="centerY" id="tce-7e-rwP"/>
                                                 <constraint firstItem="oZL-Yi-NNF" firstAttribute="leading" secondItem="1aP-oA-E16" secondAttribute="trailing" constant="15" id="tvc-Hn-ATh"/>
                                             </constraints>

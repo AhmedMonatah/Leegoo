@@ -12,10 +12,7 @@
         <scene sceneID="nav-scene">
             <objects>
                 <navigationController id="nav-ctrl" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nav-bar">
-                        <rect key="frame" x="0.0" y="124" width="402" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nav-bar"/>
                     <connections>
                         <segue destination="squad-vc" kind="relationship" relationship="rootViewController" id="nav-to-squad"/>
                     </connections>
@@ -27,7 +24,7 @@
         <!--Squad View Controller-->
         <scene sceneID="squad-scene">
             <objects>
-                <viewController id="squad-vc" customClass="SquadViewController" customModule="Leegoo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SquadViewController" id="squad-vc" customClass="SquadViewController" customModule="Leegoo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="squad-root-view">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,6 +42,9 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="team-logo-view">
                                                         <rect key="frame" x="16" y="19" width="72" height="72"/>
                                                         <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="team-logo-image-view">
+                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                                            </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JJ" textAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="team-initials-label">
                                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
@@ -58,6 +58,10 @@
                                                             <constraint firstItem="team-initials-label" firstAttribute="bottom" secondItem="team-logo-view" secondAttribute="bottom" id="c2"/>
                                                             <constraint firstItem="team-initials-label" firstAttribute="leading" secondItem="team-logo-view" secondAttribute="leading" id="c3"/>
                                                             <constraint firstItem="team-initials-label" firstAttribute="trailing" secondItem="team-logo-view" secondAttribute="trailing" id="c4"/>
+                                                            <constraint firstItem="team-logo-image-view" firstAttribute="top" secondItem="team-logo-view" secondAttribute="top" id="c5"/>
+                                                            <constraint firstItem="team-logo-image-view" firstAttribute="bottom" secondItem="team-logo-view" secondAttribute="bottom" id="c6"/>
+                                                            <constraint firstItem="team-logo-image-view" firstAttribute="leading" secondItem="team-logo-view" secondAttribute="leading" id="c7"/>
+                                                            <constraint firstItem="team-logo-image-view" firstAttribute="trailing" secondItem="team-logo-view" secondAttribute="trailing" id="c8"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -502,20 +506,19 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pc-av">
                                                     <rect key="frame" x="16" y="12" width="56" height="56"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="JD" textAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc-il">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pc-pi">
                                                             <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </label>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="56" id="pc-ah"/>
                                                         <constraint firstAttribute="width" constant="56" id="pc-aw"/>
-                                                        <constraint firstItem="pc-il" firstAttribute="bottom" secondItem="pc-av" secondAttribute="bottom" id="pc-il-bot"/>
-                                                        <constraint firstItem="pc-il" firstAttribute="leading" secondItem="pc-av" secondAttribute="leading" id="pc-isl"/>
-                                                        <constraint firstItem="pc-il" firstAttribute="top" secondItem="pc-av" secondAttribute="top" id="pc-it"/>
-                                                        <constraint firstItem="pc-il" firstAttribute="trailing" secondItem="pc-av" secondAttribute="trailing" id="pc-itr"/>
+                                                        <constraint firstItem="pc-pi" firstAttribute="bottom" secondItem="pc-av" secondAttribute="bottom" id="pc-pi-bot"/>
+                                                        <constraint firstItem="pc-pi" firstAttribute="leading" secondItem="pc-av" secondAttribute="leading" id="pc-pi-sl"/>
+                                                        <constraint firstItem="pc-pi" firstAttribute="top" secondItem="pc-av" secondAttribute="top" id="pc-pi-t"/>
+                                                        <constraint firstItem="pc-pi" firstAttribute="trailing" secondItem="pc-av" secondAttribute="trailing" id="pc-pi-tr"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -682,7 +685,7 @@
                                             <outlet property="avatarView" destination="pc-av" id="pc-o-av"/>
                                             <outlet property="captainBadge" destination="pc-cb" id="pc-o-cb"/>
                                             <outlet property="captainLabel" destination="pc-cl" id="pc-o-cl"/>
-                                            <outlet property="initialsLabel" destination="pc-il" id="pc-o-il"/>
+                                            <outlet property="playerImageView" destination="pc-pi" id="pc-o-pi"/>
                                             <outlet property="injuredBadge" destination="pc-ib" id="pc-o-ib"/>
                                             <outlet property="injuredLabel" destination="pc-il2" id="pc-o-il2"/>
                                             <outlet property="mpTitleLabel" destination="pc-mpt" id="pc-o-mpt"/>
@@ -754,6 +757,7 @@
                         <outlet property="teamIDLabel" destination="team-id-label" id="o-tid"/>
                         <outlet property="teamInitialsLabel" destination="team-initials-label" id="o-initials"/>
                         <outlet property="teamLogoView" destination="team-logo-view" id="o-logo"/>
+                        <outlet property="teamLogoImageView" destination="team-logo-image-view" id="o-logo-iv"/>
                         <outlet property="teamNameLabel" destination="team-name-label" id="o-tname"/>
                         <outlet property="totalPlayersLabel" destination="total-players-label" id="o-total"/>
                     </connections>
