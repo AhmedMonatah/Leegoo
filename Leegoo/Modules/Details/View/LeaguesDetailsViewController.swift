@@ -9,6 +9,12 @@ class LeaguesDetailsViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     
+    
+    private let upcomingEmptyView = NoDataView()
+    private let latestEmptyView = NoDataView()
+    private let teamsEmptyView = NoDataView()
+    
+    
     private var isLoading = false
     var presenter: LeaguesDetailsPresenterProtocol?
 
@@ -88,12 +94,18 @@ extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
             return
         }
         if count == 0 {
-            let noDataView = NoDataView(frame: collectionView.bounds)
-            collectionView.backgroundView = noDataView
+            if collectionView == upcomingCollectionView {
+                collectionView.backgroundView = upcomingEmptyView
+            } else if collectionView == latestCollectionView {
+                collectionView.backgroundView = latestEmptyView
+            } else {
+                collectionView.backgroundView = teamsEmptyView
+            }
         } else {
             collectionView.backgroundView = nil
         }
     }
+
     
     func setTitle(_ title: String) {
         titleLabel.text = title
