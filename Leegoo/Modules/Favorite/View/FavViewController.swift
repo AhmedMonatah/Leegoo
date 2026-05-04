@@ -39,10 +39,6 @@ extension FavViewController: FavoritesViewProtocol {
         tableView.reloadData()
     }
     
-    func setTitle(_ title: String) {
-        self.title = title
-    }
-    
     
     func navigateToLeagueDetails(league: League, sportName: String) {
         let storyboard = UIStoryboard(name: "LeaguesDetails", bundle: nil)

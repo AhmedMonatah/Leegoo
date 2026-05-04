@@ -9,7 +9,6 @@ import Foundation
 
 protocol FavoritesViewProtocol: AnyObject {
     func reloadData()
-    func setTitle(_ title: String)
     func navigateToLeagueDetails(league: League,sportName: String)
 }
 

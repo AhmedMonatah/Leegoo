@@ -21,7 +21,6 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func viewDidLoad() {
-        view?.setTitle("Favorites")
         loadFavorites()
     }
     
