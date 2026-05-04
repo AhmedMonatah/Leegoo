@@ -35,6 +35,7 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     
     func viewDidLoad() {
         view?.setTitle(league.leagueName ?? "NoTitle")
+        view?.updateFavoriteButton(isFavorite: isFavorite())
         fetchData()
     }
     

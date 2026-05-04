@@ -17,6 +17,7 @@ protocol FavoritesPresenterProtocol: AnyObject {
     var numberOfFavorites: Int { get }
 
     func viewDidLoad()
+    func viewWillAppear()
     func favoriteLeague(at index: Int) -> League
     func deleteLeague(at index: Int)
     func didSelectLeague(at index: Int)

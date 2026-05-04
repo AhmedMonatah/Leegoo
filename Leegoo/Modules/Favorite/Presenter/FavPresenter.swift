@@ -25,6 +25,10 @@ class FavoritesPresenter: FavoritesPresenterProtocol {
         loadFavorites()
     }
     
+    func viewWillAppear() {
+           loadFavorites()
+       }
+    
     func favoriteLeague(at index: Int) -> League {
         favoriteLeagues[index].league
     }

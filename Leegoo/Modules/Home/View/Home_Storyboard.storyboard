@@ -85,7 +85,7 @@
             </objects>
             <point key="canvasLocation" x="1943.1818181818182" y="1.2552301255230125"/>
         </scene>
-        <!--Favorite-->
+        <!--Fav View Controller-->
         <scene sceneID="IId-hy-fzE">
             <objects>
                 <viewController id="EGL-va-HMe" customClass="FavViewController" customModule="Leegoo" customModuleProvider="target" sceneMemberID="viewController">
@@ -94,13 +94,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mW-lq-1CG">
-                                <rect key="frame" x="149" y="104" width="142" height="43"/>
+                                <rect key="frame" x="149" y="148" width="142" height="43"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sev-7q-zow">
-                                <rect key="frame" x="0.0" y="155" width="440" height="684"/>
+                                <rect key="frame" x="0.0" y="199" width="440" height="640"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="leaguesCell" rowHeight="75" id="4N4-Eg-iuO" customClass="LeaguesCell" customModule="Leegoo" customModuleProvider="target">
@@ -160,14 +160,14 @@
                             <constraint firstItem="Sev-7q-zow" firstAttribute="bottom" secondItem="rr2-tA-lRl" secondAttribute="bottom" id="uTR-7F-3Xe"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorite" image="heart.fill" catalog="system" id="Luw-fI-Tza"/>
+                    <navigationItem key="navigationItem" id="L0h-0V-6qx"/>
                     <connections>
                         <outlet property="tableView" destination="Sev-7q-zow" id="kz6-bh-tOX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pI2-br-pW6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1941.818181818182" y="682.84518828451883"/>
+            <point key="canvasLocation" x="2833.636363636364" y="682.84518828451883"/>
         </scene>
         <!--Leagues View Controller-->
         <scene sceneID="wb5-uR-HML">
@@ -299,11 +299,30 @@
                     </tabBar>
                     <connections>
                         <segue destination="wye-5R-DtQ" kind="relationship" relationship="viewControllers" id="L0V-7N-xKx"/>
-                        <segue destination="EGL-va-HMe" kind="relationship" relationship="viewControllers" id="V0U-zg-Vjq"/>
+                        <segue destination="OVP-Pd-X0K" kind="relationship" relationship="viewControllers" id="V0U-zg-Vjq"/>
                     </connections>
                 </tabBarController>
             </objects>
             <point key="canvasLocation" x="-23" y="471"/>
+        </scene>
+        <!--Favorite-->
+        <scene sceneID="eU0-96-g2X">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OVP-Pd-X0K" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorite" image="heart.fill" catalog="system" id="Luw-fI-Tza"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OP4-Sn-t1O">
+                        <rect key="frame" x="0.0" y="124" width="440" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EGL-va-HMe" kind="relationship" relationship="rootViewController" id="s0z-mx-k7n"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b3O-0i-3IJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1941.818181818182" y="682.84518828451883"/>
         </scene>
     </scenes>
     <resources>
