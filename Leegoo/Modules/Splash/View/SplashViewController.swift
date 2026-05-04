@@ -172,11 +172,13 @@ class SplashViewController: UIViewController {
             destinationVC = UINavigationController(rootViewController: onboardingVC)
         } else {
             let storyboard = UIStoryboard(name: "Home_Storyboard", bundle: nil)
-            guard let navVC = storyboard.instantiateInitialViewController() as? UINavigationController,
-                  let homeVC = navVC.viewControllers.first as? HomeViewController else { return }
-            let presenter = HomePresenter(view: homeVC)
-            homeVC.presenter = presenter
-            destinationVC = navVC
+                guard let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController else { return }
+                if let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
+                let homeVC = navVC.viewControllers.first as? HomeViewController {
+                    let presenter = HomePresenter(view: homeVC)
+                    homeVC.presenter = presenter
+                }
+            destinationVC = tabBarVC
         }
         
         destinationVC.modalTransitionStyle = .crossDissolve

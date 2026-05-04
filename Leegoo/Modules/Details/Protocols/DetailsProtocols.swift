@@ -18,6 +18,7 @@ protocol LeaguesDetailsViewProtocol: AnyObject {
     
     func setTitle(_ title: String)
     func navigateToTeamDetails(teamId: Int)
+    func updateFavoriteButton(isFavorite: Bool)
 }
 
 protocol LeaguesDetailsPresenterProtocol: AnyObject {
@@ -32,4 +33,7 @@ protocol LeaguesDetailsPresenterProtocol: AnyObject {
     func latestEvent(at index: Int) -> Event
     func team(at index: Int) -> Team
     func didSelectTeam(at index: Int)
+    
+    func isFavorite() -> Bool
+    func toggleFavorite()
 }

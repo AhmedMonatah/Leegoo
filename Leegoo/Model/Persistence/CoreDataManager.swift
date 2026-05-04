@@ -1,101 +1,101 @@
 import Foundation
 import CoreData
 
-class CoreDataManager {
-    
+final class CoreDataManager {
+
     static let shared = CoreDataManager()
     private init() {}
-    
-    // MARK: - Core Data stack
+
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Leegoo")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Handle error
-                print("Unresolved error \(error), \(error.userInfo)")
+        container.loadPersistentStores { _, error in
+            if let error = error {
+                print("Failed to load Core Data store: \(error.localizedDescription)")
             }
-        })
+        }
         return container
-    } ()
-    
+    }()
+
     var context: NSManagedObjectContext {
-        return persistentContainer.viewContext
+        persistentContainer.viewContext
     }
-    
-    // MARK: - Favorite Management
-    
-    func saveLeague(league: League) {
-        // Check if already exists
-//        if isLeagueFavorite(id: league.idLeague ?? "") { return }
-//        
-//        let entity = NSEntityDescription.entity(forEntityName: "FavoriteLeague", in: context)!
-//        let favorite = NSManagedObject(entity: entity, insertInto: context)
-//        
-//        favorite.setValue(league.idLeague, forKey: "idLeague")
-//        favorite.setValue(league.strLeague, forKey: "strLeague")
-//        favorite.setValue(league.strBadge, forKey: "strBadge")
-//        favorite.setValue(league.strYoutube, forKey: "strYoutube")
-//        favorite.setValue(league.strSport, forKey: "strSport")
-//        
-//        saveContext()
+
+    func saveLeague(_ league: League, sportName: String) {
+        guard let leagueKey = league.leagueKey else { return }
+
+        if isLeagueFavorite(id: leagueKey) { return }
+
+        let favorite = FavoriteLeague(context: context)
+        favorite.leagueKey = Int64(leagueKey)
+        favorite.leagueName = league.leagueName
+        favorite.leagueLogo = league.leagueLogo
+        favorite.sportName = sportName
+
+        saveContext()
     }
-    
-    func fetchFavorites() -> [League] {
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteLeague")
-//        do {
-//            let results = try context.fetch(fetchRequest)
-//            return results.map { favorite in
-//                League(
-//                    idLeague: favorite.value(forKey: "idLeague") as? String,
-//                    strLeague: favorite.value(forKey: "strLeague") as? String,
-//                    strBadge: favorite.value(forKey: "strBadge") as? String,
-//                    strYoutube: favorite.value(forKey: "strYoutube") as? String,
-//                    strSport: favorite.value(forKey: "strSport") as? String
-//                )
-//            }
-//        } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//            return []
-//        }
-        return []
+
+    func fetchFavorites() -> [FavoriteLeagueItem] {
+        let fetchRequest: NSFetchRequest<FavoriteLeague> = FavoriteLeague.fetchRequest()
+
+        do {
+            let results = try context.fetch(fetchRequest)
+
+            return results.map {
+               let league = League(
+                    leagueKey: Int($0.leagueKey),
+                    leagueName: $0.leagueName,
+                    countryName: nil,
+                    leagueLogo: $0.leagueLogo,
+                    countryLogo: nil,
+                    leagueYear: nil,
+                    leagueSurface: nil
+                )
+                return FavoriteLeagueItem(
+                        league: league,
+                        sportName: $0.sportName ?? "football"
+                )
+            }
+        } catch {
+            print("Failed to fetch favorites: \(error.localizedDescription)")
+            return []
+        }
     }
-    
-    func deleteLeague(id: String) {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteLeague")
-        fetchRequest.predicate = NSPredicate(format: "idLeague == %@", id)
-        
+
+    func deleteLeague(id: Int) {
+        let fetchRequest: NSFetchRequest<FavoriteLeague> = FavoriteLeague.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "leagueKey == %d", id)
+
         do {
             let results = try context.fetch(fetchRequest)
             for object in results {
                 context.delete(object)
             }
             saveContext()
-        } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
+        } catch {
+            print("Failed to delete favorite: \(error.localizedDescription)")
         }
     }
-    
-    func isLeagueFavorite(id: String) -> Bool {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteLeague")
-        fetchRequest.predicate = NSPredicate(format: "idLeague == %@", id)
-        
+
+    func isLeagueFavorite(id: Int) -> Bool {
+        let fetchRequest: NSFetchRequest<FavoriteLeague> = FavoriteLeague.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "leagueKey == %d", id)
+        fetchRequest.fetchLimit = 1
+
         do {
-            let count = try context.count(for: fetchRequest)
-            return count > 0
+            return try context.count(for: fetchRequest) > 0
         } catch {
             return false
         }
     }
-    
-    // MARK: - Core Data Saving support
-    func saveContext () {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                print("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+
+    func saveContext() {
+        guard context.hasChanges else { return }
+
+        do {
+            try context.save()
+        } catch {
+            context.rollback()
+            print("Failed to save context: \(error.localizedDescription)")
         }
     }
 }

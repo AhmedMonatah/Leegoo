@@ -9,6 +9,7 @@ class LeaguesDetailsViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var favoriteButton: UIButton!
     
     private let upcomingEmptyView = NoDataView()
     private let latestEmptyView = NoDataView()
@@ -21,6 +22,8 @@ class LeaguesDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        favoriteButton.tintColor = .systemGray
+        favoriteButton.imageView?.contentMode = .scaleAspectFit
         setupUpcomingCollectionView()
         
         upcomingCollectionView.delegate = self
@@ -33,6 +36,10 @@ class LeaguesDetailsViewController: UIViewController {
         teamsCollectionView.dataSource = self
 
         presenter?.viewDidLoad()
+    }
+    
+    @IBAction func addFavorite(_ sender: Any) {
+        presenter?.toggleFavorite()
     }
     
     private func setupUpcomingCollectionView() {
@@ -122,6 +129,12 @@ extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
         )
         
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func updateFavoriteButton(isFavorite: Bool) {
+        let imageName = isFavorite ? "heart.fill" : "heart"
+        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+        favoriteButton.tintColor = isFavorite ? .systemRed : .systemGray
     }
 }
 

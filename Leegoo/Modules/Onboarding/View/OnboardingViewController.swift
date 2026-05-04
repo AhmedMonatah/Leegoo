@@ -212,11 +212,13 @@ class OnboardingViewController: UIViewController {
 extension OnboardingViewController: OnboardingViewProtocol {
     func navigateToHome() {
         let sb = UIStoryboard(name: "Home_Storyboard", bundle: nil)
-        guard let nav = sb.instantiateInitialViewController() as? UINavigationController,
-              let home = nav.viewControllers.first as? HomeViewController else { return }
-        home.presenter = HomePresenter(view: home)
-        nav.modalTransitionStyle = .crossDissolve
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
+        guard let tabBar = sb.instantiateInitialViewController() as? UITabBarController else { return }
+        if let nav = tabBar.viewControllers?.first as? UINavigationController,
+            let home = nav.viewControllers.first as? HomeViewController {
+            home.presenter = HomePresenter(view: home)
+        }
+        tabBar.modalTransitionStyle = .crossDissolve
+        tabBar.modalPresentationStyle = .fullScreen
+        present(tabBar, animated: true)
     }
 }

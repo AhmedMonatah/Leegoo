@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wye-5R-DtQ">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -14,17 +14,17 @@
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="HomeViewController" customModule="Leegoo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sports" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyt-E1-Gu1">
-                                <rect key="frame" x="137.66666666666666" y="162" width="117.66666666666666" height="43"/>
+                                <rect key="frame" x="161" y="168" width="118" height="43"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HA2-Pi-BqT">
-                                <rect key="frame" x="16" y="237" width="361" height="547"/>
+                                <rect key="frame" x="16" y="243" width="408" height="596"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bfL-uV-WPp">
                                     <size key="itemSize" width="194" height="286"/>
@@ -34,7 +34,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCell" id="jFd-Km-LQV" customClass="HomeCell" customModule="Leegoo" customModuleProvider="target">
-                                        <rect key="frame" x="83.666666666666671" y="0.0" width="194" height="286"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="194" height="286"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Sqo-Nl-teT">
                                             <rect key="frame" x="0.0" y="0.0" width="194" height="286"/>
@@ -83,39 +83,123 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1052.6717557251909" y="1.4084507042253522"/>
+            <point key="canvasLocation" x="1943.1818181818182" y="1.2552301255230125"/>
+        </scene>
+        <!--Favorite-->
+        <scene sceneID="IId-hy-fzE">
+            <objects>
+                <viewController id="EGL-va-HMe" customClass="FavViewController" customModule="Leegoo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LYH-qz-kfV">
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mW-lq-1CG">
+                                <rect key="frame" x="149" y="104" width="142" height="43"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sev-7q-zow">
+                                <rect key="frame" x="0.0" y="155" width="440" height="684"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="leaguesCell" rowHeight="75" id="4N4-Eg-iuO" customClass="LeaguesCell" customModule="Leegoo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="440" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4N4-Eg-iuO" id="R6E-zI-jsC">
+                                            <rect key="frame" x="0.0" y="0.0" width="440" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f1k-xx-3hr">
+                                                    <rect key="frame" x="10" y="12" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="Dso-7C-bxn"/>
+                                                        <constraint firstAttribute="width" constant="50" id="bl1-9C-baD"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RnR-Cq-eHO">
+                                                    <rect key="frame" x="97" y="22" width="198" height="31"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="abf-XI-PtK">
+                                                    <rect key="frame" x="390" y="30.666666666666671" width="35" height="14.333333333333329"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="Usa-Af-KbW"/>
+                                                        <constraint firstAttribute="height" constant="20" id="ccp-He-J43"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="f1k-xx-3hr" firstAttribute="leading" secondItem="R6E-zI-jsC" secondAttribute="leading" constant="10" id="7Of-Dl-FQy"/>
+                                                <constraint firstItem="RnR-Cq-eHO" firstAttribute="leading" secondItem="f1k-xx-3hr" secondAttribute="trailing" constant="15" id="BxA-vj-EQI"/>
+                                                <constraint firstItem="abf-XI-PtK" firstAttribute="centerY" secondItem="R6E-zI-jsC" secondAttribute="centerY" id="CD3-Qo-vZr"/>
+                                                <constraint firstItem="RnR-Cq-eHO" firstAttribute="centerY" secondItem="R6E-zI-jsC" secondAttribute="centerY" id="bmp-76-KH7"/>
+                                                <constraint firstAttribute="trailing" secondItem="abf-XI-PtK" secondAttribute="trailing" constant="15" id="kYh-6Q-hq3"/>
+                                                <constraint firstItem="abf-XI-PtK" firstAttribute="leading" secondItem="RnR-Cq-eHO" secondAttribute="trailing" constant="15" id="mpR-fr-Tyn"/>
+                                                <constraint firstItem="f1k-xx-3hr" firstAttribute="top" secondItem="R6E-zI-jsC" secondAttribute="top" constant="12" id="qzg-aY-CtH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="leagueLogo" destination="f1k-xx-3hr" id="pAn-UU-RxU"/>
+                                            <outlet property="leagueName" destination="RnR-Cq-eHO" id="qtA-dS-lQw"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rr2-tA-lRl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2mW-lq-1CG" firstAttribute="centerX" secondItem="rr2-tA-lRl" secondAttribute="centerX" id="Akw-32-X0r"/>
+                            <constraint firstItem="rr2-tA-lRl" firstAttribute="top" secondItem="2mW-lq-1CG" secondAttribute="top" constant="20" id="Bn2-i3-Y11"/>
+                            <constraint firstItem="rr2-tA-lRl" firstAttribute="trailing" secondItem="Sev-7q-zow" secondAttribute="trailing" id="HdS-hJ-yRR"/>
+                            <constraint firstItem="Sev-7q-zow" firstAttribute="leading" secondItem="rr2-tA-lRl" secondAttribute="leading" id="PTY-4c-Trn"/>
+                            <constraint firstItem="Sev-7q-zow" firstAttribute="top" secondItem="2mW-lq-1CG" secondAttribute="bottom" constant="8" id="mSb-v2-vJf"/>
+                            <constraint firstItem="Sev-7q-zow" firstAttribute="bottom" secondItem="rr2-tA-lRl" secondAttribute="bottom" id="uTR-7F-3Xe"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favorite" image="heart.fill" catalog="system" id="Luw-fI-Tza"/>
+                    <connections>
+                        <outlet property="tableView" destination="Sev-7q-zow" id="kz6-bh-tOX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pI2-br-pW6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1941.818181818182" y="682.84518828451883"/>
         </scene>
         <!--Leagues View Controller-->
         <scene sceneID="wb5-uR-HML">
             <objects>
                 <viewController storyboardIdentifier="LeaguesVC" id="REx-Mo-3Gv" customClass="LeaguesViewController" customModule="Leegoo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9ml-bV-HY8">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leagues" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxQ-hm-ta9">
-                                <rect key="frame" x="122.66666666666669" y="98" width="148" height="43"/>
+                                <rect key="frame" x="146" y="104" width="148" height="43"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" placeholder="Search Leagues" translatesAutoresizingMaskIntoConstraints="NO" id="leagues-search-bar">
-                                <rect key="frame" x="0.0" y="151" width="393" height="56"/>
+                                <rect key="frame" x="0.0" y="157" width="440" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ASZ-iv-lrM">
-                                <rect key="frame" x="0.0" y="215" width="393" height="569"/>
+                                <rect key="frame" x="0.0" y="221" width="440" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="leaguesCell" rowHeight="75" id="l3y-qP-XJj" customClass="LeaguesCell" customModule="Leegoo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="75"/>
+                                        <rect key="frame" x="0.0" y="50" width="440" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l3y-qP-XJj" id="hXU-Dw-Dql">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="440" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1aP-oA-E16">
-                                                    <rect key="frame" x="10" y="12" width="50" height="51"/>
+                                                    <rect key="frame" x="10" y="12" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="M9e-fe-0fV"/>
                                                         <constraint firstAttribute="height" constant="50" id="xBY-W6-34c"/>
@@ -128,7 +212,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jdk-Qp-wgf">
-                                                    <rect key="frame" x="343" y="30.666666666666671" width="35" height="14.333333333333329"/>
+                                                    <rect key="frame" x="390" y="30.666666666666671" width="35" height="14.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="ODh-UW-Zzg"/>
                                                         <constraint firstAttribute="width" constant="35" id="Ren-0o-Ddq"/>
@@ -180,29 +264,52 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SYJ-Mw-WWi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1890.8396946564885" y="13.380281690140846"/>
+            <point key="canvasLocation" x="2781.818181818182" y="13.179916317991632"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="omw-bf-QOw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wye-5R-DtQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="NGw-W2-d1U"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AVs-mV-OVw">
-                        <rect key="frame" x="0.0" y="118" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="124" width="440" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="u8b-80-uCZ"/>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="XRm-Xi-XAu"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D38-Nt-6kI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="127.48091603053435" y="1.4084507042253522"/>
+            <point key="canvasLocation" x="1075" y="1"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="LV4-V8-Rj2">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fat-pT-Y0s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="01R-yE-vhK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Udv-J3-HXb"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="L3O-sD-613">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="wye-5R-DtQ" kind="relationship" relationship="viewControllers" id="L0V-7N-xKx"/>
+                        <segue destination="EGL-va-HMe" kind="relationship" relationship="viewControllers" id="V0U-zg-Vjq"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="-23" y="471"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrow.right" catalog="system" width="128" height="95"/>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

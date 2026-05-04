@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import CoreData
 
 class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     
@@ -14,8 +14,8 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     
     private let networkService: NetworkServiceProtocol
     private let sportName: String
-    private let leagueId: String
-    private let leagueName: String
+    private let league: League
+    private let coreDataManager: CoreDataManager
     
     private var upcomingEvents: [Event] = []
     private var latestEvents: [Event] = []
@@ -23,18 +23,18 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     
     init(view: LeaguesDetailsViewProtocol,
         sportName: String,
-        leagueId: String,
-        leagueName: String,
-        networkService: NetworkServiceProtocol = NetworkService.shared) {
+        league: League,
+        networkService: NetworkServiceProtocol = NetworkService.shared,
+        coreDataManager: CoreDataManager = .shared) {
         self.view = view
         self.sportName = sportName
-        self.leagueId = leagueId
-        self.leagueName = leagueName
+        self.league = league
         self.networkService = networkService
+        self.coreDataManager = coreDataManager
     }
     
     func viewDidLoad() {
-        view?.setTitle(leagueName)
+        view?.setTitle(league.leagueName ?? "NoTitle")
         fetchData()
     }
     
@@ -43,6 +43,11 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     var teamsCount: Int { teams.count }
     var sport: String { sportName }
     
+    private var leagueIdString: String? {
+        guard let key = league.leagueKey else { return nil }
+        return String(key)
+    }
+        
     func upcomingEvent(at index: Int) -> Event {
         upcomingEvents[index]
     }
@@ -74,7 +79,30 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
         }
     }
     
+    func isFavorite() -> Bool {
+        guard let id = league.leagueKey else { return false }
+        return coreDataManager.isLeagueFavorite(id: id)
+    }
+        
+    func toggleFavorite() {
+        guard let id = league.leagueKey else { return }
+            
+        if coreDataManager.isLeagueFavorite(id: id) {
+            coreDataManager.deleteLeague(id: id)
+        } else {
+            coreDataManager.saveLeague(league, sportName: sportName)
+        }
+            
+        view?.updateFavoriteButton(isFavorite: coreDataManager.isLeagueFavorite(id: id))
+    }
+    
     private func fetchEvents() {
+        guard let leagueId = leagueIdString else {
+            view?.hideLoading()
+            view?.showError("Invalid league id")
+            return
+        }
+        
         networkService.fetchEvents(sportName: sportName, leagueId: leagueId) { [weak self] result in
             guard let self = self else { return }
 
@@ -126,6 +154,12 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
 
     
     private func fetchTeams() {
+        guard let leagueId = leagueIdString else {
+            view?.hideLoading()
+            view?.showError("Invalid league id")
+            return
+        }
+        
         networkService.fetchTeams(sportName: sportName, leagueId: leagueId) { [weak self] result in
             guard let self = self else { return }
 

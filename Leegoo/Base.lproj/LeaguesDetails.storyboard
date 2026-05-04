@@ -37,6 +37,9 @@
                                         <state key="normal">
                                             <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addFavorite:" destination="LD-vc-001" eventType="touchUpInside" id="0s9-w0-404"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -224,7 +227,7 @@
                                                             <constraint firstItem="LD-cv-upcoming" firstAttribute="trailing" secondItem="LD-vw-sec1" secondAttribute="trailing" id="LD-ct-s1-R"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec2">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec2">
                                                         <rect key="frame" x="0.0" y="304" width="393" height="640"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latest Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-s2-title">
@@ -240,7 +243,7 @@
                                                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                                                 </state>
                                                             </button>
-                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-latest" customClass="SelfSizingCollectionView" customModule="Leegoo" customModuleProvider="target">
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-latest" customClass="SelfSizingCollectionView" customModule="Leegoo" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="30" width="393" height="610"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="0.0" id="LD-fl-latest">
@@ -368,7 +371,7 @@
                                                             <constraint firstAttribute="bottom" secondItem="LD-cv-latest" secondAttribute="bottom" id="LD-ct-s2-8"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec3">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LD-vw-sec3">
                                                         <rect key="frame" x="0.0" y="968" width="393" height="200"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD-lb-s3-title">
@@ -384,7 +387,7 @@
                                                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                                                 </state>
                                                             </button>
-                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-teams" customClass="SelfSizingCollectionView" customModule="Leegoo" customModuleProvider="target">
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LD-cv-teams" customClass="SelfSizingCollectionView" customModule="Leegoo" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="35" width="393" height="165"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="LD-fl-teams">
@@ -483,6 +486,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="favoriteButton" destination="LD-bt-fav" id="DNs-ge-7RF"/>
                         <outlet property="latestCollectionView" destination="LD-cv-latest" id="conn-1"/>
                         <outlet property="teamsCollectionView" destination="LD-cv-teams" id="conn-3"/>
                         <outlet property="titleLabel" destination="LD-lb-title" id="conn-4"/>
