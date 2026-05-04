@@ -41,6 +41,7 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     var upcomingCount: Int { upcomingEvents.count }
     var latestCount: Int { latestEvents.count }
     var teamsCount: Int { teams.count }
+    var sport: String { sportName }
     
     func upcomingEvent(at index: Int) -> Event {
         upcomingEvents[index]
@@ -52,6 +53,13 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     
     func team(at index: Int) -> Team {
         teams[index]
+    }
+    
+    func didSelectTeam(at index: Int) {
+        let team = teams[index]
+        if let teamId = team.teamKey {
+            view?.navigateToTeamDetails(teamId: teamId)
+        }
     }
     
     private func fetchData() {
@@ -75,21 +83,31 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
 
                 switch result {
                 case .success(let events):
-                    print("DEBUG: fetched events count = \(events.count)")
-
-                    if events.isEmpty {
-                        self.upcomingEvents = []
-                        self.latestEvents = []
-                        self.view?.showUpcomingEvents()
-                        self.view?.showLatestEvents()
-                        return
-                    }
-
-                    self.upcomingEvents = Array(events.prefix(5))
-                    self.latestEvents = Array(events.suffix(5))
-
-                    print("DEBUG: upcoming count = \(self.upcomingEvents.count)")
-                    print("DEBUG: latest count = \(self.latestEvents.count)")
+                    let calendar = Calendar.current
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    let startOfToday = calendar.startOfDay(for: Date())
+                    
+                    // Upcoming: Today and future, must have team names
+                    self.upcomingEvents = events.filter { event in
+                        guard let dateStr = event.eventDate, let date = formatter.date(from: dateStr) else { return false }
+                        let home = (event.eventHomeTeam ?? "").trimmingCharacters(in: .whitespaces)
+                        let away = (event.eventAwayTeam ?? "").trimmingCharacters(in: .whitespaces)
+                        return date >= startOfToday && !home.isEmpty && !away.isEmpty
+                    }.sorted(by: { ($0.eventDate ?? "") < ($1.eventDate ?? "") })
+                    
+                    // Latest: Past events, must have team names AND a valid result score
+                    self.latestEvents = events.filter { event in
+                        guard let dateStr = event.eventDate, let date = formatter.date(from: dateStr) else { return false }
+                        let home = (event.eventHomeTeam ?? "").trimmingCharacters(in: .whitespaces)
+                        let away = (event.eventAwayTeam ?? "").trimmingCharacters(in: .whitespaces)
+                        let result = (event.eventFinalResult ?? "").trimmingCharacters(in: .whitespaces)
+                        
+                        let hasTeams = !home.isEmpty && !away.isEmpty
+                        let hasResult = !result.isEmpty && result != "-" && result != " - "
+                        
+                        return date < startOfToday && hasTeams && hasResult
+                    }.sorted(by: { ($0.eventDate ?? "") > ($1.eventDate ?? "") })
 
                     self.view?.showUpcomingEvents()
                     self.view?.showLatestEvents()
@@ -114,7 +132,6 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let teams):
-                    print("DEBUG: fetched teams count = \(teams.count)")
                     self.teams = teams
                     self.view?.showTeams()
 

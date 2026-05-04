@@ -70,7 +70,6 @@ class OnboardingViewController: UIViewController {
             nextButton.setImage(arrow, for: .normal)
             nextButton.tintColor = .white
             nextButton.semanticContentAttribute = .forceRightToLeft
-            nextButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
         }
         
         titleLabel.font = UIFont(name: "AvenirNext-Heavy", size: 34) ?? UIFont.systemFont(ofSize: 34, weight: .black)
@@ -112,7 +111,7 @@ class OnboardingViewController: UIViewController {
         subtitleLabel.text = page.subtitle
         mainImageView.image = UIImage(named: page.imageName)
         pageControl.currentPage = index
-        nextButton.setTitle(index == pages.count - 1 ? "Get Started" : "Continue", for: .normal)
+        nextButton.setTitle(index == pages.count - 1 ? "Get Started   " : "Continue   ", for: .normal)
         
         
         titleLabel.alpha = 0
