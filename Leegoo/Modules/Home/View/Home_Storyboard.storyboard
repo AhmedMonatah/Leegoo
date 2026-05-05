@@ -26,7 +26,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HA2-Pi-BqT">
                                 <rect key="frame" x="16" y="243" width="408" height="596"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bfL-uV-WPp">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bfL-uV-WPp">
                                     <size key="itemSize" width="194" height="286"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -40,20 +40,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="194" height="286"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q48-hi-9X6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="194" height="246"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q48-hi-9X6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="194" height="286"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ci5-cl-Y58">
-                                                    <rect key="frame" x="30" y="233" width="147" height="45"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ci5-cl-Y58">
+                                                    <rect key="frame" x="8" y="251.66666666666666" width="178" height="26.333333333333343"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <color key="textColor" systemColor="systemBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="ci5-cl-Y58" secondAttribute="bottom" constant="20" id="FIM-Ic-Owg"/>
-                                                <constraint firstItem="ci5-cl-Y58" firstAttribute="centerX" secondItem="Sqo-Nl-teT" secondAttribute="centerX" id="LNf-v6-Ona"/>
+                                                <constraint firstItem="ci5-cl-Y58" firstAttribute="bottom" secondItem="Q48-hi-9X6" secondAttribute="bottom" constant="-8" id="3Sy-CN-rVZ"/>
+                                                <constraint firstItem="Q48-hi-9X6" firstAttribute="top" secondItem="Sqo-Nl-teT" secondAttribute="top" id="F7e-Ju-zAE"/>
+                                                <constraint firstAttribute="trailing" secondItem="ci5-cl-Y58" secondAttribute="trailing" constant="8" id="F9i-2r-nUm"/>
+                                                <constraint firstAttribute="trailing" secondItem="Q48-hi-9X6" secondAttribute="trailing" id="LXi-BQ-Aqp"/>
+                                                <constraint firstAttribute="bottom" secondItem="Q48-hi-9X6" secondAttribute="bottom" id="XpF-A8-jiU"/>
+                                                <constraint firstItem="Q48-hi-9X6" firstAttribute="leading" secondItem="Sqo-Nl-teT" secondAttribute="leading" id="rOf-Pk-U7u"/>
+                                                <constraint firstItem="ci5-cl-Y58" firstAttribute="leading" secondItem="Sqo-Nl-teT" secondAttribute="leading" constant="8" id="taf-qc-Iln"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="194" height="286"/>
@@ -288,7 +292,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="LV4-V8-Rj2">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fat-pT-Y0s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="01R-yE-vhK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Udv-J3-HXb"/>
@@ -302,6 +305,7 @@
                         <segue destination="OVP-Pd-X0K" kind="relationship" relationship="viewControllers" id="V0U-zg-Vjq"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fat-pT-Y0s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-23" y="471"/>
         </scene>

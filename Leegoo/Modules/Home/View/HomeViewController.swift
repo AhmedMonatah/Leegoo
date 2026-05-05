@@ -57,14 +57,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         let padding: CGFloat = 12
         let spacing: CGFloat = 12
-               
-        let isLandscape = collectionView.frame.width > collectionView.frame.height
+
+        let isLandscape = collectionView.bounds.width > collectionView.bounds.height
         let itemsPerRow: CGFloat = isLandscape ? 4 : 2
-               
+
         let totalSpacing = (padding * 2) + ((itemsPerRow - 1) * spacing)
-        let width = (collectionView.frame.width - totalSpacing) / itemsPerRow
-                              
-        return CGSize(width: width, height: 250)
+        let width = (collectionView.bounds.width - totalSpacing) / itemsPerRow
+        let height = width * 1.5
+        
+        return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
@@ -74,6 +75,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+        return 12
     }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+    }
+    
 }
