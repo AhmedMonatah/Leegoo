@@ -20,6 +20,9 @@ extension UIView {
         var viewsToSkeletonize = [UIView]()
         
         func findViews(in v: UIView) {
+            // Skip views with tag 999 (custom exclusion tag)
+            if v.tag == 999 { return }
+            
             // If the user wants entire stack views to shimmer as a block:
             // "if you have a stack containing things like images and so on, then the whole stack should have a shimmer on it"
             if v is UIStackView {
