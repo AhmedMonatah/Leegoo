@@ -215,7 +215,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jdk-Qp-wgf">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jdk-Qp-wgf">
                                                     <rect key="frame" x="390" y="30.666666666666671" width="35" height="14.333333333333329"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="ODh-UW-Zzg"/>
