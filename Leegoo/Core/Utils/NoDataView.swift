@@ -16,7 +16,6 @@ class NoDataView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "No Data Found"
         label.textColor = .label
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 22, weight: .semibold)
@@ -32,6 +31,13 @@ class NoDataView: UIView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
+    init(title: String) {
+        super.init(frame: .zero)
+        titleLabel.text = title
+        setup()
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

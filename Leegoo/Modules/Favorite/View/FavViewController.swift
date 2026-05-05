@@ -12,6 +12,7 @@ class FavViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var presenter: FavoritesPresenterProtocol!
+    private let emptyView = NoDataView(title: "No Favorites Yet")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,16 @@ class FavViewController: UIViewController {
         presenter.viewWillAppear()
     }
     
+    
+    private func updateEmptyState() {
+            if presenter.numberOfFavorites == 0 {
+                tableView.backgroundView = emptyView
+                tableView.separatorStyle = .none
+            } else {
+                tableView.backgroundView = nil
+                tableView.separatorStyle = .singleLine
+            }
+        }
 
 }
 
@@ -37,6 +48,7 @@ extension FavViewController: FavoritesViewProtocol {
     
     func reloadData() {
         tableView.reloadData()
+        updateEmptyState()
     }
     
     
@@ -55,6 +67,7 @@ extension FavViewController: FavoritesViewProtocol {
         
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 
 }
 

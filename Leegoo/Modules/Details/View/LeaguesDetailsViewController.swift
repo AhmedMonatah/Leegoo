@@ -11,9 +11,9 @@ class LeaguesDetailsViewController: UIViewController {
     
     @IBOutlet weak var favoriteButton: UIButton!
     
-    private let upcomingEmptyView = NoDataView()
-    private let latestEmptyView = NoDataView()
-    private let teamsEmptyView = NoDataView()
+    private let upcomingEmptyView = NoDataView(title: "No Data found")
+    private let latestEmptyView = NoDataView(title: "No Data found")
+    private let teamsEmptyView = NoDataView(title: "No Data found")
     
     
     private var isLoading = false
