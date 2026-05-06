@@ -25,14 +25,59 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
     var presenter: LeaguesPresenterProtocol!
     
     
+    private var customHeaderView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var backBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateHeaderTheme()
         
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
-                
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
         presenter.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateHeaderTheme()
+        tableView.reloadData()
+    }
+    
+    @objc private func backTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func updateHeaderTheme() {
+        let isDark = ThemeManager.shared.isDarkTheme
+        titleLabel?.textColor = ThemeManager.shared.textColor
+        subtitleLabel?.textColor = ThemeManager.shared.secondaryTextColor
+        backBtn?.tintColor = ThemeManager.shared.accentColor
+    }
+    
+    @objc private func themeDidChange() {
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateHeaderTheme()
+        
+        // Force remove and re-add skeleton for loading cells
+        if isLoading {
+            for cell in tableView.visibleCells {
+                cell.contentView.hideSkeleton()
+                cell.contentView.showSkeleton()
+            }
+        }
+        tableView.reloadData()
     }
     
     func reloadData() {
@@ -56,7 +101,7 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
     }
         
     func setTitle(_ title: String) {
-        self.title = title
+        subtitleLabel.text = title
     }
     
     func navigateToDetails(league: League) {
@@ -89,6 +134,9 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "leaguesCell", for: indexPath) as? LeaguesCell else {
             return UITableViewCell()
         }
+        
+        cell.applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
         
         if isLoading {
             cell.leagueName.text = "                   "

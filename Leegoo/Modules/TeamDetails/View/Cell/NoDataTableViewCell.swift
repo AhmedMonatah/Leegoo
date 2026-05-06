@@ -23,6 +23,7 @@ class NoDataTableViewCell: UITableViewCell {
     private func setup() {
         selectionStyle = .none
         backgroundColor = .clear
+        contentView.backgroundColor = .clear
         contentView.addSubview(noDataView)
         
         NSLayoutConstraint.activate([

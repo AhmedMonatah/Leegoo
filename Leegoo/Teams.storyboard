@@ -12,7 +12,10 @@
         <scene sceneID="nav-scene">
             <objects>
                 <navigationController id="nav-ctrl" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nav-bar"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nav-bar">
+                        <rect key="frame" x="0.0" y="124" width="402" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </navigationBar>
                     <connections>
                         <segue destination="squad-vc" kind="relationship" relationship="rootViewController" id="nav-to-squad"/>
                     </connections>
@@ -29,12 +32,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="back-btn">
+                                <rect key="frame" x="16" y="184" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="back-h"/>
+                                    <constraint firstAttribute="width" constant="44" id="back-w"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
+                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scroll-main">
-                                <rect key="frame" x="0.0" y="168" width="402" height="305"/>
+                                <rect key="frame" x="0.0" y="248" width="402" height="305"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scroll-content">
                                         <rect key="frame" x="0.0" y="0.0" width="402" height="305"/>
-                                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="header-card">
                                                 <rect key="frame" x="0.0" y="0.0" width="402" height="110"/>
@@ -85,7 +97,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="📋 Team ID: 96" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="team-id-label">
-                                                        <rect key="frame" x="104" y="53.333333333333343" width="282" height="15.666666666666671"/>
+                                                        <rect key="frame" x="104" y="53.333333333333314" width="282" height="15.666666666666671"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="systemGrayColor"/>
                                                         <nil key="highlightedColor"/>
@@ -107,7 +119,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="card-total">
-                                                <rect key="frame" x="16" y="122" width="115.33333333333333" height="78"/>
+                                                <rect key="frame" x="15.999999999999993" y="122" width="115.33333333333331" height="78"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="accent-total">
                                                         <rect key="frame" x="0.0" y="8" width="4" height="62"/>
@@ -145,10 +157,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="78" id="ct-h"/>
                                                     <constraint firstAttribute="bottom" secondItem="accent-total" secondAttribute="bottom" constant="8" id="at-b"/>
                                                     <constraint firstItem="accent-total" firstAttribute="leading" secondItem="card-total" secondAttribute="leading" id="at-l"/>
                                                     <constraint firstItem="accent-total" firstAttribute="top" secondItem="card-total" secondAttribute="top" constant="8" id="at-t"/>
+                                                    <constraint firstAttribute="height" constant="78" id="ct-h"/>
                                                     <constraint firstItem="icon-total" firstAttribute="leading" secondItem="accent-total" secondAttribute="trailing" constant="10" id="it-l"/>
                                                     <constraint firstItem="icon-total" firstAttribute="top" secondItem="card-total" secondAttribute="top" constant="12" id="it-t"/>
                                                     <constraint firstItem="lbl-total-title" firstAttribute="centerY" secondItem="icon-total" secondAttribute="centerY" id="ltt-c"/>
@@ -208,10 +220,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="78" id="cg-h"/>
                                                     <constraint firstAttribute="bottom" secondItem="accent-gk" secondAttribute="bottom" constant="8" id="ag-b"/>
                                                     <constraint firstItem="accent-gk" firstAttribute="leading" secondItem="card-gk" secondAttribute="leading" id="ag-l"/>
                                                     <constraint firstItem="accent-gk" firstAttribute="top" secondItem="card-gk" secondAttribute="top" constant="8" id="ag-t"/>
+                                                    <constraint firstAttribute="height" constant="78" id="cg-h"/>
                                                     <constraint firstItem="goalkeepers-count-label" firstAttribute="leading" secondItem="icon-gk" secondAttribute="leading" id="gcl-l"/>
                                                     <constraint firstItem="goalkeepers-count-label" firstAttribute="top" secondItem="icon-gk" secondAttribute="bottom" constant="4" id="gcl-t"/>
                                                     <constraint firstItem="icon-gk" firstAttribute="leading" secondItem="accent-gk" secondAttribute="trailing" constant="10" id="ig-l"/>
@@ -233,7 +245,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="card-def">
-                                                <rect key="frame" x="270.66666666666674" y="122" width="115.33333333333331" height="78"/>
+                                                <rect key="frame" x="270.66666666666669" y="122" width="115.33333333333331" height="78"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="accent-def">
                                                         <rect key="frame" x="0.0" y="8" width="4" height="62"/>
@@ -271,10 +283,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="78" id="cd-h"/>
                                                     <constraint firstAttribute="bottom" secondItem="accent-def" secondAttribute="bottom" constant="8" id="ad-b"/>
                                                     <constraint firstItem="accent-def" firstAttribute="leading" secondItem="card-def" secondAttribute="leading" id="ad-l"/>
                                                     <constraint firstItem="accent-def" firstAttribute="top" secondItem="card-def" secondAttribute="top" constant="8" id="ad-t"/>
+                                                    <constraint firstAttribute="height" constant="78" id="cd-h"/>
                                                     <constraint firstItem="defenders-count-label" firstAttribute="leading" secondItem="icon-def" secondAttribute="leading" id="dcl-l"/>
                                                     <constraint firstItem="defenders-count-label" firstAttribute="top" secondItem="icon-def" secondAttribute="bottom" constant="4" id="dcl-t"/>
                                                     <constraint firstItem="icon-def" firstAttribute="leading" secondItem="accent-def" secondAttribute="trailing" constant="10" id="id-l"/>
@@ -457,29 +469,30 @@
                                                 </constraints>
                                             </scrollView>
                                         </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="header-card" firstAttribute="top" secondItem="scroll-content" secondAttribute="top" id="c-h-t"/>
-                                            <constraint firstItem="header-card" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" id="c-h-l"/>
-                                            <constraint firstItem="header-card" firstAttribute="trailing" secondItem="scroll-content" secondAttribute="trailing" id="c-h-r"/>
-                                            <constraint firstItem="card-total" firstAttribute="top" secondItem="header-card" secondAttribute="bottom" constant="12" id="c-ct-t"/>
-                                            <constraint firstItem="card-total" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" constant="16" id="c-ct-l"/>
-                                            <constraint firstItem="card-gk" firstAttribute="top" secondItem="card-total" secondAttribute="top" id="c-cg-t"/>
-                                            <constraint firstItem="card-gk" firstAttribute="leading" secondItem="card-total" secondAttribute="trailing" constant="12" id="c-cg-l"/>
-                                            <constraint firstItem="card-gk" firstAttribute="width" secondItem="card-total" secondAttribute="width" id="c-cg-w"/>
-                                            <constraint firstItem="card-def" firstAttribute="top" secondItem="card-total" secondAttribute="top" id="c-cd-t"/>
                                             <constraint firstItem="card-def" firstAttribute="leading" secondItem="card-gk" secondAttribute="trailing" constant="12" id="c-cd-l"/>
                                             <constraint firstItem="card-def" firstAttribute="trailing" secondItem="scroll-content" secondAttribute="trailing" constant="-16" id="c-cd-r"/>
+                                            <constraint firstItem="card-def" firstAttribute="top" secondItem="card-total" secondAttribute="top" id="c-cd-t"/>
                                             <constraint firstItem="card-def" firstAttribute="width" secondItem="card-total" secondAttribute="width" id="c-cd-w"/>
-                                            <constraint firstItem="separator-line" firstAttribute="top" secondItem="card-total" secondAttribute="bottom" constant="12" id="c-sep-t"/>
-                                            <constraint firstItem="separator-line" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" constant="16" id="c-sep-l"/>
-                                            <constraint firstItem="separator-line" firstAttribute="trailing" secondItem="scroll-content" secondAttribute="trailing" constant="-16" id="c-sep-r"/>
-                                            <constraint firstItem="section-title" firstAttribute="top" secondItem="separator-line" secondAttribute="bottom" constant="12" id="c-st-t"/>
-                                            <constraint firstItem="section-title" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" constant="16" id="c-st-l"/>
-                                            <constraint firstItem="section-title" firstAttribute="trailing" secondItem="scroll-content" secondAttribute="trailing" constant="-16" id="c-st-r"/>
-                                            <constraint firstItem="filter-scroll" firstAttribute="top" secondItem="section-title" secondAttribute="bottom" constant="12" id="c-fs-t"/>
+                                            <constraint firstItem="card-gk" firstAttribute="leading" secondItem="card-total" secondAttribute="trailing" constant="12" id="c-cg-l"/>
+                                            <constraint firstItem="card-gk" firstAttribute="top" secondItem="card-total" secondAttribute="top" id="c-cg-t"/>
+                                            <constraint firstItem="card-gk" firstAttribute="width" secondItem="card-total" secondAttribute="width" id="c-cg-w"/>
+                                            <constraint firstItem="card-total" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" constant="16" id="c-ct-l"/>
+                                            <constraint firstItem="card-total" firstAttribute="top" secondItem="header-card" secondAttribute="bottom" constant="12" id="c-ct-t"/>
+                                            <constraint firstItem="filter-scroll" firstAttribute="bottom" secondItem="scroll-content" secondAttribute="bottom" id="c-fs-b"/>
                                             <constraint firstItem="filter-scroll" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" id="c-fs-l"/>
                                             <constraint firstItem="filter-scroll" firstAttribute="trailing" secondItem="scroll-content" secondAttribute="trailing" id="c-fs-r"/>
-                                            <constraint firstItem="filter-scroll" firstAttribute="bottom" secondItem="scroll-content" secondAttribute="bottom" id="c-fs-b"/>
+                                            <constraint firstItem="filter-scroll" firstAttribute="top" secondItem="section-title" secondAttribute="bottom" constant="12" id="c-fs-t"/>
+                                            <constraint firstItem="header-card" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" id="c-h-l"/>
+                                            <constraint firstItem="header-card" firstAttribute="trailing" secondItem="scroll-content" secondAttribute="trailing" id="c-h-r"/>
+                                            <constraint firstItem="header-card" firstAttribute="top" secondItem="scroll-content" secondAttribute="top" id="c-h-t"/>
+                                            <constraint firstItem="separator-line" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" constant="16" id="c-sep-l"/>
+                                            <constraint firstItem="separator-line" firstAttribute="trailing" secondItem="scroll-content" secondAttribute="trailing" constant="-16" id="c-sep-r"/>
+                                            <constraint firstItem="separator-line" firstAttribute="top" secondItem="card-total" secondAttribute="bottom" constant="12" id="c-sep-t"/>
+                                            <constraint firstItem="section-title" firstAttribute="leading" secondItem="scroll-content" secondAttribute="leading" constant="16" id="c-st-l"/>
+                                            <constraint firstItem="section-title" firstAttribute="trailing" secondItem="scroll-content" secondAttribute="trailing" constant="-16" id="c-st-r"/>
+                                            <constraint firstItem="section-title" firstAttribute="top" secondItem="separator-line" secondAttribute="bottom" constant="12" id="c-st-t"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -493,8 +506,8 @@
                                 </constraints>
                             </scrollView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="52" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="squad-table-view">
-                                <rect key="frame" x="0.0" y="473" width="402" height="333"/>
-                                <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="565" width="402" height="241"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PlayerCell" rowHeight="80" id="pc-proto" customClass="PlayerCell" customModule="Leegoo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="402" height="80"/>
@@ -613,7 +626,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="MP" textAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc-mpt">
-                                                    <rect key="frame" x="270" y="25.666666666666671" width="30" height="12"/>
+                                                    <rect key="frame" x="270" y="25.666666666666668" width="30" height="12.000000000000004"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="mpt-w"/>
                                                     </constraints>
@@ -621,11 +634,11 @@
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="25" textAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc-mpv">
-                                                    <rect key="frame" x="270" y="37.666666666666671" width="30" height="17"/>
+                                                    <rect key="frame" x="270" y="37.666666666666664" width="30" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Goals" textAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc-gt">
-                                                    <rect key="frame" x="308" y="25.666666666666671" width="30" height="12"/>
+                                                    <rect key="frame" x="308" y="25.666666666666668" width="30" height="12.000000000000004"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="gt-w"/>
                                                     </constraints>
@@ -633,11 +646,11 @@
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="12" textAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc-gv">
-                                                    <rect key="frame" x="308" y="37.666666666666671" width="30" height="17"/>
+                                                    <rect key="frame" x="308" y="37.666666666666664" width="30" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Rating" textAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc-rt">
-                                                    <rect key="frame" x="346" y="25.666666666666671" width="40" height="12"/>
+                                                    <rect key="frame" x="346" y="25.666666666666668" width="40" height="12.000000000000004"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="rt-w"/>
                                                     </constraints>
@@ -645,12 +658,22 @@
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="7.5" textAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pc-rv">
-                                                    <rect key="frame" x="346" y="37.666666666666671" width="40" height="17"/>
+                                                    <rect key="frame" x="346" y="37.666666666666664" width="40" height="17"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.10000000000000001" green="0.10000000000000001" blue="0.10000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="pc-gt" firstAttribute="top" secondItem="pc-rt" secondAttribute="top" id="gt-t"/>
+                                                <constraint firstItem="pc-rt" firstAttribute="leading" secondItem="pc-gt" secondAttribute="trailing" constant="8" id="gt-tr"/>
+                                                <constraint firstItem="pc-gv" firstAttribute="leading" secondItem="pc-gt" secondAttribute="leading" id="gv-l"/>
+                                                <constraint firstItem="pc-gv" firstAttribute="trailing" secondItem="pc-gt" secondAttribute="trailing" id="gv-r"/>
+                                                <constraint firstItem="pc-gv" firstAttribute="top" secondItem="pc-gt" secondAttribute="bottom" id="gv-t"/>
+                                                <constraint firstItem="pc-mpt" firstAttribute="top" secondItem="pc-rt" secondAttribute="top" id="mpt-t"/>
+                                                <constraint firstItem="pc-gt" firstAttribute="leading" secondItem="pc-mpt" secondAttribute="trailing" constant="8" id="mpt-tr"/>
+                                                <constraint firstItem="pc-mpv" firstAttribute="leading" secondItem="pc-mpt" secondAttribute="leading" id="mpv-l"/>
+                                                <constraint firstItem="pc-mpv" firstAttribute="trailing" secondItem="pc-mpt" secondAttribute="trailing" id="mpv-r"/>
+                                                <constraint firstItem="pc-mpv" firstAttribute="top" secondItem="pc-mpt" secondAttribute="bottom" id="mpv-t"/>
                                                 <constraint firstItem="pc-av" firstAttribute="centerY" secondItem="pc-cv" secondAttribute="centerY" id="pc-ac"/>
                                                 <constraint firstItem="pc-av" firstAttribute="leading" secondItem="pc-cv" secondAttribute="leading" constant="16" id="pc-al"/>
                                                 <constraint firstItem="pc-age" firstAttribute="leading" secondItem="pc-name" secondAttribute="leading" id="pc-al2"/>
@@ -668,16 +691,6 @@
                                                 <constraint firstItem="pc-rv" firstAttribute="leading" secondItem="pc-rt" secondAttribute="leading" id="rv-l"/>
                                                 <constraint firstItem="pc-rv" firstAttribute="trailing" secondItem="pc-rt" secondAttribute="trailing" id="rv-r"/>
                                                 <constraint firstItem="pc-rv" firstAttribute="top" secondItem="pc-rt" secondAttribute="bottom" id="rv-t"/>
-                                                <constraint firstItem="pc-gt" firstAttribute="top" secondItem="pc-rt" secondAttribute="top" id="gt-t"/>
-                                                <constraint firstItem="pc-rt" firstAttribute="leading" secondItem="pc-gt" secondAttribute="trailing" constant="8" id="gt-tr"/>
-                                                <constraint firstItem="pc-gv" firstAttribute="leading" secondItem="pc-gt" secondAttribute="leading" id="gv-l"/>
-                                                <constraint firstItem="pc-gv" firstAttribute="trailing" secondItem="pc-gt" secondAttribute="trailing" id="gv-r"/>
-                                                <constraint firstItem="pc-gv" firstAttribute="top" secondItem="pc-gt" secondAttribute="bottom" id="gv-t"/>
-                                                <constraint firstItem="pc-mpt" firstAttribute="top" secondItem="pc-rt" secondAttribute="top" id="mpt-t"/>
-                                                <constraint firstItem="pc-gt" firstAttribute="leading" secondItem="pc-mpt" secondAttribute="trailing" constant="8" id="mpt-tr"/>
-                                                <constraint firstItem="pc-mpv" firstAttribute="leading" secondItem="pc-mpt" secondAttribute="leading" id="mpv-l"/>
-                                                <constraint firstItem="pc-mpv" firstAttribute="trailing" secondItem="pc-mpt" secondAttribute="trailing" id="mpv-r"/>
-                                                <constraint firstItem="pc-mpv" firstAttribute="top" secondItem="pc-mpt" secondAttribute="bottom" id="mpv-t"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -685,7 +698,6 @@
                                             <outlet property="avatarView" destination="pc-av" id="pc-o-av"/>
                                             <outlet property="captainBadge" destination="pc-cb" id="pc-o-cb"/>
                                             <outlet property="captainLabel" destination="pc-cl" id="pc-o-cl"/>
-                                            <outlet property="playerImageView" destination="pc-pi" id="pc-o-pi"/>
                                             <outlet property="injuredBadge" destination="pc-ib" id="pc-o-ib"/>
                                             <outlet property="injuredLabel" destination="pc-il2" id="pc-o-il2"/>
                                             <outlet property="mpTitleLabel" destination="pc-mpt" id="pc-o-mpt"/>
@@ -693,6 +705,7 @@
                                             <outlet property="nameLabel" destination="pc-name" id="pc-o-name"/>
                                             <outlet property="numberBadge" destination="pc-nb" id="pc-o-nb"/>
                                             <outlet property="numberLabel" destination="pc-nl" id="pc-o-nl"/>
+                                            <outlet property="playerImageView" destination="pc-pi" id="pc-o-pi"/>
                                             <outlet property="ratingTitleLabel" destination="pc-rt" id="pc-o-rt"/>
                                             <outlet property="ratingValueLabel" destination="pc-rv" id="pc-o-rv"/>
                                             <outlet property="statTitleLabel" destination="pc-gt" id="pc-o-gt"/>
@@ -712,11 +725,11 @@
                                                     <nil key="textColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="5" textAlignment="natural" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sh-count">
-                                                    <rect key="frame" x="343" y="15.999999999999998" width="11" height="20.333333333333329"/>
+                                                    <rect key="frame" x="375" y="15.999999999999998" width="11" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.10000000000000001" green="0.10000000000000001" blue="0.10000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                             </subviews>
+                                            </subviews>
                                             <constraints>
                                                 <constraint firstItem="sh-title" firstAttribute="leading" secondItem="sh-cv" secondAttribute="leading" constant="12" id="mh8-fI-cPz"/>
                                                 <constraint firstItem="sh-count" firstAttribute="centerY" secondItem="sh-cv" secondAttribute="centerY" id="sh-cc"/>
@@ -724,7 +737,7 @@
                                                 <constraint firstItem="sh-title" firstAttribute="centerY" secondItem="sh-cv" secondAttribute="centerY" id="sh-tc"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="countLabel" destination="sh-count" id="sh-o-count"/>
                                             <outlet property="titleLabel" destination="sh-title" id="sh-o-title"/>
@@ -734,10 +747,12 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="safe-area"/>
-                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="back-btn" firstAttribute="leading" secondItem="squad-root-view" secondAttribute="leading" constant="16" id="back-lead"/>
+                            <constraint firstItem="back-btn" firstAttribute="top" secondItem="safe-area" secondAttribute="top" constant="16" id="back-top"/>
                             <constraint firstItem="scroll-main" firstAttribute="leading" secondItem="squad-root-view" secondAttribute="leading" id="sv-lead"/>
-                            <constraint firstItem="scroll-main" firstAttribute="top" secondItem="safe-area" secondAttribute="top" id="sv-top"/>
+                            <constraint firstItem="scroll-main" firstAttribute="top" secondItem="safe-area" secondAttribute="top" constant="80" id="sv-top"/>
                             <constraint firstItem="scroll-main" firstAttribute="trailing" secondItem="squad-root-view" secondAttribute="trailing" id="sv-trail"/>
                             <constraint firstItem="squad-table-view" firstAttribute="bottom" secondItem="safe-area" secondAttribute="bottom" id="tv-bot"/>
                             <constraint firstItem="squad-table-view" firstAttribute="leading" secondItem="squad-root-view" secondAttribute="leading" id="tv-lead"/>
@@ -746,6 +761,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="back-btn" id="o-back"/>
                         <outlet property="defendersCountLabel" destination="defenders-count-label" id="o-defcount"/>
                         <outlet property="filterAllButton" destination="filter-all-btn" id="o-fall"/>
                         <outlet property="filterDefButton" destination="filter-def-btn" id="o-fdef"/>
@@ -756,8 +772,8 @@
                         <outlet property="tableView" destination="squad-table-view" id="o-tv"/>
                         <outlet property="teamIDLabel" destination="team-id-label" id="o-tid"/>
                         <outlet property="teamInitialsLabel" destination="team-initials-label" id="o-initials"/>
-                        <outlet property="teamLogoView" destination="team-logo-view" id="o-logo"/>
                         <outlet property="teamLogoImageView" destination="team-logo-image-view" id="o-logo-iv"/>
+                        <outlet property="teamLogoView" destination="team-logo-view" id="o-logo"/>
                         <outlet property="teamNameLabel" destination="team-name-label" id="o-tname"/>
                         <outlet property="totalPlayersLabel" destination="total-players-label" id="o-total"/>
                     </connections>
@@ -768,6 +784,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="people" width="512" height="512"/>
         <image name="shield" width="512" height="512"/>
         <image name="t-shirt" width="512" height="512"/>

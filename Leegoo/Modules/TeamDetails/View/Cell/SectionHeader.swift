@@ -26,5 +26,10 @@ final class SectionHeaderView: UITableViewCell {
     func configure(position: PlayerPosition, count: Int) {
         titleLabel.text = position.rawValue
         countLabel.text  = "\(count)"
+        
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        titleLabel.textColor = ThemeManager.shared.textColor
+        countLabel.textColor = ThemeManager.shared.secondaryTextColor
     }
 }

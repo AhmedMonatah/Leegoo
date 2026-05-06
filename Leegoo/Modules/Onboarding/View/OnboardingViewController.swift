@@ -212,13 +212,20 @@ class OnboardingViewController: UIViewController {
 extension OnboardingViewController: OnboardingViewProtocol {
     func navigateToHome() {
         let sb = UIStoryboard(name: "Home_Storyboard", bundle: nil)
-        guard let tabBar = sb.instantiateInitialViewController() as? UITabBarController else { return }
+        guard let tabBar = sb.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController else { return }
         if let nav = tabBar.viewControllers?.first as? UINavigationController,
             let home = nav.viewControllers.first as? HomeViewController {
             home.presenter = HomePresenter(view: home)
         }
         tabBar.modalTransitionStyle = .crossDissolve
         tabBar.modalPresentationStyle = .fullScreen
-        present(tabBar, animated: true)
+        
+        // Use the window's rootViewController to present or replace the root
+        if let window = view.window {
+            window.rootViewController = tabBar
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil)
+        } else {
+            present(tabBar, animated: true)
+        }
     }
 }

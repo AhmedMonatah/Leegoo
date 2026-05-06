@@ -22,9 +22,11 @@ class LeaguesDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        favoriteButton.tintColor = .systemGray
+        favoriteButton.tintColor = ThemeManager.shared.isDarkTheme ? .white : .systemGray
         favoriteButton.imageView?.contentMode = .scaleAspectFit
         setupUpcomingCollectionView()
+        setupLatestCollectionView()
+        setupTeamsCollectionView()
         
         upcomingCollectionView.delegate = self
         upcomingCollectionView.dataSource = self
@@ -35,12 +37,63 @@ class LeaguesDetailsViewController: UIViewController {
         teamsCollectionView.delegate = self
         teamsCollectionView.dataSource = self
 
+        // Apply theme AFTER all views are configured
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateSpecificTheme()
+        titleLabel?.numberOfLines = 2
+        titleLabel?.lineBreakMode = .byWordWrapping
+
         presenter?.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
+    }
+    
+    @objc private func themeDidChange() {
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateSpecificTheme()
+        
+        // Re-create shimmer for loading cells
+        if isLoading {
+            for cell in upcomingCollectionView.visibleCells {
+                cell.contentView.hideSkeleton()
+                cell.contentView.showSkeleton()
+            }
+            for cell in latestCollectionView.visibleCells {
+                cell.contentView.hideSkeleton()
+                cell.contentView.showSkeleton()
+            }
+            for cell in teamsCollectionView.visibleCells {
+                cell.contentView.hideSkeleton()
+                cell.contentView.showSkeleton()
+            }
+        }
+        
+        upcomingCollectionView.reloadData()
+        latestCollectionView.reloadData()
+        teamsCollectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateSpecificTheme()
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        // Reload to pick up latest theme
+        upcomingCollectionView.reloadData()
+        latestCollectionView.reloadData()
+        teamsCollectionView.reloadData()
+    }
+    
+    private func updateSpecificTheme() {
+        titleLabel?.textColor = ThemeManager.shared.textColor
+        titleLabel?.numberOfLines = 2
+        titleLabel?.lineBreakMode = .byWordWrapping
+        
+        favoriteButton?.tintColor = ThemeManager.shared.isDarkTheme ? .white : .systemGray
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -64,6 +117,23 @@ class LeaguesDetailsViewController: UIViewController {
             layout.minimumLineSpacing = 20
             layout.sectionInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
             layout.itemSize = CGSize(width: view.frame.width - 64, height: 220)
+        }
+    }
+    
+    private func setupLatestCollectionView() {
+        if let layout = latestCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumLineSpacing = 12
+            layout.itemSize = CGSize(width: view.frame.width - 40, height: 130)
+        }
+    }
+    
+    private func setupTeamsCollectionView() {
+        if let layout = teamsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 16
+            layout.minimumInteritemSpacing = 16
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            layout.itemSize = CGSize(width: 90, height: 125)
         }
     }
     
@@ -148,7 +218,8 @@ extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
     func updateFavoriteButton(isFavorite: Bool) {
         let imageName = isFavorite ? "heart.fill" : "heart"
         favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
-        favoriteButton.tintColor = isFavorite ? .systemRed : .systemGray
+        let isDark = ThemeManager.shared.isDarkTheme
+        favoriteButton.tintColor = isFavorite ? .systemRed : (isDark ? .white : .systemGray)
     }
 }
 
@@ -177,6 +248,8 @@ extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == upcomingCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingCell", for: indexPath) as! UpcomingEventCell
+            cell.applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
             if isLoading {
                 cell.contentView.showSkeleton()
             } else {
@@ -188,6 +261,8 @@ extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollection
             return cell
         } else if collectionView == latestCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestCell", for: indexPath) as! LatestEventCell
+            cell.applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
             if isLoading {
                 cell.contentView.showSkeleton()
             } else {
@@ -199,6 +274,8 @@ extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollection
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! TeamCell
+            cell.applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
             if isLoading {
                 cell.contentView.showSkeleton()
             } else {

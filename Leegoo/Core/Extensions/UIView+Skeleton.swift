@@ -2,123 +2,80 @@ import UIKit
 
 extension UIView {
     private struct AssociatedKeys {
-        static var skeletonLayer: UInt8 = 0
+        static var skeletonLayer = "skeletonLayer"
     }
     
     private var skeletonLayer: CALayer? {
-        get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.skeletonLayer) as? CALayer
-        }
-        set {
-            objc_setAssociatedObject(self, &AssociatedKeys.skeletonLayer, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
+        get { objc_getAssociatedObject(self, &AssociatedKeys.skeletonLayer) as? CALayer }
+        set { objc_setAssociatedObject(self, &AssociatedKeys.skeletonLayer, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
     
     func showSkeleton() {
-        self.layoutIfNeeded()
+        let isDark = ThemeManager.shared.isDarkTheme
+        let views = findSkeletonableViews(in: self)
         
-        var viewsToSkeletonize = [UIView]()
-        
-        func findViews(in v: UIView) {
-            // Skip views with tag 999 (custom exclusion tag)
-            if v.tag == 999 { return }
-            
-            // If the user wants entire stack views to shimmer as a block:
-            // "if you have a stack containing things like images and so on, then the whole stack should have a shimmer on it"
-            if v is UIStackView {
-                viewsToSkeletonize.append(v)
-            } else if v is UILabel || v is UIImageView || v is UIButton {
-                viewsToSkeletonize.append(v)
-            } else {
-                for sub in v.subviews {
-                    if !sub.isHidden {
-                        findViews(in: sub)
-                    }
-                }
-            }
-        }
-        
-        findViews(in: self)
-        
-        // If empty, skeletonize self
-        if viewsToSkeletonize.isEmpty {
-            viewsToSkeletonize.append(self)
-        }
-        
-        for v in viewsToSkeletonize {
-            if v.skeletonLayer != nil { continue } // already has skeleton
-            
-            // Set dummy text on labels if empty so they have height
-            if let label = v as? UILabel, (label.text?.isEmpty ?? true) {
-                label.text = "                "
-                label.layoutIfNeeded()
-            }
-            
-            let light = UIColor.white.withAlphaComponent(0.7).cgColor
-            let dark = UIColor.black.withAlphaComponent(0.2).cgColor
-            
-            let gradient = CAGradientLayer()
-            gradient.colors = [dark, light, dark]
-            // We want it to be wide enough to sweep across
-            gradient.frame = CGRect(x: -v.bounds.width, y: 0, width: 3 * max(v.bounds.width, 50), height: max(v.bounds.height, 20))
-            gradient.startPoint = CGPoint(x: 0, y: 0.5)
-            gradient.endPoint = CGPoint(x: 1, y: 0.5)
-            gradient.locations = [0.4, 0.5, 0.6]
-            
-            let animation = CABasicAnimation(keyPath: "locations")
-            animation.fromValue = [0.0, 0.1, 0.2]
-            animation.toValue = [0.8, 0.9, 1.0]
-            animation.duration = 1.2
-            animation.repeatCount = .infinity
-            gradient.add(animation, forKey: "shimmer")
-            
-            let skeletonMask = UIView(frame: v.bounds)
-            skeletonMask.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
-            skeletonMask.layer.mask = gradient
-            
-            if v.layer.cornerRadius > 0 {
-                skeletonMask.layer.cornerRadius = v.layer.cornerRadius
-            } else if v is UIImageView && v.bounds.width == v.bounds.height {
-                skeletonMask.layer.cornerRadius = v.bounds.width / 2
-            } else {
-                skeletonMask.layer.cornerRadius = 4
-            }
-            skeletonMask.clipsToBounds = true
-            
-            // Use associated object to keep reference
-            v.skeletonLayer = skeletonMask.layer
-            
-            // For labels and buttons, we just add it to layer. For others too.
-            v.layer.addSublayer(skeletonMask.layer)
+        for view in views {
+            view.applySkeleton(isDark: isDark)
         }
     }
     
     func hideSkeleton() {
-        var viewsWithSkeleton = [UIView]()
+        removeSkeleton(from: self)
+    }
+    
+    // MARK: - Helpers
+    private func findSkeletonableViews(in root: UIView) -> [UIView] {
+        var results = [UIView]()
+        if root.tag == 999 { return results }
         
-        func findViews(in v: UIView) {
-            if v.skeletonLayer != nil {
-                viewsWithSkeleton.append(v)
-            }
-            for sub in v.subviews {
-                findViews(in: sub)
+        if root is UILabel || root is UIImageView || root is UIButton || root is UIStackView {
+            results.append(root)
+        } else {
+            for subview in root.subviews where !subview.isHidden {
+                results.append(contentsOf: findSkeletonableViews(in: subview))
             }
         }
         
-        findViews(in: self)
+        return results.isEmpty ? [root] : results
+    }
+    
+    private func applySkeleton(isDark: Bool) {
+        skeletonLayer?.removeFromSuperlayer()
         
-        if self.skeletonLayer != nil {
-            viewsWithSkeleton.append(self)
-        }
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: bounds.width * 3, height: bounds.height)
         
-        for v in viewsWithSkeleton {
-            v.skeletonLayer?.removeFromSuperlayer()
-            v.skeletonLayer = nil
-            
-            // Optionally clear dummy text if you set it
-            if let label = v as? UILabel, label.text == "                " {
-                label.text = nil
-            }
+        let base = isDark ? UIColor(white: 1.0, alpha: 0.08).cgColor : UIColor(white: 0.85, alpha: 1.0).cgColor
+        let shine = isDark ? UIColor(white: 1.0, alpha: 0.15).cgColor : UIColor.white.cgColor
+        
+        gradient.colors = [base, shine, base]
+        gradient.locations = [0.35, 0.5, 0.65]
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1, y: 0.5)
+        
+        let anim = CABasicAnimation(keyPath: "position.x")
+        anim.fromValue = -bounds.width
+        anim.toValue = bounds.width * 2
+        anim.duration = 1.5
+        anim.repeatCount = .infinity
+        gradient.add(anim, forKey: "shimmer")
+        
+        let container = CALayer()
+        container.frame = bounds
+        container.backgroundColor = base
+        container.cornerRadius = layer.cornerRadius > 0 ? layer.cornerRadius : 4
+        container.masksToBounds = true
+        container.addSublayer(gradient)
+        
+        layer.addSublayer(container)
+        skeletonLayer = container
+    }
+    
+    private func removeSkeleton(from root: UIView) {
+        root.skeletonLayer?.removeFromSuperlayer()
+        root.skeletonLayer = nil
+        for subview in root.subviews {
+            removeSkeleton(from: subview)
         }
     }
 }

@@ -8,10 +8,19 @@ class TeamCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-     
+        backgroundColor = .clear
+        applyTheme()
+    }
+    
+    func applyTheme() {
+        let isDark = ThemeManager.shared.isDarkTheme
+        teamNameLabel?.textColor = ThemeManager.shared.textColor
+        teamImageView?.tintColor = isDark ? .white : .systemGray
+        contentView.backgroundColor = .clear
     }
     
     func configure(with team: Team) {
+        applyTheme()
         teamNameLabel.text = team.teamName ?? "Team"
         teamImageView.sd_setImage(
             with: URL(string: team.teamLogo ?? ""),

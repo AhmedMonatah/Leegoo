@@ -9,17 +9,20 @@ class HomeCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .clear
+    }
+    
+    func configure(with item: Sport) {
 
         contentView.layer.cornerRadius = 8
         contentView.clipsToBounds = true
 
         sportImage.contentMode = .scaleAspectFill
         sportImage.clipsToBounds = true
-    }
-
-    func configure(with item: Sport) {
         sportImage.image = UIImage(named: item.imageName)
         sportTitle.text = item.title
+        sportTitle.textColor = .white
+        sportTitle.tag = 1001
     }
-       
+
 }

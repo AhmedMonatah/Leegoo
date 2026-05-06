@@ -9,26 +9,44 @@ import UIKit
 
 class FavViewController: UIViewController {
 
+    @IBOutlet weak var favTitleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
     var presenter: FavoritesPresenterProtocol!
     private let emptyView = NoDataView(title: "No Favorites Yet")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         presenter = FavoritesPresenter(view: self)
-                
         tableView.delegate = self
         tableView.dataSource = self
-                
         presenter.viewDidLoad()
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateHeaderTheme()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateHeaderTheme()
         presenter.viewWillAppear()
+        tableView.reloadData()
+    }
+    
+    @objc private func themeDidChange() {
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateHeaderTheme()
+        tableView.reloadData()
+    }
+    
+    private func updateHeaderTheme() {
+        let isDark = ThemeManager.shared.isDarkTheme
+        favTitleLabel?.textColor = isDark ? .white : .black
     }
     
     
@@ -81,6 +99,9 @@ extension FavViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "leaguesCell", for: indexPath) as? LeaguesCell else {
             return UITableViewCell()
         }
+        
+        cell.applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
         
         let league = presenter.favoriteLeague(at: indexPath.row)
         cell.configure(with: league)
