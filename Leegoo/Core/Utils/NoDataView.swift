@@ -16,7 +16,8 @@ class NoDataView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .label
+        label.text = "No Data Found"
+        label.textColor = ThemeManager.shared.textColor
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 22, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +51,7 @@ class NoDataView: UIView {
     }
     
     private func setup() {
-        backgroundColor = .systemBackground
+        backgroundColor = .clear
         addSubview(stackView)
         
         stackView.addArrangedSubview(animationView)
@@ -64,6 +65,13 @@ class NoDataView: UIView {
             animationView.widthAnchor.constraint(equalToConstant: 220),
             animationView.heightAnchor.constraint(equalToConstant: 220)
         ])
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applyTheme), name: .themeDidChange, object: nil)
+        applyTheme()
+    }
+    
+    @objc private func applyTheme() {
+        titleLabel.textColor = ThemeManager.shared.textColor
     }
     
     override func layoutSubviews() {

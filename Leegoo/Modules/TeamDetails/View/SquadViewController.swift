@@ -12,6 +12,7 @@ import SDWebImage
 final class SquadViewController: UIViewController {
 
     private var isLoading = false
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var teamLogoImageView: UIImageView!
 
 
@@ -43,7 +44,83 @@ final class SquadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateSpecificTheme()
         presenter.viewDidLoad()
+        
+        backButton?.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
+    }
+    
+    @objc private func themeDidChange() {
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateSpecificTheme()
+        tableView.reloadData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
+        updateSpecificTheme()
+    }
+    
+    @objc private func backTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func updateSpecificTheme() {
+        let textColor = ThemeManager.shared.textColor
+        let isDark = ThemeManager.shared.isDarkTheme
+        teamNameLabel?.textColor = textColor
+        teamIDLabel?.textColor = ThemeManager.shared.secondaryTextColor
+        totalPlayersLabel?.textColor = .white
+        goalkeepersCountLabel?.textColor = .white
+        defendersCountLabel?.textColor = .white
+        
+        // Apply theme to main containers
+        [teamLogoView, teamNameLabel?.superview].forEach {
+            if let view = $0 { applyGlassEffect(to: view) }
+        }
+        
+        // Apply theme to stat cards
+        [totalPlayersLabel, goalkeepersCountLabel, defendersCountLabel].forEach {
+            if let card = $0?.superview {
+                applyGlassEffect(to: card)
+                card.subviews.compactMap { $0 as? UILabel }.forEach {
+                    $0.textColor = isDark ? .white : .black
+                }
+            }
+        }
+        
+        teamNameLabel?.textColor = isDark ? .white : .black
+        teamIDLabel?.textColor = isDark ? UIColor(white: 1.0, alpha: 0.7) : .secondaryLabel
+        
+        if let logoView = teamLogoView {
+            logoView.layer.cornerRadius = logoView.frame.height / 2
+        }
+        
+        backButton?.tintColor = ThemeManager.shared.accentColor
+        applyFilterStyle()
+    }
+
+    private func applyGlassEffect(to view: UIView) {
+        let isDark = ThemeManager.shared.isDarkTheme
+        if isDark {
+            view.backgroundColor = UIColor(white: 1.0, alpha: 0.15)
+            view.layer.borderColor = UIColor(white: 1.0, alpha: 0.25).cgColor
+            view.layer.borderWidth = 1
+        } else {
+            view.backgroundColor = .white
+            view.layer.borderColor = UIColor.clear.cgColor
+            view.layer.borderWidth = 0
+        }
+        view.layer.cornerRadius = 16
+        view.layer.masksToBounds = true
     }
 
 
@@ -53,13 +130,18 @@ final class SquadViewController: UIViewController {
     private func applyFilterStyle() {
         let buttons = [filterAllButton, filterGKButton, filterDefButton,
                        filterMidButton, filterFwdButton]
-        let accent  = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1)
+        
+        let isDark = ThemeManager.shared.isDarkTheme
+        let activeBg = isDark ? UIColor.white : UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1)
+        let inactiveBg = isDark ? UIColor(white: 1.0, alpha: 0.1) : .white
+        let activeText = isDark ? UIColor.black : .white
+        let inactiveText = isDark ? UIColor.lightGray : UIColor.darkGray
 
         for btn in buttons {
             guard let btn = btn else { continue }
             let isActive = btn.tag == presenter.activeFilterTag
-            btn.backgroundColor = isActive ? accent : .white
-            btn.setTitleColor(isActive ? .white : UIColor.darkGray, for: .normal)
+            btn.backgroundColor = isActive ? activeBg : inactiveBg
+            btn.setTitleColor(isActive ? activeText : inactiveText, for: .normal)
         }
     }
 
@@ -115,7 +197,7 @@ extension SquadViewController: TeamDetailsViewProtocol {
             })
         }
         
-        teamIDLabel.text = "\(team.teamKey ?? 0)"
+        teamIDLabel.text = "ID \(team.teamKey ?? 0)"
         
         let players = team.players ?? []
         totalPlayersLabel.text = "\(players.count)"
@@ -148,6 +230,8 @@ extension SquadViewController: UITableViewDataSource {
                 withIdentifier: PlayerCell.reuseID, for: indexPath) as? PlayerCell else {
                 return UITableViewCell()
             }
+            cell.applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
             cell.contentView.showSkeleton()
             return cell
         }

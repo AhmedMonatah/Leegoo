@@ -7,15 +7,17 @@ class UpcomingEventCell: UICollectionViewCell {
     @IBOutlet weak var awayTeamImageView: UIImageView!
     @IBOutlet weak var homeTeamLabel: UILabel!
     @IBOutlet weak var awayTeamLabel: UILabel!
+    @IBOutlet weak var vsLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = .systemBackground
+        backgroundColor = .clear
+        applyTheme()
+        
         contentView.layer.cornerRadius = 12
         contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.systemGray5.cgColor
         
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -24,9 +26,38 @@ class UpcomingEventCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
     
+    func applyTheme() {
+        let isDark = ThemeManager.shared.isDarkTheme
+        contentView.backgroundColor = ThemeManager.shared.cellBackgroundColor
+        contentView.layer.borderColor = isDark ? UIColor.white.withAlphaComponent(0.2).cgColor : UIColor.systemGray5.cgColor
+        
+        // Clear all inner container views
+        for sub in contentView.subviews {
+            if !(sub is UILabel) && !(sub is UIImageView) {
+                sub.backgroundColor = .clear
+            }
+        }
+        
+        homeTeamLabel?.textColor = ThemeManager.shared.textColor
+        awayTeamLabel?.textColor = ThemeManager.shared.textColor
+        dateLabel?.textColor = ThemeManager.shared.secondaryTextColor
+        
+        
+        // Plain style for VS
+        vsLabel?.textColor = ThemeManager.shared.accentColor
+        vsLabel?.backgroundColor = .clear
+        vsLabel?.layer.borderWidth = 0
+        
+        // Adjust shadow for dark mode
+        layer.shadowOpacity = isDark ? 0 : 0.08
+    }
+    
     func configure(with event: Event) {
+        applyTheme()
+        
         homeTeamLabel.text = event.eventHomeTeam ?? "Home"
         awayTeamLabel.text = event.eventAwayTeam ?? "Away"
+        
         dateLabel.text = ""
         timeLabel.text = ""
         setupInfoLabel(event: event)
@@ -48,12 +79,12 @@ class UpcomingEventCell: UICollectionViewCell {
         let timeText = formatTime(event.eventTime)
         let info = NSMutableAttributedString()
         let attrs: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.secondaryLabel,
+            .foregroundColor: ThemeManager.shared.secondaryTextColor,
             .font: UIFont.systemFont(ofSize: 11, weight: .semibold)
         ]
         
         // Calendar
-        if let calImg = UIImage(systemName: "calendar")?.withTintColor(.secondaryLabel, renderingMode: .alwaysOriginal) {
+        if let calImg = UIImage(systemName: "calendar")?.withTintColor(ThemeManager.shared.secondaryTextColor, renderingMode: .alwaysOriginal) {
             let a = NSTextAttachment(); a.image = calImg
             a.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
             info.append(NSAttributedString(attachment: a))
@@ -64,7 +95,7 @@ class UpcomingEventCell: UICollectionViewCell {
         info.append(NSAttributedString(string: "|   ", attributes: attrs))
         
         // Clock
-        if let clkImg = UIImage(systemName: "clock")?.withTintColor(.secondaryLabel, renderingMode: .alwaysOriginal) {
+        if let clkImg = UIImage(systemName: "clock")?.withTintColor(ThemeManager.shared.secondaryTextColor, renderingMode: .alwaysOriginal) {
             let a = NSTextAttachment(); a.image = clkImg
             a.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
             info.append(NSAttributedString(attachment: a))

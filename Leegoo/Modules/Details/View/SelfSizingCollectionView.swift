@@ -10,7 +10,7 @@ class SelfSizingCollectionView: UICollectionView {
     
     override var intrinsicContentSize: CGSize {
         self.layoutIfNeeded()
-        let height = contentSize.height > 0 ? contentSize.height : 250
+        let height = contentSize.height > 0 ? contentSize.height : 120
         return CGSize(width: UIView.noIntrinsicMetric, height: height)
     }
     

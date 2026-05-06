@@ -42,6 +42,22 @@ final class PlayerCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        backgroundColor = .clear
+        applyTheme()
+    }
+    
+    func applyTheme() {
+        nameLabel?.textColor = ThemeManager.shared.textColor
+        ageLabel?.textColor = ThemeManager.shared.secondaryTextColor
+        mpTitleLabel?.textColor = ThemeManager.shared.secondaryTextColor
+        statTitleLabel?.textColor = ThemeManager.shared.secondaryTextColor
+        ratingTitleLabel?.textColor = ThemeManager.shared.secondaryTextColor
+        mpValueLabel?.textColor = ThemeManager.shared.textColor
+        statValueLabel?.textColor = ThemeManager.shared.textColor
+        ratingValueLabel?.textColor = ThemeManager.shared.textColor
+        
+        contentView.backgroundColor = ThemeManager.shared.isDarkTheme ? .clear : .white
+        avatarView?.backgroundColor = ThemeManager.shared.isDarkTheme ? UIColor(white: 1.0, alpha: 0.1) : .white
     }
     
     override func layoutSubviews() {
@@ -57,12 +73,13 @@ final class PlayerCell: UITableViewCell {
     // MARK: - Configure
 
     func configure(with player: Player) {
+        applyTheme()
+        
         // Player Image
         playerImageView.sd_setImage(
             with: URL(string: player.imageURL),
             placeholderImage: UIImage(named: "PlayerPlacholder")
         )
-        avatarView.backgroundColor = .white
 
         // Number
         numberLabel.text = player.number
@@ -82,6 +99,5 @@ final class PlayerCell: UITableViewCell {
         
         ratingTitleLabel.text = "Cards (Y/R)"
         ratingValueLabel.text = "\(player.yellowCards)/\(player.redCards)"
-        ratingValueLabel.textColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
     }
 }
