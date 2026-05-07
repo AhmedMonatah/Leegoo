@@ -109,6 +109,12 @@ extension FavViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard NetworkMonitor.shared.isConnected else {
+            showNoInternetAlert()
+            return
+        }
+        
         presenter.didSelectLeague(at: indexPath.row)
     }
     

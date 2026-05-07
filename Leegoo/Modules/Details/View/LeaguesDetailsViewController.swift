@@ -22,7 +22,6 @@ class LeaguesDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        favoriteButton.tintColor = ThemeManager.shared.isDarkTheme ? .white : .systemGray
         favoriteButton.imageView?.contentMode = .scaleAspectFit
         setupUpcomingCollectionView()
         setupLatestCollectionView()
@@ -93,7 +92,7 @@ class LeaguesDetailsViewController: UIViewController {
         titleLabel?.numberOfLines = 2
         titleLabel?.lineBreakMode = .byWordWrapping
         
-        favoriteButton?.tintColor = ThemeManager.shared.isDarkTheme ? .white : .systemGray
+        updateFavoriteButton(isFavorite: presenter?.isFavorite() ?? false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -227,6 +226,10 @@ extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard !isLoading else { return }
+        guard NetworkMonitor.shared.isConnected else {
+            showNoInternetAlert()
+            return
+        }
         if collectionView == teamsCollectionView {
             presenter?.didSelectTeam(at: indexPath.item)
         }

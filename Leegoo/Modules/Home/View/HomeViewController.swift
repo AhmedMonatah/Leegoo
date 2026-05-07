@@ -19,6 +19,20 @@ class HomeViewController: UIViewController ,HomeViewProtocol {
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
         updateHomeHeaderTheme()
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
+        
+        observeNetworkChanges(using: #selector(handleNetworkChange(_:)))
+    }
+    
+    @objc private func handleNetworkChange(_ notification: Notification) {
+        guard let isConnected = notification.object as? Bool else { return }
+        
+        if !isConnected {
+            showNoInternetAlert()
+        }
+    }
+    
+    deinit {
+        stopObservingNetworkChanges()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,6 +160,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard NetworkMonitor.shared.isConnected else {
+            showNoInternetAlert()
+            return
+        }
         presenter.didSelectItem(at: indexPath.item)
     }
     

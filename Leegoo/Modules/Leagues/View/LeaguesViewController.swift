@@ -158,6 +158,10 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard !isLoading else { return }
+        guard NetworkMonitor.shared.isConnected else {
+            showNoInternetAlert()
+            return
+        }
         presenter.didSelectLeague(at: indexPath.row)
     }
     
