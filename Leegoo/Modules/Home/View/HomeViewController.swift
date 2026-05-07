@@ -125,7 +125,7 @@ class HomeViewController: UIViewController ,HomeViewProtocol {
     }
     
     func navigateToLeagues(with sport: Sport) {
-        let storyboard = UIStoryboard(name: "Home_Storyboard", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
            
         guard let leaguesVC = storyboard.instantiateViewController(withIdentifier: "LeaguesVC") as? LeaguesViewController else {
             return

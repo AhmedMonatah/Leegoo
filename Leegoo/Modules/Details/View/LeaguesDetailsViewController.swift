@@ -202,7 +202,7 @@ extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
     }
     
     func navigateToTeamDetails(teamId: Int) {
-        let storyboard = UIStoryboard(name: "Teams", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "SquadViewController") as? SquadViewController else { return }
         
         vc.presenter = TeamDetailsPresenter(

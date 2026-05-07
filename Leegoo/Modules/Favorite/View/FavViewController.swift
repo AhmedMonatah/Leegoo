@@ -71,7 +71,7 @@ extension FavViewController: FavoritesViewProtocol {
     
     
     func navigateToLeagueDetails(league: League, sportName: String) {
-        let storyboard = UIStoryboard(name: "LeaguesDetails", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let vc = storyboard.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as? LeaguesDetailsViewController else {
             return

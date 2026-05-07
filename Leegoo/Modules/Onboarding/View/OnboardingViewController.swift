@@ -211,7 +211,7 @@ class OnboardingViewController: UIViewController {
 
 extension OnboardingViewController: OnboardingViewProtocol {
     func navigateToHome() {
-        let sb = UIStoryboard(name: "Home_Storyboard", bundle: nil)
+        let sb = UIStoryboard(name: "Main", bundle: nil)
         guard let tabBar = sb.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController else { return }
         if let nav = tabBar.viewControllers?.first as? UINavigationController,
             let home = nav.viewControllers.first as? HomeViewController {
