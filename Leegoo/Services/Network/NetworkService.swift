@@ -96,23 +96,18 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
     
-    private func performRequest<T: Codable>(urlString: String, responseType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
-        
-        AF.request(urlString).validate().responseData { response in
-            if response.data != nil {
-            }
-            
-            switch response.result {
-            case .success(let data):
-                do {
-                    let decoded = try JSONDecoder().decode(T.self, from: data)
+    private func performRequest<T: Decodable>(urlString: String,responseType: T.Type,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        AF.request(urlString)
+            .validate()
+            .responseDecodable(of: responseType) { response in
+                switch response.result {
+                case .success(let decoded):
                     completion(.success(decoded))
-                } catch {
-                    completion(.failure(NetworkError.decodingError))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-            case .failure(let error):
-                completion(.failure(error))
             }
-        }
     }
 }
