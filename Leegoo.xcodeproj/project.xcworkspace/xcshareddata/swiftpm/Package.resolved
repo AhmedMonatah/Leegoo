@@ -1,5 +1,5 @@
 {
-  "originHash" : "d694dad9c20934bf88ed91fe0b69c79ec425144f09c087e4475027a93e61554d",
+  "originHash" : "08a0a31c1008ee8496f3cb9055d750fcf0f7825cf9927fa412596102346a74b4",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -26,6 +26,24 @@
       "state" : {
         "revision" : "2de3a496eaf6df9a1312862adcfd54acd73c39c0",
         "version" : "5.21.7"
+      }
+    },
+    {
+      "identity" : "skeletonview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Juanpe/SkeletonView",
+      "state" : {
+        "revision" : "2f5274827d310e32c09325dd3e0007120940988e",
+        "version" : "1.31.0"
+      }
+    },
+    {
+      "identity" : "swifttheme",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wxxsw/SwiftTheme.git",
+      "state" : {
+        "revision" : "f6a5442da8527f88e5b61b42131c003bd2d56803",
+        "version" : "0.6.4"
       }
     },
     {

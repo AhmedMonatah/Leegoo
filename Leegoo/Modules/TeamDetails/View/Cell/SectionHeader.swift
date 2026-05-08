@@ -21,15 +21,14 @@ final class SectionHeaderView: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        titleLabel.theme_textColor = AppTheme.textColor
+        countLabel.theme_textColor = AppTheme.secondaryTextColor
     }
 
     func configure(position: PlayerPosition, count: Int) {
         titleLabel.text = position.rawValue
         countLabel.text  = "\(count)"
-        
-        backgroundColor = .clear
-        contentView.backgroundColor = .clear
-        titleLabel.textColor = ThemeManager.shared.textColor
-        countLabel.textColor = ThemeManager.shared.secondaryTextColor
     }
 }

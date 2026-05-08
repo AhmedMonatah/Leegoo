@@ -34,14 +34,18 @@ class SplashViewController: UIViewController {
     private var dots: [UIView] = []
 
 
+    var presenter: SplashPresenterProtocol!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = SplashPresenter(view: self)
         setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startAnimations()
+        presenter.viewDidAppear()
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,10 +57,9 @@ class SplashViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
         
-
         gradientLayer.colors = [
-            UIColor(red: 0.208, green: 0.271, blue: 1.0, alpha: 1.0).cgColor, // #3545FF
-            UIColor(red: 0.102, green: 0.169, blue: 0.620, alpha: 1.0).cgColor  // #1a2b9e
+            SplashTheme.startColor.cgColor,
+            SplashTheme.endColor.cgColor
         ]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
@@ -93,7 +96,7 @@ class SplashViewController: UIViewController {
             let label = UILabel()
             label.text = String(char)
             label.font = UIFont.systemFont(ofSize: 48, weight: .black)
-            label.textColor = .white
+            label.textColor = SplashTheme.textColor
             label.alpha = 0
             label.transform = CGAffineTransform(translationX: 0, y: 20).scaledBy(x: 0.8, y: 0.8)
             titleStackView.addArrangedSubview(label)
@@ -104,7 +107,7 @@ class SplashViewController: UIViewController {
     private func setupLoadingDots() {
         for _ in 0..<3 {
             let dot = UIView()
-            dot.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+            dot.backgroundColor = SplashTheme.dotColor
             dot.layer.cornerRadius = 4
             dot.translatesAutoresizingMaskIntoConstraints = false
             dot.widthAnchor.constraint(equalToConstant: 8).isActive = true
@@ -119,10 +122,6 @@ class SplashViewController: UIViewController {
         rotateIcon()
         animateCharacters()
         animateLoadingDots()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            self.goToHome()
-        }
     }
     
     private func rotateIcon() {
@@ -159,31 +158,32 @@ class SplashViewController: UIViewController {
         }
     }
 
+}
+
+extension SplashViewController: SplashViewProtocol {
+    func navigateToOnboarding() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let onboardingVC = storyboard.instantiateViewController(withIdentifier: "OnboardingViewController") as? OnboardingViewController else { return }
+        let onboardingPresenter = OnboardingPresenter(view: onboardingVC)
+        onboardingVC.presenter = onboardingPresenter
+        let nav = UINavigationController(rootViewController: onboardingVC)
+        nav.modalTransitionStyle = .crossDissolve
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
     
-    private func goToHome() {
-        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-        
-        let destinationVC: UIViewController
-        if !hasCompletedOnboarding {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let onboardingVC = storyboard.instantiateViewController(withIdentifier: "OnboardingViewController") as? OnboardingViewController else { return }
-            let onboardingPresenter = OnboardingPresenter(view: onboardingVC)
-            onboardingVC.presenter = onboardingPresenter
-            destinationVC = UINavigationController(rootViewController: onboardingVC)
-        } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                guard let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController else { return }
-                if let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
-                let homeVC = navVC.viewControllers.first as? HomeViewController {
-                    let presenter = HomePresenter(view: homeVC)
-                    homeVC.presenter = presenter
-                }
-            destinationVC = tabBarVC
+    func navigateToHome() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let tabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController else { return }
+        if let navVC = tabBarVC.viewControllers?.first as? UINavigationController,
+           let homeVC = navVC.viewControllers.first as? HomeViewController {
+            let presenter = HomePresenter(view: homeVC)
+            homeVC.presenter = presenter
         }
-        
-        destinationVC.modalTransitionStyle = .crossDissolve
-        destinationVC.modalPresentationStyle = .fullScreen
-        present(destinationVC, animated: true)
+        tabBarVC.modalTransitionStyle = .crossDissolve
+        tabBarVC.modalPresentationStyle = .fullScreen
+        present(tabBarVC, animated: true)
     }
 }
+
 

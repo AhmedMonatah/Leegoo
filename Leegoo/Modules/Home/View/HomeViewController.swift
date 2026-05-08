@@ -1,6 +1,6 @@
 import UIKit
 
-class HomeViewController: UIViewController ,HomeViewProtocol {
+final class HomeViewController: UIViewController ,HomeViewProtocol {
     
     var presenter: HomePresenterProtocol!
     
@@ -11,13 +11,12 @@ class HomeViewController: UIViewController ,HomeViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = HomePresenter(view: self)
         sportsCollectionView.delegate = self
         sportsCollectionView.dataSource = self
         
+        setupThemePickers()
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateHomeHeaderTheme()
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
         
         observeNetworkChanges(using: #selector(handleNetworkChange(_:)))
@@ -40,24 +39,25 @@ class HomeViewController: UIViewController ,HomeViewProtocol {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateHomeHeaderTheme()
-        updateMoonIcon()
     }
     
 
-    private func updateMoonIcon() {
-        let moonImage = UIImage(systemName: ThemeManager.shared.isDarkTheme ? "moon.fill" : "moon")
-        themeToggleButton.setImage(moonImage, for: .normal)
-        themeToggleButton.tintColor = ThemeManager.shared.isDarkTheme ? .white : .systemBlue
+    private func setupThemePickers() {
+        themeToggleButton.theme_setImage(AppTheme.moonIcon, forState: .normal)
+        themeToggleButton.theme_tintColor = AppTheme.navBarTintColor
+        sportsLabel.theme_textColor = AppTheme.textColor
+        sportsCollectionView.theme_backgroundColor = AppTheme.tableBackgroundColor
     }
     
-    private func updateHomeHeaderTheme() {
-        let isDark = ThemeManager.shared.isDarkTheme
-        sportsLabel?.textColor = isDark ? .white : .black
-        
+    @IBAction private func toggleTheme() {
+        presenter.toggleThemeTapped()
     }
     
-    @objc private func toggleTheme() {
+    func showNoInternet() {
+        showNoInternetAlert()
+    }
+    
+    func toggleThemeWithAnimation() {
         guard let window = view.window else {
             ThemeManager.shared.toggleTheme()
             notifyAndRefresh()
@@ -75,14 +75,12 @@ class HomeViewController: UIViewController ,HomeViewProtocol {
         // Circular reveal animation from moon icon position
         let center = themeToggleButton.convert(themeToggleButton.center, to: window)
         
-        // Calculate the radius needed to cover the entire screen
         let maxCorner = CGPoint(
             x: max(center.x, window.bounds.width - center.x),
             y: max(center.y, window.bounds.height - center.y)
         )
         let maxRadius = sqrt(maxCorner.x * maxCorner.x + maxCorner.y * maxCorner.y)
         
-        // Create circular mask
         let startPath = UIBezierPath(ovalIn: CGRect(x: center.x, y: center.y, width: 0, height: 0))
         let endPath = UIBezierPath(ovalIn: CGRect(
             x: center.x - maxRadius,
@@ -95,7 +93,6 @@ class HomeViewController: UIViewController ,HomeViewProtocol {
         maskLayer.path = endPath.cgPath
         snapshot.layer.mask = maskLayer
         
-        // Animate the mask to reveal the new theme underneath
         let anim = CABasicAnimation(keyPath: "path")
         anim.fromValue = endPath.cgPath
         anim.toValue = startPath.cgPath
@@ -113,15 +110,12 @@ class HomeViewController: UIViewController ,HomeViewProtocol {
     }
     
     private func notifyAndRefresh() {
-        updateHomeHeaderTheme()
         NotificationCenter.default.post(name: .themeDidChange, object: nil)
     }
     
     @objc private func themeDidChange() {
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateHomeHeaderTheme()
-        updateMoonIcon()
     }
     
     func navigateToLeagues(with sport: Sport) {

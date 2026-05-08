@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D4984AD2FADC1E70049ED78 /* SwiftTheme in Frameworks */ = {isa = PBXBuildFile; productRef = 6D4984AC2FADC1E70049ED78 /* SwiftTheme */; };
 		6D7F81852FAC0AE700540877 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6D7F81842FAC0AE700540877 /* SDWebImage */; };
 		6D7F81872FAC0AE700540877 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6D7F81862FAC0AE700540877 /* SDWebImageMapKit */; };
 		6D7F818A2FAC0B0300540877 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6D7F81892FAC0B0300540877 /* Lottie */; };
 		6D7F818D2FAC0B8000540877 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6D7F818C2FAC0B8000540877 /* Alamofire */; };
 		6D7F81922FAC0BB200540877 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 6D7F81912FAC0BB200540877 /* Shimmer */; };
+		6DBC6FD72FADCC1000E14DCD /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 6DBC6FD62FADCC1000E14DCD /* SkeletonView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +47,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D7F81922FAC0BB200540877 /* Shimmer in Frameworks */,
+				6DBC6FD72FADCC1000E14DCD /* SkeletonView in Frameworks */,
 				6D7F81872FAC0AE700540877 /* SDWebImageMapKit in Frameworks */,
+				6D4984AD2FADC1E70049ED78 /* SwiftTheme in Frameworks */,
 				6D7F818D2FAC0B8000540877 /* Alamofire in Frameworks */,
 				6D7F81852FAC0AE700540877 /* SDWebImage in Frameworks */,
 				6D7F818A2FAC0B0300540877 /* Lottie in Frameworks */,
@@ -96,6 +100,8 @@
 				6D7F81892FAC0B0300540877 /* Lottie */,
 				6D7F818C2FAC0B8000540877 /* Alamofire */,
 				6D7F81912FAC0BB200540877 /* Shimmer */,
+				6D4984AC2FADC1E70049ED78 /* SwiftTheme */,
+				6DBC6FD62FADCC1000E14DCD /* SkeletonView */,
 			);
 			productName = Leegoo;
 			productReference = 6D9C5B5A2FA026CA00ECB3D6 /* Leegoo.app */;
@@ -130,6 +136,8 @@
 				6D7F81882FAC0B0300540877 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				6D7F818B2FAC0B8000540877 /* XCRemoteSwiftPackageReference "alamofire" */,
 				6D7F81902FAC0BB200540877 /* XCRemoteSwiftPackageReference "swiftui-Shimmer" */,
+				6D4984AB2FADC1E70049ED78 /* XCRemoteSwiftPackageReference "SwiftTheme" */,
+				6DBC6FD52FADCC1000E14DCD /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6D9C5B5B2FA026CA00ECB3D6 /* Products */;
@@ -359,6 +367,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6D4984AB2FADC1E70049ED78 /* XCRemoteSwiftPackageReference "SwiftTheme" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wxxsw/SwiftTheme.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.4;
+			};
+		};
 		6D7F81832FAC0AE700540877 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -391,9 +407,22 @@
 				minimumVersion = 1.5.1;
 			};
 		};
+		6DBC6FD52FADCC1000E14DCD /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.31.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6D4984AC2FADC1E70049ED78 /* SwiftTheme */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D4984AB2FADC1E70049ED78 /* XCRemoteSwiftPackageReference "SwiftTheme" */;
+			productName = SwiftTheme;
+		};
 		6D7F81842FAC0AE700540877 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6D7F81832FAC0AE700540877 /* XCRemoteSwiftPackageReference "SDWebImage" */;
@@ -418,6 +447,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6D7F81902FAC0BB200540877 /* XCRemoteSwiftPackageReference "swiftui-Shimmer" */;
 			productName = Shimmer;
+		};
+		6DBC6FD62FADCC1000E14DCD /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6DBC6FD52FADCC1000E14DCD /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

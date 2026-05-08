@@ -1,43 +1,64 @@
 import UIKit
+import ObjectiveC
 
 extension UIViewController {
-    private struct AssociatedKeys {
-        static var gradientView = "gradientView"
+    
+    private struct Keys {
+        static var gradientView: UInt8 = 0
     }
     
     var themeGradientView: GradientView? {
-        get { objc_getAssociatedObject(self, &AssociatedKeys.gradientView) as? GradientView }
-        set { objc_setAssociatedObject(self, &AssociatedKeys.gradientView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+        get {
+            objc_getAssociatedObject(self, &Keys.gradientView) as? GradientView
+        }
+        set {
+            objc_setAssociatedObject(self, &Keys.gradientView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
     }
+    
+    // MARK: - Public
     
     func applyTheme() {
         let isDark = ThemeManager.shared.isDarkTheme
+        
         updateBackground(isDark)
-        updateSubviews(view, isDark: isDark)
         updateNavigationBar(isDark)
+        updateSubviews(view, isDark: isDark)
     }
+    
+    // MARK: - Background
     
     private func updateBackground(_ isDark: Bool) {
         if isDark {
-            if themeGradientView == nil {
-                let gv = GradientView(frame: view.bounds)
-                gv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                view.insertSubview(gv, at: 0)
-                themeGradientView = gv
-            }
+            addGradientIfNeeded()
             view.backgroundColor = .clear
         } else {
-            themeGradientView?.removeFromSuperview()
-            themeGradientView = nil
+            removeGradient()
             view.backgroundColor = .systemBackground
         }
     }
     
+    private func addGradientIfNeeded() {
+        guard themeGradientView == nil else { return }
+        
+        let gradient = GradientView(frame: view.bounds)
+        gradient.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.insertSubview(gradient, at: 0)
+        themeGradientView = gradient
+    }
+    
+    private func removeGradient() {
+        themeGradientView?.removeFromSuperview()
+        themeGradientView = nil
+    }
+    
+    // MARK: - Navigation
+    
     private func updateNavigationBar(_ isDark: Bool) {
         guard let navBar = navigationController?.navigationBar else { return }
-        navBar.tintColor = ThemeManager.shared.navBarTintColor
         
         let appearance = UINavigationBarAppearance()
+        
         if isDark {
             appearance.configureWithTransparentBackground()
             appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -45,55 +66,55 @@ extension UIViewController {
             appearance.configureWithDefaultBackground()
             appearance.titleTextAttributes = [.foregroundColor: UIColor.label]
         }
+        
         navBar.standardAppearance = appearance
         navBar.scrollEdgeAppearance = appearance
+        navBar.tintColor = ThemeManager.shared.navBarTintColor
     }
     
-    private func updateSubviews(_ parent: UIView, isDark: Bool) {
-        for subview in parent.subviews {
+    // MARK: - Subviews
+    
+    private func updateSubviews(_ view: UIView, isDark: Bool) {
+        for subview in view.subviews {
+            
             if subview is GradientView { continue }
             
-            // Clear backgrounds for containers in dark mode
-            if isDark {
-                if subview is UITableView || subview is UICollectionView || subview is UIScrollView {
-                    subview.backgroundColor = .clear
-                } else if !(subview is UILabel) && !(subview is UIImageView) && !(subview is UIButton) {
-                    subview.backgroundColor = .clear
-                }
-            } else {
-                if subview is UITableView || subview is UICollectionView || subview is UIScrollView {
-                    subview.backgroundColor = .systemBackground
-                }
-            }
-            
-            // Apply text and tint colors
-            if let label = subview as? UILabel, label.tag != 1001 {
-                label.textColor = ThemeManager.shared.textColor
-            } else if let button = subview as? UIButton {
-                button.tintColor = ThemeManager.shared.textColor
-            } else if let searchBar = subview as? UISearchBar {
-                styleSearchBar(searchBar, isDark: isDark)
-            }
+            applyContainerBackground(subview, isDark: isDark)
+            applyTextStyle(subview)
+            applySpecialViews(subview, isDark: isDark)
             
             updateSubviews(subview, isDark: isDark)
         }
     }
     
-    private func styleSearchBar(_ searchBar: UISearchBar, isDark: Bool) {
-        if isDark {
-            searchBar.barTintColor = .clear
-            searchBar.backgroundColor = .clear
-            searchBar.backgroundImage = UIImage()
-            searchBar.searchTextField.textColor = .white
-            searchBar.searchTextField.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
-            searchBar.searchTextField.attributedPlaceholder = NSAttributedString(
-                string: searchBar.placeholder ?? "Search",
-                attributes: [.foregroundColor: UIColor(white: 1.0, alpha: 0.5)]
-            )
-        } else {
-            searchBar.searchTextField.textColor = .label
-            searchBar.searchTextField.backgroundColor = .secondarySystemBackground
-            searchBar.searchTextField.attributedPlaceholder = nil
+    private func applyContainerBackground(_ view: UIView, isDark: Bool) {
+        
+        if view is UITableView ||
+           view is UICollectionView ||
+           view is UIScrollView {
+            view.backgroundColor = .clear
         }
+    }
+    
+    private func applyTextStyle(_ view: UIView) {
+        if let label = view as? UILabel, label.tag != 1001 {
+            label.textColor = ThemeManager.shared.textColor
+        }
+        
+        if let button = view as? UIButton {
+            button.tintColor = ThemeManager.shared.textColor
+        }
+    }
+    
+    private func applySpecialViews(_ view: UIView, isDark: Bool) {
+        if let searchBar = view as? UISearchBar {
+            styleSearchBar(searchBar, isDark: isDark)
+        }
+    }
+    
+    // MARK: - SearchBar
+    
+    private func styleSearchBar(_ searchBar: UISearchBar, isDark: Bool) {
+        ThemeManager.shared.style(searchBar: searchBar)
     }
 }

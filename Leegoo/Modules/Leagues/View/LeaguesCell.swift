@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import SwiftTheme
 
 class LeaguesCell: UITableViewCell {
 
@@ -16,17 +17,23 @@ class LeaguesCell: UITableViewCell {
         
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         backgroundColor = .clear
-        applyTheme()
-        leagueLogo.clipsToBounds = true
-        leagueLogo.contentMode = .scaleAspectFit    }
-    
-    func applyTheme() {
-        let isDark = ThemeManager.shared.isDarkTheme
-        leagueName?.textColor = ThemeManager.shared.textColor
-        arrowImageView?.tintColor = ThemeManager.shared.accentColor
         contentView.backgroundColor = .clear
+        leagueName.theme_textColor = AppTheme.textColor
+        arrowImageView.theme_tintColor = AppTheme.accentColor
+        leagueLogo.clipsToBounds = true
+        leagueLogo.contentMode = .scaleAspectFit
+        selectionStyle = .none
+        
+        // Clear storyboard-baked backgrounds recursively
+        contentView.clearBackgroundsRecursively()
+        
+        // Ensure all components are skeletonable
+        isSkeletonable = true
+        contentView.isSkeletonable = false
+        SkeletonHelper.enable([leagueLogo])
+        SkeletonHelper.styleLabels([leagueName], height: 15)
+        arrowImageView.isSkeletonable = false
     }
     
     override func layoutSubviews() {
@@ -35,7 +42,6 @@ class LeaguesCell: UITableViewCell {
     }
     
     func configure(with league: League) {
-        applyTheme()
         leagueName.text = league.leagueName
         
         if let logoString = league.leagueLogo,

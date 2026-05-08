@@ -20,9 +20,9 @@ class FavViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         presenter.viewDidLoad()
+        setupThemePickers()
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateHeaderTheme()
         
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
     }
@@ -32,7 +32,7 @@ class FavViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateHeaderTheme()
+        setupThemePickers()
         presenter.viewWillAppear()
         tableView.reloadData()
     }
@@ -40,13 +40,11 @@ class FavViewController: UIViewController {
     @objc private func themeDidChange() {
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateHeaderTheme()
         tableView.reloadData()
     }
     
-    private func updateHeaderTheme() {
-        let isDark = ThemeManager.shared.isDarkTheme
-        favTitleLabel?.textColor = isDark ? .white : .black
+    private func setupThemePickers() {
+        favTitleLabel.theme_textColor = AppTheme.textColor
     }
     
     
@@ -100,7 +98,6 @@ extension FavViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        cell.applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
         
         let league = presenter.favoriteLeague(at: indexPath.row)

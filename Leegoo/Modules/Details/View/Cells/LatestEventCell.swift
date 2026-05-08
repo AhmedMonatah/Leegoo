@@ -1,5 +1,6 @@
 import UIKit
 import SDWebImage
+import SwiftTheme
 
 class LatestEventCell: UICollectionViewCell {
     
@@ -13,11 +14,20 @@ class LatestEventCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = .clear
-        applyTheme()
+        isSkeletonable = true
+        contentView.isSkeletonable = true
+        SkeletonHelper.enable([homeTeamImageView, awayTeamImageView])
+        SkeletonHelper.styleLabels([homeTeamLabel, awayTeamLabel, scoreLabel], height: 15)
+        SkeletonHelper.styleLabels([infoLabel], height: 12)
+        arrowImageView.isSkeletonable = false
         
-        contentView.layer.cornerRadius = 12
-        contentView.layer.borderWidth = 1
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        contentView.clearBackgroundsRecursively()
+        
+        setupThemePickers()
+        
+        CardUI.apply(to: contentView)
         
         homeTeamLabel.adjustsFontSizeToFitWidth = true
         homeTeamLabel.minimumScaleFactor = 0.5
@@ -28,32 +38,18 @@ class LatestEventCell: UICollectionViewCell {
         awayTeamLabel.numberOfLines = 1
     }
     
-    func applyTheme() {
-        let isDark = ThemeManager.shared.isDarkTheme
-        contentView.backgroundColor = ThemeManager.shared.cellBackgroundColor
-        contentView.layer.borderColor = isDark ? UIColor.white.withAlphaComponent(0.2).cgColor : UIColor.systemGray5.cgColor
+
+    
+    private func setupThemePickers() {
+        homeTeamLabel.theme_textColor = AppTheme.textColor
+        awayTeamLabel.theme_textColor = AppTheme.textColor
+        scoreLabel.theme_textColor = AppTheme.accentColor
+        arrowImageView.theme_tintColor = AppTheme.accentColor
+        
         contentView.clipsToBounds = true
-        
-        // Clear all inner container views
-        for sub in contentView.subviews {
-            if !(sub is UILabel) && !(sub is UIImageView) {
-                sub.backgroundColor = .clear
-            }
-        }
-        
-        homeTeamLabel?.textColor = ThemeManager.shared.textColor
-        awayTeamLabel?.textColor = ThemeManager.shared.textColor
-        
-        // Plain style for score
-        scoreLabel?.textColor = ThemeManager.shared.accentColor
-        scoreLabel?.backgroundColor = .clear
-        scoreLabel?.layer.borderWidth = 0
-        
-        arrowImageView?.tintColor = ThemeManager.shared.accentColor
     }
     
     func configure(with event: Event) {
-        applyTheme()
         
         homeTeamLabel.text = event.eventHomeTeam ?? "Home"
         awayTeamLabel.text = event.eventAwayTeam  ?? "Away"
@@ -92,7 +88,6 @@ class LatestEventCell: UICollectionViewCell {
             .font: UIFont.systemFont(ofSize: 11, weight: .semibold)
         ]
         
-        // Calendar
         if let calImg = UIImage(systemName: "calendar")?.withTintColor(ThemeManager.shared.secondaryTextColor, renderingMode: .alwaysOriginal) {
             let a = NSTextAttachment(); a.image = calImg
             a.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
@@ -100,10 +95,8 @@ class LatestEventCell: UICollectionViewCell {
             info.append(NSAttributedString(string: " \(dateText)  ", attributes: attrs))
         }
         
-        // Separator
         info.append(NSAttributedString(string: "|   ", attributes: attrs))
         
-        // Clock
         if let clkImg = UIImage(systemName: "clock")?.withTintColor(ThemeManager.shared.secondaryTextColor, renderingMode: .alwaysOriginal) {
             let a = NSTextAttachment(); a.image = clkImg
             a.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)

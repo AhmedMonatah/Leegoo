@@ -6,17 +6,9 @@
 //
 
 import UIKit
+import SkeletonView
 
-protocol LeaguesViewProtocol: AnyObject {
-    func reloadData()
-    func showLoading()
-    func hideLoading()
-    func showError(_ message: String)
-    func setTitle(_ title: String)
-    func navigateToDetails(league: League)
-}
-
-class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
+final class LeaguesViewController: UIViewController, LeaguesViewProtocol {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
@@ -33,14 +25,18 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupThemePickers()
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateHeaderTheme()
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isSkeletonable = true
+        tableView.theme_backgroundColor = AppTheme.tableBackgroundColor
+        tableView.estimatedRowHeight = 85
+        tableView.rowHeight = 85
         searchBar.delegate = self
-        
+        ThemeManager.shared.style(searchBar: searchBar)
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
         presenter.viewDidLoad()
     }
@@ -50,32 +46,30 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateHeaderTheme()
-        tableView.reloadData()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc private func backTapped() {
         navigationController?.popViewController(animated: true)
     }
     
-    private func updateHeaderTheme() {
-        let isDark = ThemeManager.shared.isDarkTheme
-        titleLabel?.textColor = ThemeManager.shared.textColor
-        subtitleLabel?.textColor = ThemeManager.shared.secondaryTextColor
-        backBtn?.tintColor = ThemeManager.shared.accentColor
+    private func setupThemePickers() {
+        titleLabel.theme_textColor = AppTheme.textColor
+        subtitleLabel.theme_textColor = AppTheme.secondaryTextColor
+        backBtn.theme_tintColor = AppTheme.accentColor
     }
     
     @objc private func themeDidChange() {
+        ThemeManager.shared.style(searchBar: searchBar)
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateHeaderTheme()
         
-        // Force remove and re-add skeleton for loading cells
         if isLoading {
-            for cell in tableView.visibleCells {
-                cell.contentView.hideSkeleton()
-                cell.contentView.showSkeleton()
-            }
+            view.clearBackgroundsRecursively()
+            tableView.showAnimatedGradientSkeleton()
         }
         tableView.reloadData()
     }
@@ -86,11 +80,13 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
         
     func showLoading() {
         isLoading = true
-        tableView.reloadData()
+        view.clearBackgroundsRecursively()
+        tableView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
     }
         
     func hideLoading() {
         isLoading = false
+        tableView.hideSkeleton()
         tableView.reloadData()
     }
         
@@ -119,8 +115,6 @@ class LeaguesViewController: UIViewController ,LeaguesViewProtocol {
         
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-
 }
 
 
@@ -135,17 +129,11 @@ extension LeaguesViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        cell.applyTheme()
-        ThemeManager.shared.applyGlobalAppearance(to: view.window)
         
         if isLoading {
-            cell.leagueName.text = "                   "
-            cell.leagueLogo.image = nil
-            cell.contentView.showSkeleton()
             return cell
         }
         
-        cell.contentView.hideSkeleton()
         let league = presenter.league(at: indexPath.row)
         cell.configure(with: league)
         
@@ -178,3 +166,11 @@ extension LeaguesViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
 }
+
+
+extension LeaguesViewController: SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "leaguesCell"
+    }
+}
+

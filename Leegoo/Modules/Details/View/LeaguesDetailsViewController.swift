@@ -1,7 +1,9 @@
 import UIKit
+import SwiftTheme
 import SDWebImage
+import SkeletonView
 
-class LeaguesDetailsViewController: UIViewController {
+final class LeaguesDetailsViewController: UIViewController {
 
     @IBOutlet weak var upcomingCollectionView: UICollectionView!
     @IBOutlet weak var latestCollectionView: UICollectionView!
@@ -22,6 +24,7 @@ class LeaguesDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: - UI Setup
         favoriteButton.imageView?.contentMode = .scaleAspectFit
         setupUpcomingCollectionView()
         setupLatestCollectionView()
@@ -29,44 +32,38 @@ class LeaguesDetailsViewController: UIViewController {
         
         upcomingCollectionView.delegate = self
         upcomingCollectionView.dataSource = self
-
         latestCollectionView.delegate = self
         latestCollectionView.dataSource = self
-
         teamsCollectionView.delegate = self
         teamsCollectionView.dataSource = self
 
-        // Apply theme AFTER all views are configured
-        applyTheme()
-        ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateSpecificTheme()
+        upcomingCollectionView.isSkeletonable = true
+        latestCollectionView.isSkeletonable = true
+        teamsCollectionView.isSkeletonable = true
+
         titleLabel?.numberOfLines = 2
         titleLabel?.lineBreakMode = .byWordWrapping
 
-        presenter?.viewDidLoad()
-        
+        // MARK: - Theme
+        setupThemePickers()
+        applyTheme()
+        ThemeManager.shared.applyGlobalAppearance(to: view.window)
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
+
+        // MARK: - Data
+        presenter?.viewDidLoad()
     }
     
     @objc private func themeDidChange() {
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateSpecificTheme()
+        updateFavoriteButton(isFavorite: presenter?.isFavorite() ?? false)
         
-        // Re-create shimmer for loading cells
         if isLoading {
-            for cell in upcomingCollectionView.visibleCells {
-                cell.contentView.hideSkeleton()
-                cell.contentView.showSkeleton()
-            }
-            for cell in latestCollectionView.visibleCells {
-                cell.contentView.hideSkeleton()
-                cell.contentView.showSkeleton()
-            }
-            for cell in teamsCollectionView.visibleCells {
-                cell.contentView.hideSkeleton()
-                cell.contentView.showSkeleton()
-            }
+            view.clearBackgroundsRecursively()
+            upcomingCollectionView.showAnimatedGradientSkeleton()
+            latestCollectionView.showAnimatedGradientSkeleton()
+            teamsCollectionView.showAnimatedGradientSkeleton()
         }
         
         upcomingCollectionView.reloadData()
@@ -78,7 +75,7 @@ class LeaguesDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
-        updateSpecificTheme()
+        setupThemePickers()
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
         // Reload to pick up latest theme
@@ -87,11 +84,11 @@ class LeaguesDetailsViewController: UIViewController {
         teamsCollectionView.reloadData()
     }
     
-    private func updateSpecificTheme() {
-        titleLabel?.textColor = ThemeManager.shared.textColor
-        titleLabel?.numberOfLines = 2
-        titleLabel?.lineBreakMode = .byWordWrapping
-        
+    private func setupThemePickers() {
+        titleLabel.theme_textColor = AppTheme.textColor
+        upcomingCollectionView.theme_backgroundColor = AppTheme.tableBackgroundColor
+        latestCollectionView.theme_backgroundColor = AppTheme.tableBackgroundColor
+        teamsCollectionView.theme_backgroundColor = AppTheme.tableBackgroundColor
         updateFavoriteButton(isFavorite: presenter?.isFavorite() ?? false)
     }
     
@@ -141,13 +138,18 @@ class LeaguesDetailsViewController: UIViewController {
 extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
     func showLoading() {
         isLoading = true
-        upcomingCollectionView.reloadData()
-        latestCollectionView.reloadData()
-        teamsCollectionView.reloadData()
+        view.clearBackgroundsRecursively()
+        upcomingCollectionView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
+        latestCollectionView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
+        teamsCollectionView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
     }
     
     func hideLoading() {
         isLoading = false
+        upcomingCollectionView.hideSkeleton()
+        latestCollectionView.hideSkeleton()
+        teamsCollectionView.hideSkeleton()
+        
         upcomingCollectionView.reloadData()
         latestCollectionView.reloadData()
         teamsCollectionView.reloadData()
@@ -217,8 +219,11 @@ extension LeaguesDetailsViewController: LeaguesDetailsViewProtocol {
     func updateFavoriteButton(isFavorite: Bool) {
         let imageName = isFavorite ? "heart.fill" : "heart"
         favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
-        let isDark = ThemeManager.shared.isDarkTheme
-        favoriteButton.tintColor = isFavorite ? .systemRed : (isDark ? .white : .systemGray)
+        if isFavorite {
+            favoriteButton.theme_tintColor = ThemeColorPicker(colors: "#FF3B30", "#FF453A")
+        } else {
+            favoriteButton.theme_tintColor = ThemeColorPicker(colors: "#8E8E93", "#FFFFFF")
+        }
     }
 }
 
@@ -249,46 +254,27 @@ extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == upcomingCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UpcomingCell", for: indexPath) as! UpcomingEventCell
-            cell.applyTheme()
-        ThemeManager.shared.applyGlobalAppearance(to: view.window)
-            if isLoading {
-                cell.contentView.showSkeleton()
-            } else {
-                cell.contentView.hideSkeleton()
-                if let event = presenter?.upcomingEvent(at: indexPath.item) {
-                    cell.configure(with: event)
-                }
-            }
-            return cell
-        } else if collectionView == latestCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestCell", for: indexPath) as! LatestEventCell
-            cell.applyTheme()
-        ThemeManager.shared.applyGlobalAppearance(to: view.window)
-            if isLoading {
-                cell.contentView.showSkeleton()
-            } else {
-                cell.contentView.hideSkeleton()
-                if let event = presenter?.latestEvent(at: indexPath.item) {
-                    cell.configure(with: event)
-                }
-            }
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! TeamCell
-            cell.applyTheme()
-        ThemeManager.shared.applyGlobalAppearance(to: view.window)
-            if isLoading {
-                cell.contentView.showSkeleton()
-            } else {
-                cell.contentView.hideSkeleton()
-                if let team = presenter?.team(at: indexPath.item) {
-                    cell.configure(with: team)
-                }
-            }
+        let identifier = collectionView == upcomingCollectionView ? "UpcomingCell" : (collectionView == latestCollectionView ? "LatestCell" : "TeamCell")
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        
+        if isLoading {
             return cell
         }
+        
+        if collectionView == upcomingCollectionView {
+            if let cell = cell as? UpcomingEventCell, let event = presenter?.upcomingEvent(at: indexPath.item) {
+                cell.configure(with: event)
+            }
+        } else if collectionView == latestCollectionView {
+            if let cell = cell as? LatestEventCell, let event = presenter?.latestEvent(at: indexPath.item) {
+                cell.configure(with: event)
+            }
+        } else {
+            if let cell = cell as? TeamCell, let team = presenter?.team(at: indexPath.item) {
+                cell.configure(with: team)
+            }
+        }
+        return cell
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -304,5 +290,17 @@ extension LeaguesDetailsViewController: UICollectionViewDataSource, UICollection
         offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing, y: 0)
         
         targetContentOffset.pointee = offset
+    }
+}
+
+extension LeaguesDetailsViewController: SkeletonCollectionViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        if skeletonView == upcomingCollectionView {
+            return "UpcomingCell"
+        } else if skeletonView == latestCollectionView {
+            return "LatestCell"
+        } else {
+            return "TeamCell"
+        }
     }
 }

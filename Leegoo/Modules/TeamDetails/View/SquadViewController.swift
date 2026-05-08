@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import SkeletonView
 
 final class SquadViewController: UIViewController {
 
@@ -44,6 +45,8 @@ final class SquadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setupThemePickers()
+        tableView.isSkeletonable = true
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
         updateSpecificTheme()
@@ -58,6 +61,10 @@ final class SquadViewController: UIViewController {
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
         updateSpecificTheme()
+        
+        if isLoading {
+            tableView.showAnimatedGradientSkeleton()
+        }
         tableView.reloadData()
     }
 
@@ -73,55 +80,46 @@ final class SquadViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    private func setupThemePickers() {
+        teamNameLabel.theme_textColor = AppTheme.textColor
+        teamIDLabel.theme_textColor = AppTheme.secondaryTextColor
+        backButton.theme_tintColor = AppTheme.accentColor
+        tableView.theme_backgroundColor = AppTheme.tableBackgroundColor
+    }
+
     private func updateSpecificTheme() {
-        let textColor = ThemeManager.shared.textColor
         let isDark = ThemeManager.shared.isDarkTheme
-        teamNameLabel?.textColor = textColor
-        teamIDLabel?.textColor = ThemeManager.shared.secondaryTextColor
-        totalPlayersLabel?.textColor = .white
-        goalkeepersCountLabel?.textColor = .white
-        defendersCountLabel?.textColor = .white
+        
+        // Clear any storyboard-baked backgrounds
+        view.clearBackgroundsRecursively()
         
         // Apply theme to main containers
         [teamLogoView, teamNameLabel?.superview].forEach {
-            if let view = $0 { applyGlassEffect(to: view) }
+            $0?.theme_backgroundColor = AppTheme.glassBackgroundColor
+            $0?.layer.cornerRadius = 16
+            $0?.layer.masksToBounds = true
         }
         
         // Apply theme to stat cards
         [totalPlayersLabel, goalkeepersCountLabel, defendersCountLabel].forEach {
             if let card = $0?.superview {
-                applyGlassEffect(to: card)
+                card.theme_backgroundColor = AppTheme.glassBackgroundColor
+                card.layer.cornerRadius = 16
+                card.layer.masksToBounds = true
                 card.subviews.compactMap { $0 as? UILabel }.forEach {
-                    $0.textColor = isDark ? .white : .black
+                    $0.theme_textColor = AppTheme.textColor
                 }
             }
         }
-        
-        teamNameLabel?.textColor = isDark ? .white : .black
-        teamIDLabel?.textColor = isDark ? UIColor(white: 1.0, alpha: 0.7) : .secondaryLabel
         
         if let logoView = teamLogoView {
             logoView.layer.cornerRadius = logoView.frame.height / 2
         }
         
-        backButton?.tintColor = ThemeManager.shared.accentColor
         applyFilterStyle()
     }
 
-    private func applyGlassEffect(to view: UIView) {
-        let isDark = ThemeManager.shared.isDarkTheme
-        if isDark {
-            view.backgroundColor = UIColor(white: 1.0, alpha: 0.15)
-            view.layer.borderColor = UIColor(white: 1.0, alpha: 0.25).cgColor
-            view.layer.borderWidth = 1
-        } else {
-            view.backgroundColor = .white
-            view.layer.borderColor = UIColor.clear.cgColor
-            view.layer.borderWidth = 0
-        }
-        view.layer.cornerRadius = 16
-        view.layer.masksToBounds = true
-    }
+
 
 
 
@@ -131,17 +129,12 @@ final class SquadViewController: UIViewController {
         let buttons = [filterAllButton, filterGKButton, filterDefButton,
                        filterMidButton, filterFwdButton]
         
-        let isDark = ThemeManager.shared.isDarkTheme
-        let activeBg = isDark ? UIColor.white : UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1)
-        let inactiveBg = isDark ? UIColor(white: 1.0, alpha: 0.1) : .white
-        let activeText = isDark ? UIColor.black : .white
-        let inactiveText = isDark ? UIColor.lightGray : UIColor.darkGray
-
         for btn in buttons {
             guard let btn = btn else { continue }
             let isActive = btn.tag == presenter.activeFilterTag
-            btn.backgroundColor = isActive ? activeBg : inactiveBg
-            btn.setTitleColor(isActive ? activeText : inactiveText, for: .normal)
+            btn.theme_backgroundColor = isActive ? AppTheme.filterActiveBackground : AppTheme.filterInactiveBackground
+            btn.theme_setTitleColor(isActive ? AppTheme.filterActiveText : AppTheme.filterInactiveText, forState: .normal)
+            btn.layer.cornerRadius = 12
         }
     }
 
@@ -172,11 +165,12 @@ final class SquadViewController: UIViewController {
 extension SquadViewController: TeamDetailsViewProtocol {
     func showLoading() {
         isLoading = true
-        tableView.reloadData()
+        tableView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
     }
     
     func hideLoading() {
         isLoading = false
+        tableView.hideSkeleton()
         tableView.reloadData()
     }
     
@@ -186,23 +180,22 @@ extension SquadViewController: TeamDetailsViewProtocol {
         present(alert, animated: true)
     }
     
-    func showTeamDetails(_ team: Team) {
-        teamNameLabel.text = team.teamName
-        let parts = (team.teamName ?? "").split(separator: " ")
-        let initials = parts.prefix(2).compactMap { $0.first }.map { String($0) }.joined()
-        teamInitialsLabel.text = initials.isEmpty ? "?" : initials.uppercased()
-        if let logoUrlString = team.teamLogo, let url = URL(string: logoUrlString) {
+    func showTeamDetails(_ viewModel: TeamHeaderViewModel) {
+        teamNameLabel.text = viewModel.name
+        teamInitialsLabel.text = viewModel.initials
+        
+        if let logoUrlString = viewModel.logoURL, let url = URL(string: logoUrlString) {
             teamLogoImageView.sd_setImage(with: url, placeholderImage: nil, completed: { [weak self] img, _, _, _ in
                 self?.teamInitialsLabel.isHidden = (img != nil)
             })
+        } else {
+            teamInitialsLabel.isHidden = false
         }
         
-        teamIDLabel.text = "ID \(team.teamKey ?? 0)"
-        
-        let players = team.players ?? []
-        totalPlayersLabel.text = "\(players.count)"
-        goalkeepersCountLabel.text = "\(players.filter { $0.position == .goalkeeper }.count)"
-        defendersCountLabel.text = "\(players.filter { $0.position == .defender }.count)"
+        teamIDLabel.text = viewModel.idText
+        totalPlayersLabel.text = viewModel.totalPlayers
+        goalkeepersCountLabel.text = viewModel.gkCount
+        defendersCountLabel.text = viewModel.defCount
         
         applyFilterStyle()
         tableView.reloadData()
@@ -226,13 +219,8 @@ extension SquadViewController: UITableViewDataSource {
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if isLoading {
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: PlayerCell.reuseID, for: indexPath) as? PlayerCell else {
-                return UITableViewCell()
-            }
-            cell.applyTheme()
-        ThemeManager.shared.applyGlobalAppearance(to: view.window)
-            cell.contentView.showSkeleton()
+            let cell = tableView.dequeueReusableCell(withIdentifier: PlayerCell.reuseID, for: indexPath)
+            cell.contentView.theme_backgroundColor = AppTheme.cellBackgroundColor
             return cell
         }
         
@@ -243,6 +231,7 @@ extension SquadViewController: UITableViewDataSource {
                 withIdentifier: NoDataTableViewCell.reuseID, for: indexPath) as? NoDataTableViewCell else {
                 return UITableViewCell()
             }
+            cell.contentView.theme_backgroundColor = AppTheme.cellBackgroundColor
             return cell
         }
         
@@ -251,9 +240,9 @@ extension SquadViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.contentView.hideSkeleton()
         let player = presenter.player(at: indexPath)
-        cell.configure(with: player)
+        let vm = presenter.makePlayerViewModel(from: player)
+        cell.configure(with: vm)
         return cell
     }
 }
@@ -291,5 +280,11 @@ extension SquadViewController: UITableViewDelegate {
                    didSelectRowAt indexPath: IndexPath) {
         guard !isLoading else { return }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension SquadViewController: SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return PlayerCell.reuseID
     }
 }

@@ -9,6 +9,7 @@
 
 import UIKit
 import SDWebImage
+import SwiftTheme
 
 final class PlayerCell: UITableViewCell {
 
@@ -37,67 +38,73 @@ final class PlayerCell: UITableViewCell {
     @IBOutlet weak var ratingTitleLabel: UILabel!
     @IBOutlet weak var ratingValueLabel: UILabel!
 
-    // MARK: - Lifecycle
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        isSkeletonable = true
+        contentView.isSkeletonable = false
+        
+        SkeletonHelper.enable([avatarView, playerImageView])
+        SkeletonHelper.styleLabels([nameLabel, ageLabel, mpTitleLabel, mpValueLabel, statTitleLabel, statValueLabel, ratingTitleLabel, ratingValueLabel], height: 15)
+        
         selectionStyle = .none
         backgroundColor = .clear
-        applyTheme()
+        contentView.backgroundColor = .clear
+        contentView.clearBackgroundsRecursively()
+        setupStaticStyles()
+        setupThemePickers()
     }
     
-    func applyTheme() {
-        nameLabel?.textColor = ThemeManager.shared.textColor
-        ageLabel?.textColor = ThemeManager.shared.secondaryTextColor
-        mpTitleLabel?.textColor = ThemeManager.shared.secondaryTextColor
-        statTitleLabel?.textColor = ThemeManager.shared.secondaryTextColor
-        ratingTitleLabel?.textColor = ThemeManager.shared.secondaryTextColor
-        mpValueLabel?.textColor = ThemeManager.shared.textColor
-        statValueLabel?.textColor = ThemeManager.shared.textColor
-        ratingValueLabel?.textColor = ThemeManager.shared.textColor
+    private func setupStaticStyles() {
+        numberLabel.textColor = .black
+        numberLabel.theme_textColor = nil
+        numberBadge.backgroundColor = .white
+        numberBadge.isSkeletonable = false
+    }
+    
+    private func setupThemePickers() {
+        nameLabel.theme_textColor = AppTheme.textColor
+        ageLabel.theme_textColor = AppTheme.secondaryTextColor
+        mpTitleLabel.theme_textColor = AppTheme.secondaryTextColor
+        statTitleLabel.theme_textColor = AppTheme.secondaryTextColor
+        ratingTitleLabel.theme_textColor = AppTheme.secondaryTextColor
+        mpValueLabel.theme_textColor = AppTheme.textColor
+        statValueLabel.theme_textColor = AppTheme.textColor
+        ratingValueLabel.theme_textColor = AppTheme.textColor
         
-        contentView.backgroundColor = ThemeManager.shared.isDarkTheme ? .clear : .white
-        avatarView?.backgroundColor = ThemeManager.shared.isDarkTheme ? UIColor(white: 1.0, alpha: 0.1) : .white
+        contentView.theme_backgroundColor = AppTheme.glassBackgroundColor
+        avatarView.theme_backgroundColor = AppTheme.glassBackgroundColor
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        // Circular styling
         playerImageView.layer.cornerRadius = playerImageView.frame.height / 2
         playerImageView.clipsToBounds = true
         avatarView.layer.cornerRadius = avatarView.frame.height / 2
         avatarView.clipsToBounds = true
-        avatarView.backgroundColor = .white
+        avatarView.backgroundColor = .clear
+        
+        numberBadge.layer.cornerRadius = numberBadge.frame.height / 2
+        numberBadge.clipsToBounds = true
     }
 
-    // MARK: - Configure
 
-    func configure(with player: Player) {
-        applyTheme()
+    func configure(with vm: PlayerCellViewModel) {
         
-        // Player Image
+    
         playerImageView.sd_setImage(
-            with: URL(string: player.imageURL),
+            with: URL(string: vm.imageURL),
             placeholderImage: UIImage(named: "PlayerPlacholder")
         )
-
-        // Number
-        numberLabel.text = player.number
-
-        // Name / age
-        nameLabel.text = player.name
-        ageLabel.text  = "Age \(player.age)"
-
-        // Badges
+        numberLabel.text = vm.number
+        nameLabel.text = vm.name
+        ageLabel.text  = vm.ageText
         captainBadge.isHidden = true
         injuredBadge.isHidden = true
-
-        // Stats
         statTitleLabel.text = "Goals"
-        mpValueLabel.text   = player.matches
-        statValueLabel.text = player.goals
-        
+        mpValueLabel.text   = vm.matches
+        statValueLabel.text = vm.goals
         ratingTitleLabel.text = "Cards (Y/R)"
-        ratingValueLabel.text = "\(player.yellowCards)/\(player.redCards)"
+        ratingValueLabel.text = vm.cards
     }
 }

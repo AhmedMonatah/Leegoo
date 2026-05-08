@@ -66,7 +66,7 @@ class TeamDetailsPresenter: TeamDetailsPresenterProtocol {
         }
         
         if let team = team {
-            view?.showTeamDetails(team)
+            view?.showTeamDetails(makeHeaderViewModel(from: team))
         }
     }
     
@@ -80,11 +80,40 @@ class TeamDetailsPresenter: TeamDetailsPresenterProtocol {
                 case .success(let team):
                     self.team = team
                     self.filterPlayers(by: self.activeFilter.rawValue) 
-                    self.view?.showTeamDetails(team)
+                    self.view?.showTeamDetails(self.makeHeaderViewModel(from: team))
                 case .failure(let error):
                     self.view?.showError(error.localizedDescription)
                 }
             }
         }
+    }
+
+    private func makeHeaderViewModel(from team: Team) -> TeamHeaderViewModel {
+        let players = team.players ?? []
+        
+        // Initials logic
+        let parts = (team.teamName ?? "").split(separator: " ")
+        let initials = parts.prefix(2).compactMap { $0.first }.map { String($0) }.joined()
+        
+        return TeamHeaderViewModel(
+            name: team.teamName ?? "Unknown",
+            initials: initials.isEmpty ? "?" : initials.uppercased(),
+            idText: "ID \(team.teamKey ?? 0)",
+            logoURL: team.teamLogo,
+            totalPlayers: "\(players.count)",
+            gkCount: "\(players.filter { $0.position == .goalkeeper }.count)",
+            defCount: "\(players.filter { $0.position == .defender }.count)"
+        )
+    }
+    func makePlayerViewModel(from player: Player) -> PlayerCellViewModel {
+        return PlayerCellViewModel(
+            imageURL: player.imageURL,
+            number: player.number,
+            name: player.name,
+            ageText: "Age \(player.age)",
+            matches: player.matches,
+            goals: player.goals,
+            cards: "\(player.yellowCards)/\(player.redCards)"
+        )
     }
 }

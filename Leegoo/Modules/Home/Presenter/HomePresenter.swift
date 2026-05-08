@@ -1,8 +1,6 @@
 import Foundation
 
-protocol HomeViewProtocol: AnyObject {
-    func navigateToLeagues(with sport: Sport)
-}
+
 
 
 class HomePresenter: HomePresenterProtocol {
@@ -32,5 +30,13 @@ class HomePresenter: HomePresenterProtocol {
     func didSelectItem(at index: Int) {
         let item = items[index]
         view?.navigateToLeagues(with: item)
+    }
+    
+    func toggleThemeTapped() {
+        guard NetworkMonitor.shared.isConnected else {
+            view?.showNoInternet()
+            return
+        }
+        view?.toggleThemeWithAnimation()
     }
 }

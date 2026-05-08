@@ -1,13 +1,6 @@
 
 import UIKit
 
-struct OnboardingPage {
-    let title: String
-    let subtitle: String
-    let imageName: String
-    let accentColor: UIColor
-}
-
 class OnboardingViewController: UIViewController {
     
     @IBOutlet weak var mainImageView: UIImageView!
@@ -19,36 +12,14 @@ class OnboardingViewController: UIViewController {
     
 
     var presenter: OnboardingPresenterProtocol!
-    private var currentPage = 0
     private var isAnimating = false
-    
-    private let pages: [OnboardingPage] = [
-        OnboardingPage(
-            title: "TRACK EVERY GOAL",
-            subtitle: "Stay updated with live football scores,\nleagues, and your favorite teams.",
-            imageName: "o1",
-            accentColor: UIColor(red: 0.40, green: 0.80, blue: 0.40, alpha: 1) // Adjusted for dark background
-        ),
-        OnboardingPage(
-            title: "COURT-SIDE ACTION",
-            subtitle: "Never miss a basket. Follow global\nbasketball leagues in real-time.",
-            imageName: "o2",
-            accentColor: UIColor(red: 1.0, green: 0.5, blue: 0.2, alpha: 1)
-        ),
-        OnboardingPage(
-            title: "ACE EVERY MATCH",
-            subtitle: "Grand Slam coverage and player stats\nright at your fingertips.",
-            imageName: "o3",
-            accentColor: UIColor(red: 1.0, green: 0.8, blue: 0.2, alpha: 1)
-        )
-    ]
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRuntimeStyles()
         setupGestures()
-        loadPage(0)
+        presenter.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,7 +35,6 @@ class OnboardingViewController: UIViewController {
         nextButton.layer.shadowOffset = CGSize(width: 0, height: 6)
         nextButton.layer.shadowRadius = 12
         
-        // Modern arrow icon
         let config = UIImage.SymbolConfiguration(pointSize: 16, weight: .bold)
         if let arrow = UIImage(systemName: "arrow.right", withConfiguration: config) {
             nextButton.setImage(arrow, for: .normal)
@@ -87,40 +57,6 @@ class OnboardingViewController: UIViewController {
     }
     
 
-    private func loadPage(_ index: Int) {
-        let page = pages[index]
-        
-
-        let words = page.title.split(separator: " ")
-        let result = NSMutableAttributedString()
-        let norm: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "AvenirNext-Heavy", size: 34) ?? UIFont.systemFont(ofSize: 34, weight: .black),
-            .foregroundColor: UIColor.white
-        ]
-        let accent: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "AvenirNext-Heavy", size: 34) ?? UIFont.systemFont(ofSize: 34, weight: .black),
-            .foregroundColor: page.accentColor
-        ]
-        
-        for (idx, word) in words.enumerated() {
-            let attrs = (idx == words.count - 1) ? accent : norm
-            result.append(NSAttributedString(string: String(word) + (idx == words.count - 1 ? "" : " "), attributes: attrs))
-        }
-        
-        titleLabel.attributedText = result
-        subtitleLabel.text = page.subtitle
-        mainImageView.image = UIImage(named: page.imageName)
-        pageControl.currentPage = index
-        nextButton.setTitle(index == pages.count - 1 ? "Get Started   " : "Continue   ", for: .normal)
-        
-        
-        titleLabel.alpha = 0
-        titleLabel.transform = CGAffineTransform(translationX: 50, y: 0)
-        subtitleLabel.alpha = 0
-        subtitleLabel.transform = CGAffineTransform(translationX: 30, y: 0)
-    }
-    
-
     private func animateIn() {
         UIView.animate(withDuration: 0.6, delay: 0.1, options: .curveEaseOut) {
             self.titleLabel.alpha = 1
@@ -132,58 +68,13 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-    private func transitionToPage(_ index: Int) {
-        guard !isAnimating else { return }
-        isAnimating = true
-        
-        let newPage = pages[index]
-        guard let snapshot = mainImageView.snapshotView(afterScreenUpdates: false) else {
-            self.loadPage(index)
-            self.animateIn()
-            self.isAnimating = false
-            return
-        }
-        
-        snapshot.frame = mainImageView.frame
-        view.insertSubview(snapshot, aboveSubview: mainImageView)
-        
-        // 2. Prepare new content
-        mainImageView.image = UIImage(named: newPage.imageName)
-        mainImageView.alpha = 0
-        mainImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.titleLabel.alpha = 0
-            self.subtitleLabel.alpha = 0
-        }) { _ in
-            self.loadPage(index)
-            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.85, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
-                snapshot.alpha = 0
-                snapshot.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                
-                self.mainImageView.alpha = 1
-                self.mainImageView.transform = .identity
-                
-                // Text animation triggered by loadPage's reset + animateIn
-                self.animateIn()
-            }) { _ in
-                snapshot.removeFromSuperview()
-                self.isAnimating = false
-            }
-        }
-    }
-    
+
     @IBAction func nextTapped(_ sender: UIButton) {
-        if currentPage < pages.count - 1 {
-            currentPage += 1
-            transitionToPage(currentPage)
-        } else {
-            presenter.didFinishOnboarding()
-        }
+        presenter.nextTapped()
     }
     
     @IBAction func skipTapped(_ sender: UIButton) {
-        presenter.didFinishOnboarding()
+        presenter.skipTapped()
     }
     
     @IBAction func buttonDown(_ sender: UIButton) {
@@ -197,19 +88,79 @@ class OnboardingViewController: UIViewController {
     }
     
     @objc private func swipedLeft() {
-        guard currentPage < pages.count - 1 else { return }
-        currentPage += 1
-        transitionToPage(currentPage)
+        presenter.swipeLeft()
     }
     
     @objc private func swipedRight() {
-        guard currentPage > 0 else { return }
-        currentPage -= 1
-        transitionToPage(currentPage)
+        presenter.swipeRight()
     }
 }
 
+
 extension OnboardingViewController: OnboardingViewProtocol {
+    
+    func displayPage(_ viewModel: OnboardingPageViewModel) {
+        if mainImageView.image == nil {
+            // Initial load
+            applyViewModel(viewModel)
+            return
+        }
+        
+        transitionToPage(viewModel)
+    }
+    
+    private func applyViewModel(_ viewModel: OnboardingPageViewModel) {
+        titleLabel.attributedText = viewModel.title
+        subtitleLabel.text = viewModel.subtitle
+        mainImageView.image = UIImage(named: viewModel.imageName)
+        pageControl.currentPage = viewModel.pageIndex
+        pageControl.numberOfPages = viewModel.totalPages
+        nextButton.setTitle(viewModel.buttonTitle, for: .normal)
+        
+        titleLabel.alpha = 0
+        titleLabel.transform = CGAffineTransform(translationX: 50, y: 0)
+        subtitleLabel.alpha = 0
+        subtitleLabel.transform = CGAffineTransform(translationX: 30, y: 0)
+    }
+    
+    private func transitionToPage(_ viewModel: OnboardingPageViewModel) {
+        guard !isAnimating else { return }
+        isAnimating = true
+        
+        guard let snapshot = mainImageView.snapshotView(afterScreenUpdates: false) else {
+            applyViewModel(viewModel)
+            animateIn()
+            isAnimating = false
+            return
+        }
+        
+        snapshot.frame = mainImageView.frame
+        view.insertSubview(snapshot, aboveSubview: mainImageView)
+        
+        mainImageView.image = UIImage(named: viewModel.imageName)
+        mainImageView.alpha = 0
+        mainImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.titleLabel.alpha = 0
+            self.subtitleLabel.alpha = 0
+        }) { _ in
+            self.applyViewModel(viewModel)
+            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.85, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+                snapshot.alpha = 0
+                snapshot.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                
+                self.mainImageView.alpha = 1
+                self.mainImageView.transform = .identity
+                
+                self.animateIn()
+            }) { _ in
+                snapshot.removeFromSuperview()
+                self.isAnimating = false
+            }
+        }
+    }
+
     func navigateToHome() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         guard let tabBar = sb.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController else { return }
@@ -220,7 +171,6 @@ extension OnboardingViewController: OnboardingViewProtocol {
         tabBar.modalTransitionStyle = .crossDissolve
         tabBar.modalPresentationStyle = .fullScreen
         
-        // Use the window's rootViewController to present or replace the root
         if let window = view.window {
             window.rootViewController = tabBar
             UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil)

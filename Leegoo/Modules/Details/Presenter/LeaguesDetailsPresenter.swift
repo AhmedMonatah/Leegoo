@@ -71,12 +71,21 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
     private func fetchData() {
         view?.showLoading()
         
-        fetchEvents()
+        let group = DispatchGroup()
+        
+        group.enter()
+        fetchEvents(group: group)
+        
         if sportName.lowercased() == "tennis" {
             teams = []
             view?.showTeams()
         } else {
-            fetchTeams()
+            group.enter()
+            fetchTeams(group: group)
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.view?.hideLoading()
         }
     }
     
@@ -97,19 +106,20 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
         view?.updateFavoriteButton(isFavorite: coreDataManager.isLeagueFavorite(id: id))
     }
     
-    private func fetchEvents() {
+    private func fetchEvents(group: DispatchGroup) {
         guard let leagueId = leagueIdString else {
-            view?.hideLoading()
             view?.showError("Invalid league id")
+            group.leave()
             return
         }
         
         networkService.fetchEvents(sportName: sportName, leagueId: leagueId) { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self else {
+                group.leave()
+                return
+            }
 
             DispatchQueue.main.async {
-                self.view?.hideLoading()
-
                 switch result {
                 case .success(let events):
                     let calendar = Calendar.current
@@ -142,27 +152,29 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
                     self.view?.showLatestEvents()
 
                 case .failure(let error):
-                    print("Error fetching events: \(error)")
                     self.upcomingEvents = []
                     self.latestEvents = []
                     self.view?.showUpcomingEvents()
                     self.view?.showLatestEvents()
                     self.view?.showError(error.localizedDescription)
                 }
+                group.leave()
             }
         }
     }
 
-    
-    private func fetchTeams() {
+    private func fetchTeams(group: DispatchGroup) {
         guard let leagueId = leagueIdString else {
-            view?.hideLoading()
             view?.showError("Invalid league id")
+            group.leave()
             return
         }
         
         networkService.fetchTeams(sportName: sportName, leagueId: leagueId) { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self else {
+                group.leave()
+                return
+            }
 
             DispatchQueue.main.async {
                 switch result {
@@ -171,13 +183,12 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
                     self.view?.showTeams()
 
                 case .failure(let error):
-                    print("Error fetching teams: \(error)")
                     self.teams = []
                     self.view?.showTeams()
                     self.view?.showError(error.localizedDescription)
                 }
+                group.leave()
             }
         }
     }
-
 }
