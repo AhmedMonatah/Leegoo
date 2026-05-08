@@ -16,7 +16,18 @@
 		6DBC6FD72FADCC1000E14DCD /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 6DBC6FD62FADCC1000E14DCD /* SkeletonView */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6D6AF6902FAE380A005DE59B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D9C5B522FA026CA00ECB3D6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D9C5B592FA026CA00ECB3D6;
+			remoteInfo = Leegoo;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6D6AF68C2FAE380A005DE59B /* LeegooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeegooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D9C5B5A2FA026CA00ECB3D6 /* Leegoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leegoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -31,6 +42,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6D6AF68D2FAE380A005DE59B /* LeegooTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LeegooTests;
+			sourceTree = "<group>";
+		};
 		6D9C5B5C2FA026CA00ECB3D6 /* Leegoo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -42,6 +58,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6D6AF6892FAE380A005DE59B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6D9C5B572FA026CA00ECB3D6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -63,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				6D9C5B5C2FA026CA00ECB3D6 /* Leegoo */,
+				6D6AF68D2FAE380A005DE59B /* LeegooTests */,
 				6D9C5B5B2FA026CA00ECB3D6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				6D9C5B5A2FA026CA00ECB3D6 /* Leegoo.app */,
+				6D6AF68C2FAE380A005DE59B /* LeegooTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +103,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6D6AF68B2FAE380A005DE59B /* LeegooTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D6AF6922FAE380A005DE59B /* Build configuration list for PBXNativeTarget "LeegooTests" */;
+			buildPhases = (
+				6D6AF6882FAE380A005DE59B /* Sources */,
+				6D6AF6892FAE380A005DE59B /* Frameworks */,
+				6D6AF68A2FAE380A005DE59B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D6AF6912FAE380A005DE59B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6D6AF68D2FAE380A005DE59B /* LeegooTests */,
+			);
+			name = LeegooTests;
+			packageProductDependencies = (
+			);
+			productName = LeegooTests;
+			productReference = 6D6AF68C2FAE380A005DE59B /* LeegooTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6D9C5B592FA026CA00ECB3D6 /* Leegoo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D9C5B6D2FA026CF00ECB3D6 /* Build configuration list for PBXNativeTarget "Leegoo" */;
@@ -117,6 +165,10 @@
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					6D6AF68B2FAE380A005DE59B = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 6D9C5B592FA026CA00ECB3D6;
+					};
 					6D9C5B592FA026CA00ECB3D6 = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -128,6 +180,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 6D9C5B512FA026CA00ECB3D6;
 			minimizedProjectReferenceProxies = 1;
@@ -145,11 +198,19 @@
 			projectRoot = "";
 			targets = (
 				6D9C5B592FA026CA00ECB3D6 /* Leegoo */,
+				6D6AF68B2FAE380A005DE59B /* LeegooTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6D6AF68A2FAE380A005DE59B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6D9C5B582FA026CA00ECB3D6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,6 +221,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6D6AF6882FAE380A005DE59B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6D9C5B562FA026CA00ECB3D6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,7 +237,49 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6D6AF6912FAE380A005DE59B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D9C5B592FA026CA00ECB3D6 /* Leegoo */;
+			targetProxy = 6D6AF6902FAE380A005DE59B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6D6AF6932FAE380A005DE59B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ITI.LeegooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Leegoo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Leegoo";
+			};
+			name = Debug;
+		};
+		6D6AF6942FAE380A005DE59B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ITI.LeegooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Leegoo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Leegoo";
+			};
+			name = Release;
+		};
 		6D9C5B6E2FA026CF00ECB3D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -229,6 +339,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -292,6 +403,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -346,6 +458,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6D6AF6922FAE380A005DE59B /* Build configuration list for PBXNativeTarget "LeegooTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D6AF6932FAE380A005DE59B /* Debug */,
+				6D6AF6942FAE380A005DE59B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6D9C5B552FA026CA00ECB3D6 /* Build configuration list for PBXProject "Leegoo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
