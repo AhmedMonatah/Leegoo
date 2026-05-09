@@ -16,7 +16,6 @@ extension UIViewController {
         }
     }
     
-    // MARK: - Public
     
     func applyTheme() {
         let isDark = ThemeManager.shared.isDarkTheme
@@ -26,7 +25,6 @@ extension UIViewController {
         updateSubviews(view, isDark: isDark)
     }
     
-    // MARK: - Background
     
     private func updateBackground(_ isDark: Bool) {
         if isDark {
@@ -72,7 +70,6 @@ extension UIViewController {
         navBar.tintColor = ThemeManager.shared.navBarTintColor
     }
     
-    // MARK: - Subviews
     
     private func updateSubviews(_ view: UIView, isDark: Bool) {
         for subview in view.subviews {
@@ -112,7 +109,6 @@ extension UIViewController {
         }
     }
     
-    // MARK: - SearchBar
     
     private func styleSearchBar(_ searchBar: UISearchBar, isDark: Bool) {
         ThemeManager.shared.style(searchBar: searchBar)

@@ -90,17 +90,14 @@ final class SquadViewController: UIViewController {
     private func updateSpecificTheme() {
         let isDark = ThemeManager.shared.isDarkTheme
         
-        // Clear any storyboard-baked backgrounds
         view.clearBackgroundsRecursively()
         
-        // Apply theme to main containers
         [teamLogoView, teamNameLabel?.superview].forEach {
             $0?.theme_backgroundColor = AppTheme.glassBackgroundColor
             $0?.layer.cornerRadius = 16
             $0?.layer.masksToBounds = true
         }
         
-        // Apply theme to stat cards
         [totalPlayersLabel, goalkeepersCountLabel, defendersCountLabel].forEach {
             if let card = $0?.superview {
                 card.theme_backgroundColor = AppTheme.glassBackgroundColor
@@ -118,11 +115,6 @@ final class SquadViewController: UIViewController {
         
         applyFilterStyle()
     }
-
-
-
-
-
 
 
     private func applyFilterStyle() {

@@ -25,10 +25,8 @@ class LeaguesCell: UITableViewCell {
         leagueLogo.contentMode = .scaleAspectFit
         selectionStyle = .none
         
-        // Clear storyboard-baked backgrounds recursively
         contentView.clearBackgroundsRecursively()
         
-        // Ensure all components are skeletonable
         isSkeletonable = true
         contentView.isSkeletonable = false
         SkeletonHelper.enable([leagueLogo])

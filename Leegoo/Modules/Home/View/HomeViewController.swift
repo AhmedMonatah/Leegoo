@@ -64,15 +64,12 @@ final class HomeViewController: UIViewController ,HomeViewProtocol {
             return
         }
         
-        // Take a snapshot of the current state
         let snapshot = window.snapshotView(afterScreenUpdates: false)!
         window.addSubview(snapshot)
         
-        // Apply all theme changes immediately
         ThemeManager.shared.toggleTheme()
         notifyAndRefresh()
         
-        // Circular reveal animation from moon icon position
         let center = themeToggleButton.convert(themeToggleButton.center, to: window)
         
         let maxCorner = CGPoint(

@@ -135,7 +135,6 @@ class SplashViewController: UIViewController {
     
     private func animateCharacters() {
         for (index, label) in characterLabels.enumerated() {
-            // Initial state for extra "pop"
             label.transform = CGAffineTransform(scaleX: 0.5, y: 0.5).rotated(by: -0.2)
             
             UIView.animate(withDuration: 0.8, 

@@ -101,7 +101,6 @@ extension OnboardingViewController: OnboardingViewProtocol {
     
     func displayPage(_ viewModel: OnboardingPageViewModel) {
         if mainImageView.image == nil {
-            // Initial load
             applyViewModel(viewModel)
             return
         }

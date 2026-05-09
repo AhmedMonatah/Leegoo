@@ -24,7 +24,6 @@ final class LeaguesDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: - UI Setup
         favoriteButton.imageView?.contentMode = .scaleAspectFit
         setupUpcomingCollectionView()
         setupLatestCollectionView()
@@ -44,13 +43,11 @@ final class LeaguesDetailsViewController: UIViewController {
         titleLabel?.numberOfLines = 2
         titleLabel?.lineBreakMode = .byWordWrapping
 
-        // MARK: - Theme
         setupThemePickers()
         applyTheme()
         ThemeManager.shared.applyGlobalAppearance(to: view.window)
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
 
-        // MARK: - Data
         presenter?.viewDidLoad()
     }
     
@@ -78,7 +75,6 @@ final class LeaguesDetailsViewController: UIViewController {
         setupThemePickers()
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
-        // Reload to pick up latest theme
         upcomingCollectionView.reloadData()
         latestCollectionView.reloadData()
         teamsCollectionView.reloadData()

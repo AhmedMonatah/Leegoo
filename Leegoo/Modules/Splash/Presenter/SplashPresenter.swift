@@ -9,7 +9,6 @@ class SplashPresenter: SplashPresenterProtocol {
     }
     
     func viewDidAppear() {
-        // Delay for splash animation
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
             self?.decideNextScreen()
         }

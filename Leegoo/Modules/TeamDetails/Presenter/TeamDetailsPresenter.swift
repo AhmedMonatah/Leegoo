@@ -91,7 +91,6 @@ class TeamDetailsPresenter: TeamDetailsPresenterProtocol {
     private func makeHeaderViewModel(from team: Team) -> TeamHeaderViewModel {
         let players = team.players ?? []
         
-        // Initials logic
         let parts = (team.teamName ?? "").split(separator: " ")
         let initials = parts.prefix(2).compactMap { $0.first }.map { String($0) }.joined()
         

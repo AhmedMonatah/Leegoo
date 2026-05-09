@@ -127,7 +127,6 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
                     formatter.dateFormat = "yyyy-MM-dd"
                     let startOfToday = calendar.startOfDay(for: Date())
                     
-                    // Upcoming: Today and future, must have team names
                     self.upcomingEvents = events.filter { event in
                         guard let dateStr = event.eventDate, let date = formatter.date(from: dateStr) else { return false }
                         let home = (event.eventHomeTeam ?? "").trimmingCharacters(in: .whitespaces)
@@ -135,7 +134,6 @@ class LeaguesDetailsPresenter: LeaguesDetailsPresenterProtocol {
                         return date >= startOfToday && !home.isEmpty && !away.isEmpty
                     }.sorted(by: { ($0.eventDate ?? "") < ($1.eventDate ?? "") })
                     
-                    // Latest: Past events, must have team names AND a valid result score
                     self.latestEvents = events.filter { event in
                         guard let dateStr = event.eventDate, let date = formatter.date(from: dateStr) else { return false }
                         let home = (event.eventHomeTeam ?? "").trimmingCharacters(in: .whitespaces)

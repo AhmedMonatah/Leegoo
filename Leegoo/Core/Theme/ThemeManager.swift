@@ -140,7 +140,6 @@ extension ThemeManager {
             attributes: [.foregroundColor: placeholderColor]
         )
         
-        // Search icon (glass) color
         if let glassIconView = tf.leftView as? UIImageView {
             glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
             glassIconView.tintColor = isDark ? .white : .darkGray
