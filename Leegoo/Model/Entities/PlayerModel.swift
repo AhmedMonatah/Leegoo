@@ -50,7 +50,6 @@ struct Player: Codable {
         case playerImage = "player_image"
     }
 
-    // Default value helpers
     var name: String { playerName ?? "Unknown Player" }
     var number: String { 
         if let num = playerNumber, !num.isEmpty { return num }
